@@ -1,5 +1,7 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { ChakraProvider } from '@chakra-ui/react';
+import { Theme } from '@nx-joroze/ui';
 import './styles.css';
 
 function CustomApp({ Component, pageProps }: AppProps) {
@@ -15,7 +17,9 @@ function CustomApp({ Component, pageProps }: AppProps) {
           <h1>Welcome to portfolio!</h1>
         </header>
         <main>
-          <Component {...pageProps} />
+          <ChakraProvider resetCSS theme={Theme}>
+            <Component {...pageProps} />
+          </ChakraProvider>
         </main>
       </div>
     </>
