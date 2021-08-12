@@ -27,12 +27,12 @@
     ]
   },
   "projects": {
-    "nx-joroze": {
+    "portfolio": {
       "tags": []
     },
-    "nx-joroze-e2e": {
+    "portfolio-e2e": {
       "tags": [],
-      "implicitDependencies": ["nx-joroze"]
+      "implicitDependencies": ["portfolio"]
     }
   }
 }

@@ -1,17 +1,17 @@
 {
   "version": 2,
   "projects": {
-    "nx-joroze": {
-      "root": "apps/nx-joroze",
-      "sourceRoot": "apps/nx-joroze",
+    "portfolio": {
+      "root": "apps/portfolio",
+      "sourceRoot": "apps/portfolio",
       "projectType": "application",
       "targets": {
         "build": {
           "executor": "@nrwl/next:build",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "root": "apps/nx-joroze",
-            "outputPath": "dist/apps/nx-joroze"
+            "root": "apps/portfolio",
+            "outputPath": "dist/apps/portfolio"
           },
           "configurations": {
             "production": {}
@@ -20,12 +20,12 @@
         "serve": {
           "executor": "@nrwl/next:server",
           "options": {
-            "buildTarget": "nx-joroze:build",
+            "buildTarget": "portfolio:build",
             "dev": true
           },
           "configurations": {
             "production": {
-              "buildTarget": "nx-joroze:build:production",
+              "buildTarget": "portfolio:build:production",
               "dev": false
             }
           }
@@ -33,47 +33,47 @@
         "export": {
           "executor": "@nrwl/next:export",
           "options": {
-            "buildTarget": "nx-joroze:build:production"
+            "buildTarget": "portfolio:build:production"
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/nx-joroze"],
+          "outputs": ["coverage/apps/portfolio"],
           "options": {
-            "jestConfig": "apps/nx-joroze/jest.config.js",
+            "jestConfig": "apps/portfolio/jest.config.js",
             "passWithNoTests": true
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/nx-joroze/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": ["apps/portfolio/**/*.{ts,tsx,js,jsx}"]
           }
         }
       }
     },
-    "nx-joroze-e2e": {
-      "root": "apps/nx-joroze-e2e",
-      "sourceRoot": "apps/nx-joroze-e2e/src",
+    "portfolio-e2e": {
+      "root": "apps/portfolio-e2e",
+      "sourceRoot": "apps/portfolio-e2e/src",
       "projectType": "application",
       "targets": {
         "e2e": {
           "executor": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/nx-joroze-e2e/cypress.json",
-            "tsConfig": "apps/nx-joroze-e2e/tsconfig.e2e.json",
-            "devServerTarget": "nx-joroze:serve"
+            "cypressConfig": "apps/portfolio-e2e/cypress.json",
+            "tsConfig": "apps/portfolio-e2e/tsconfig.e2e.json",
+            "devServerTarget": "portfolio:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "nx-joroze:serve:production"
+              "devServerTarget": "portfolio:serve:production"
             }
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/nx-joroze-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": ["apps/portfolio-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -94,6 +94,5 @@
         "linter": "eslint"
       }
     }
-  },
-  "defaultProject": "nx-joroze"
+  }
 }
