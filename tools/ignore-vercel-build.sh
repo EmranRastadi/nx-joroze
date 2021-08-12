@@ -1,3 +1,9 @@
+# if [[ $VERCEL_GIT_COMMIT_REF == "deploy" ]] || [[ $VERCEL_GIT_COMMIT_REF == "preview" ]]; then
+#   exit 1
+# else
+#   echo "✅ - Not deploy/preview"
+#   exit 0
+# fi
 
 # Name of the app to check. Change this to your application name!
 APP=portfolio
