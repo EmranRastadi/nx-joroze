@@ -1,4 +1,5 @@
 import styles from './index.module.scss';
+import {Ui, Box} from '@nx-joroze/ui'
 
 export function Index() {
   /*
@@ -8,6 +9,10 @@ export function Index() {
    */
   return (
     <div className={styles.page}>
+      <div>
+        <Ui/>
+        <Box/>
+      </div>
       <h2>Resources &amp; Tools</h2>
       <p>Thank you for using and showing some ♥ for Nx.</p>
       <div className="flex github-star-container">
