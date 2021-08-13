@@ -2,6 +2,6 @@
 
 export default function handler(req, res) {
   res.status(200).json({
-    body: 'Hello, I am API.',
+    body: req.headers,
   });
 }
