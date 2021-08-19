@@ -1,4 +1,3 @@
-import { Box } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 import Nav from './Nav';
 import NavLink from './NavLink';
