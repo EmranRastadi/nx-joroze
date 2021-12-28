@@ -15,8 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@joroze/ui": ["libs/shared-ui-components/src/index.ts"],
-      "@nx-joroze/ui": ["libs/ui/src/index.ts"]
+      "@joroze/cms": ["libs/cms/src/index.ts"],
+      "@joroze/ui": ["libs/ui/src/index.ts"],
+      "@joroze/react-utils": ["libs/react-utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,17 +1,26 @@
 import { AppProps } from 'next/app';
-import Head from 'next/head';
 import './styles.css';
+import type { GetStaticPropsContext, NextPage } from 'next';
+import type { ReactElement, ReactNode } from 'react';
+import { ChakraProvider } from '@chakra-ui/react';
+import { Theme } from '@joroze/ui';
+import Layout from '../components/Layout';
 
-function CustomApp({ Component, pageProps }: AppProps) {
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>);
+
   return (
-    <>
-      <Head>
-        <title>Welcome to coupon!</title>
-      </Head>
-      <main className="app">
-        <Component {...pageProps} />
-      </main>
-    </>
+    <ChakraProvider resetCSS theme={Theme}>
+      {getLayout(<Component {...pageProps} />)}
+    </ChakraProvider>
   );
 }
 

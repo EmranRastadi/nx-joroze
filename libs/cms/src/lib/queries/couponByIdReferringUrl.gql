@@ -1,0 +1,5 @@
+query CouponByIdReferringUrl($id: String!) {
+  couponEntry(id: $id) {
+    referringUrl
+  }
+}

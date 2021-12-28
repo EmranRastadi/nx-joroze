@@ -1,0 +1,15 @@
+overwrite: true
+schema:
+  - ${CONTENTFUL_GRAPHQL_ENDPOINT}:
+      headers:
+        Authorization: Bearer ${CONTENTFUL_ACCESS_TOKEN}
+documents: 'libs/cms/src/lib/**/*.{gql,graphql}'
+generates:
+  libs/cms/src/lib/generated.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-graphql-request'
+  libs/cms/src/lib/graphql.schema.json:
+    plugins:
+      - 'introspection'

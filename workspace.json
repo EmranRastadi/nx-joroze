@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "cms": "libs/cms",
     "coupon": {
       "root": "apps/coupon",
       "sourceRoot": "apps/coupon",
@@ -83,6 +84,20 @@
       "tags": [],
       "implicitDependencies": ["coupon"]
     },
+    "eslint-rules": {
+      "root": "tools/eslint-rules",
+      "sourceRoot": "tools/eslint-rules",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/tools/eslint-rules"],
+          "options": {
+            "jestConfig": "tools/eslint-rules/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "portfolio": {
       "root": "apps/portfolio",
       "sourceRoot": "apps/portfolio",
@@ -163,6 +178,7 @@
         }
       }
     },
+    "react-utils": "libs/react-utils",
     "ui": {
       "root": "libs/ui",
       "sourceRoot": "libs/ui/src",

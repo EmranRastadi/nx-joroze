@@ -1,0 +1,8 @@
+fragment Sys on Sys {
+  id
+  spaceId
+  environmentId
+  publishedAt
+  firstPublishedAt
+  publishedVersion
+}

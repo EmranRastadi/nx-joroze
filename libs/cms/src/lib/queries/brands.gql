@@ -1,0 +1,20 @@
+query Brands($slug: String) {
+  couponEntityCollection(where: {slug: $slug}) {
+    items {
+      name
+      slug
+      logoImage {
+        url
+      }
+      description
+      category {
+        description
+        image {
+          url
+        }
+        name
+      }
+      brandUrl
+    }
+  }
+}

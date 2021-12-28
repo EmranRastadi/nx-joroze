@@ -27,7 +27,7 @@ const nextConfig = {
       {
         source: '/test',
         destination: 'https://www.coinbase.com/join/rosenb_826',
-        permanent: true,
+        permanent: false,
       },
     ];
   },

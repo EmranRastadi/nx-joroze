@@ -1,0 +1,15 @@
+query BrandSearch($name_contains: String!) {
+  couponEntityCollection(where: {name_contains: $name_contains}) {
+    items {
+      sys {
+        id
+      }
+      description
+      name
+      slug
+      logoImage {
+        url
+      }
+    }
+  }
+}
