@@ -1,5 +1,7 @@
+import { Box, Flex, Heading, Text, VStack } from '@chakra-ui/react';
 import cms from '@joroze/cms';
 import { GetStaticPropsContext } from 'next';
+import Image from 'next/image';
 
 export const fetchFromContentful = (preview?: boolean) =>
   cms(
@@ -10,7 +12,29 @@ export const fetchFromContentful = (preview?: boolean) =>
   );
 
 export default function Index() {
-  return <div>Hello</div>;
+  return (
+    <Flex direction="column">
+      <VStack>
+        <Heading as="h1" mt={4} mb={4}>
+          All valid promotional codes on one site
+        </Heading>
+        <Text fontSize="xl">
+          Welcome to the <b>SSHARELY</b> website, which contains the most
+          relevant promotions, coupons, discounts and freebets for various
+          services! We constantly monitor the Internet so that you can save
+          money and receive all kinds of bonuses!
+        </Text>
+        <Text fontSize="xl">
+          With us, you can save and earn money in all spheres of life - from
+          bookmakers to food delivery to your home!
+        </Text>
+
+        <Box padding="25px">
+          <Image src="/people.png" alt="people" width={290} height={290} />
+        </Box>
+      </VStack>
+    </Flex>
+  );
 }
 
 Index.defaultProps = {
