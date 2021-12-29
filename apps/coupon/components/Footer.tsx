@@ -23,6 +23,7 @@ const Footer = () => (
           <Image
             src="/logo.svg"
             alt="logo"
+            draggable={false}
             layout="fixed"
             width={200}
             height={50}
