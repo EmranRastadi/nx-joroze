@@ -97,7 +97,7 @@ const Nav = ({ children, ...rest }: HTMLChakraProps<'div'>) => {
                       fontWeight="normal"
                       textAlign="left"
                     >
-                      Search for a company
+                      Search brands
                     </Text>
                   </Box>
                 </Button>

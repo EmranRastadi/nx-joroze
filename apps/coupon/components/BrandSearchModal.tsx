@@ -138,7 +138,7 @@ const BrandSearchModal = ({ isOpen, onClose }: Props) => {
             _focus={{ borderColor: 'transparent' }}
             _hover={{ borderColor: 'transparent' }}
             pl="68px"
-            placeholder="Search the docs"
+            placeholder="Search brands"
             fontWeight={'medium'}
             outline="transparent solid 2px"
             outlineOffset="2px"
