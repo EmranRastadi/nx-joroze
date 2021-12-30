@@ -8,7 +8,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { GetStaticPropsContext } from 'next';
-import { fetchFromContentful } from '..';
+import { fetchFromContentful } from '../..';
 import { useState } from 'react';
 import { Card } from '@joroze/ui';
 import Image from 'next/image';
@@ -41,7 +41,7 @@ type Props = {
   categories: CouponCategory[];
 };
 
-export default function CategoryPage({ preview, categories }: Props) {
+export default function BrandsPage({ preview, categories }: Props) {
   const [activeCategory, setActiveCategory] = useState<CouponCategory>(
     categories[0]
   );
@@ -119,7 +119,7 @@ export default function CategoryPage({ preview, categories }: Props) {
   );
 }
 
-CategoryPage.defaultProps = {
+BrandsPage.defaultProps = {
   meta: {
     title: 'Promo Categories',
     description: '',

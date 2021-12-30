@@ -13,7 +13,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
 import NavLink from '../components/NavLink';
-import { CouponCategory } from '../pages/promos/categories';
+import { CouponCategory } from '../pages/promos/brands';
 
 const Links = [
   {

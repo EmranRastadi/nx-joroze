@@ -1,7 +1,7 @@
-import { Brand } from '../../../components/BrandSearch';
 import { GetStaticPropsContext } from 'next';
 import { fetchFromContentful } from '../..';
 import { Text } from '@chakra-ui/react';
+import { Brand } from '../../../components/BrandSearchModal';
 
 type Props = {
   brand: Brand;
