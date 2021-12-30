@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { fetchFromContentful } from '../..';
 
-export default async function brandHandler(
+export default async function categoryHandler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -10,12 +10,14 @@ export default async function brandHandler(
   switch (method) {
     case 'GET':
       try {
-        const { couponEntityCollection } =
-          await fetchFromContentful().BrandSearch({
-            name_contains: '',
+        const { couponCategoryCollection } =
+          await fetchFromContentful().Categories({
+            preview: false,
           });
 
-        return res.json(couponEntityCollection?.items || []);
+        const categories = couponCategoryCollection?.items || [];
+
+        return res.json(categories);
       } catch (error) {
         const responseMessage =
           error instanceof Error ? error.message : 'Something went wrong.';

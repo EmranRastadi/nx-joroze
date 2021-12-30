@@ -46,9 +46,9 @@ Index.defaultProps = {
 };
 
 export const getStaticProps = async ({ preview }: GetStaticPropsContext) => {
-  const categories = await fetchFromContentful(preview).Categories({
-    preview: !!preview,
-  });
+  // const categories = await fetchFromContentful(preview).Categories({
+  //   preview: !!preview,
+  // });
 
   // console.log(
   //   'Available categories: ',

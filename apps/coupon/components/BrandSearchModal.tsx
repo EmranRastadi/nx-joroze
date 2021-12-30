@@ -10,6 +10,7 @@ import {
   ModalContent,
   ModalOverlay,
   Skeleton,
+  SkeletonCircle,
   Text,
 } from '@chakra-ui/react';
 import Image from 'next/image';
@@ -116,7 +117,7 @@ const BrandSearchModal = ({ isOpen, onClose }: Props) => {
   return (
     <Modal scrollBehavior="inside" isOpen={isOpen} onClose={onClose} size="2xl">
       <ModalOverlay />
-      <ModalContent width={{ base: '70%', md: 'full' }}>
+      <ModalContent marginTop="18vh" width={{ base: '70%', md: 'full' }}>
         <Flex alignItems="stretch" position="relative">
           <Icon
             as={FaSearch}
@@ -150,51 +151,13 @@ const BrandSearchModal = ({ isOpen, onClose }: Props) => {
             <Flex borderTopWidth="1px" pt="2" pb="4" flexDir="column">
               {isFetching && (
                 <Flex flexDir="column">
-                  <Flex>
-                    <Skeleton
-                      minHeight="16"
-                      mt="2"
-                      mr="10px"
-                      pl="4"
-                      pr="4"
-                      pt="2"
-                      pb="2"
-                      borderRadius="lg"
-                      width="100px"
-                    />
-                    <Skeleton
-                      minHeight="16"
-                      mt="2"
-                      pl="4"
-                      pr="4"
-                      pt="2"
-                      pb="2"
-                      borderRadius="lg"
-                      flexGrow="1"
-                    />
+                  <Flex pl="4" pr="4" pt="2" pb="2" mt="2">
+                    <SkeletonCircle size="10" mr="10px" />
+                    <Skeleton borderRadius="lg" flexGrow="1" />
                   </Flex>
-                  <Flex>
-                    <Skeleton
-                      minHeight="16"
-                      mt="2"
-                      mr="10px"
-                      pl="4"
-                      pr="4"
-                      pt="2"
-                      pb="2"
-                      borderRadius="lg"
-                      width="100px"
-                    />
-                    <Skeleton
-                      minHeight="16"
-                      mt="2"
-                      pl="4"
-                      pr="4"
-                      pt="2"
-                      pb="2"
-                      borderRadius="lg"
-                      flexGrow="1"
-                    />
+                  <Flex pl="4" pr="4" pt="2" pb="2" mt="2">
+                    <SkeletonCircle size="10" mr="10px" />
+                    <Skeleton borderRadius="lg" flexGrow="1" />
                   </Flex>
                 </Flex>
               )}
@@ -219,7 +182,7 @@ const BrandSearchModal = ({ isOpen, onClose }: Props) => {
                           onMouseEnter={handleSearchItemOnMouseEnter(index)}
                           role="option"
                           cursor="pointer"
-                          bgColor={isActive ? 'purple.100' : 'gray.100'}
+                          bgColor={isActive ? 'gray.100' : 'white'}
                           aria-selected={isActive}
                           display="flex"
                           alignItems="center"
@@ -231,14 +194,37 @@ const BrandSearchModal = ({ isOpen, onClose }: Props) => {
                           pb="2"
                           borderRadius="lg"
                         >
-                          <Box position="relative" width="100px" height="100px">
-                            <Image
-                              src={brand.logoImage.url}
-                              alt="logo"
-                              layout="fill"
-                              objectFit="contain"
-                            />
-                          </Box>
+                          <Flex
+                            width="50px"
+                            height="50px"
+                            bgColor="#00000008"
+                            border="1px solid #00000008"
+                            borderRadius="50%"
+                            p="5px"
+                            alignItems="center"
+                            justifyContent="center"
+                          >
+                            <Box width="full" height="full" position="relative">
+                              {brand?.logoImage?.url ? (
+                                <Image
+                                  src={brand.logoImage.url}
+                                  alt={`${brand.name} logo`}
+                                  layout="fill"
+                                  objectFit="contain"
+                                />
+                              ) : (
+                                <Flex
+                                  flexDir="column"
+                                  height="full"
+                                  justifyContent="center"
+                                >
+                                  <Text textAlign="center">
+                                    {brand.name[0]}
+                                  </Text>
+                                </Flex>
+                              )}
+                            </Box>
+                          </Flex>
 
                           <Box flex="1 1 0%" ml="4">
                             <Text fontWeight="semibold">{brand.name}</Text>

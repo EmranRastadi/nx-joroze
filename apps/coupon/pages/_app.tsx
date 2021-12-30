@@ -4,7 +4,7 @@ import type { GetStaticPropsContext, NextPage } from 'next';
 import type { ReactElement, ReactNode } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Theme } from '@joroze/ui';
-import Layout from '../components/Layout';
+import Layout from '../layouts/Layout';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;

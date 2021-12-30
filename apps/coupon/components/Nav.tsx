@@ -10,21 +10,11 @@ import {
   Button,
   Icon,
   Text,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalBody,
-  Input,
-  ListItem,
-  List,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
 import NextLink from 'next/link';
-import BrandSearchInput from './BrandSearch';
 import { FaSearch } from 'react-icons/fa';
-import { IoReturnDownBack } from 'react-icons/io5';
-import Link from 'next/link';
 import BrandSearchModal from './BrandSearchModal';
 
 const Nav = ({ children, ...rest }: HTMLChakraProps<'div'>) => {

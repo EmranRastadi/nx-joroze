@@ -1,15 +1,12 @@
 import {
   Box,
   Button,
-  Flex,
   Heading,
   HStack,
   SimpleGrid,
-  Stack,
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { Brand } from '../../components/BrandSearch';
 import { GetStaticPropsContext } from 'next';
 import { fetchFromContentful } from '..';
 import { useState } from 'react';
