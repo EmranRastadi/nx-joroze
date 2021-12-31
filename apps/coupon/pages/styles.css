@@ -1,3 +1,12 @@
 html {
   scroll-behavior: smooth;
 }
+
+.flickity-enabled:focus, .flickity-enabled:focus-visible .flickity-viewport {
+  outline: none;
+}
+
+.flickity-viewport {
+  outline: none;
+  overflow: hidden;
+}

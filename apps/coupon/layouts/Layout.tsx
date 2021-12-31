@@ -15,7 +15,8 @@ import { ReactElement, useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
 import NavLink from '../components/NavLink';
-import { CouponCategory } from '../pages/promos/brands';
+import Flickity from 'react-flickity-component';
+import { CouponCategory } from '@joroze/cms';
 
 const Links = [
   {
@@ -60,36 +61,61 @@ const Layout = ({ children }: Props) => {
           xl: 'container.xl',
         }}
       >
-        <SimpleGrid columns={{ base: 2, sm: 4, md: 6, xl: 6 }} spacing="10px">
+        <Flickity
+          options={{
+            groupCells: 1,
+            draggable: true,
+            // autoPlay: 1000,
+            // wrapAround: true,
+            cellAlign: 'left',
+            contain: true,
+            prevNextButtons: false,
+            pageDots: false,
+            // pauseAutoPlayOnHover: true,
+          }}
+        >
           {categories.map((category) => (
-            <Link
-              shallow
-              replace
+            <Button
+              mr="5px"
               key={category.sys.id}
-              href={`/promos/brands?category=${category.name.toLowerCase()}`}
-              passHref
+              zIndex={'overlay'}
+              isActive={
+                isBrandsPath &&
+                activeCategoryName === category?.name?.toLowerCase()
+              }
             >
-              <Button
-                isActive={
-                  isBrandsPath &&
-                  activeCategoryName === category?.name?.toLowerCase()
-                }
+              <Link
+                shallow
+                replace
+                href={`/promos/brands?category=${category?.name?.toLowerCase()}`}
+                passHref
               >
                 <HStack height="100%">
-                  <Box width="20px" height="50%" position="relative">
-                    <Image
-                      src={category?.image?.url}
-                      alt={category.name}
-                      layout="fill"
-                    />
-                  </Box>
+                  {category?.image?.url && (
+                    <Box width="20px" height="50%" position="relative">
+                      <Image
+                        src={category?.image?.url}
+                        alt={category.name || ''}
+                        layout="fill"
+                      />
+                    </Box>
+                  )}
 
-                  <Text>{category.name}</Text>
+                  <Text
+                    color="gray.600"
+                    fontSize="smaller"
+                    fontWeight="semibold"
+                  >
+                    {category.name}
+                  </Text>
+                  <Text color="gray.600" fontSize="smaller" fontWeight="normal">
+                    {category.linkedFrom?.couponEntityCollection?.items.length}
+                  </Text>
                 </HStack>
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           ))}
-        </SimpleGrid>
+        </Flickity>
       </Container>
 
       <Flex as="main" minHeight="calc(100vh - 64px)">

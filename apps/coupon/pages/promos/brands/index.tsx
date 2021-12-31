@@ -87,6 +87,10 @@ export default function BrandsPage({ preview, brands }: Props) {
     AlphabetLetter | ''
   >('');
 
+  const handleOnShowAllBrandsButtonClick = () => {
+    setSelectedAlphabetLetter('');
+    router.replace('/promos/brands');
+  };
   const handleOnAlphabetLetterButtonClick =
     (alphabetLetter: AlphabetLetter) => () =>
       setSelectedAlphabetLetter(alphabetLetter);
@@ -152,8 +156,14 @@ export default function BrandsPage({ preview, brands }: Props) {
           {activeCategoryName} Promo Codes
         </Heading>
         <Heading as="h2" size="md">
-          All brands
+          All brands{' '}
         </Heading>
+
+        {(activeCategoryName || selectedAlphabetLetter) && (
+          <Button onClick={handleOnShowAllBrandsButtonClick} variant="link">
+            <Text>Show All</Text>
+          </Button>
+        )}
 
         <Flex gap="2" flexWrap="wrap">
           {filteredAlphabetLetters.map((alphabetLetter) => {
