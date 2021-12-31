@@ -1606,7 +1606,7 @@ export type BrandsQueryVariables = Exact<{
 }>;
 
 
-export type BrandsQuery = { __typename?: 'Query', couponEntityCollection?: { __typename?: 'CouponEntityCollection', items: Array<{ __typename?: 'CouponEntity', name?: string | null | undefined, slug?: string | null | undefined, description?: string | null | undefined, brandUrl?: string | null | undefined, logoImage?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, category?: { __typename?: 'CouponCategory', description?: string | null | undefined, name?: string | null | undefined, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined> } | null | undefined };
+export type BrandsQuery = { __typename?: 'Query', couponEntityCollection?: { __typename?: 'CouponEntityCollection', items: Array<{ __typename?: 'CouponEntity', name?: string | null | undefined, slug?: string | null | undefined, description?: string | null | undefined, brandUrl?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, logoImage?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, category?: { __typename?: 'CouponCategory', description?: string | null | undefined, name?: string | null | undefined, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined } | null | undefined } | null | undefined> } | null | undefined };
 
 export type CategoriesQueryVariables = Exact<{
   preview: Scalars['Boolean'];
@@ -1668,6 +1668,9 @@ export const BrandsDocument = gql`
     query Brands($slug: String) {
   couponEntityCollection(where: {slug: $slug}) {
     items {
+      sys {
+        id
+      }
       name
       slug
       logoImage {

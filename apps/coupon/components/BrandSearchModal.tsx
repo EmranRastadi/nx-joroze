@@ -71,7 +71,7 @@ const BrandSearchModal = ({ isOpen, onClose }: Props) => {
     } else if (e.key === 'Enter') {
       const activeBrand = filteredBrandOptions[cursor];
 
-      router.push(`/promos/brand/${activeBrand.slug}`);
+      router.push(`/promos/brands/${activeBrand.slug}`);
 
       handleOnBrandOptionClick();
     }
@@ -175,7 +175,7 @@ const BrandSearchModal = ({ isOpen, onClose }: Props) => {
                       <Link
                         key={brand?.sys?.id}
                         passHref
-                        href={`/promos/brand/${brand.slug}`}
+                        href={`/promos/brands/${brand.slug}`}
                       >
                         <ListItem
                           onClick={handleOnBrandOptionClick}

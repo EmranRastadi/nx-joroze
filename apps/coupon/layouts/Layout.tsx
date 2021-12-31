@@ -9,6 +9,8 @@ import {
   Text,
   Image,
 } from '@chakra-ui/react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { ReactElement, useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
@@ -17,8 +19,8 @@ import { CouponCategory } from '../pages/promos/brands';
 
 const Links = [
   {
-    name: 'Categories',
-    href: '/promos/categories',
+    name: '🎁 Brands',
+    href: '/promos/brands',
   },
 ];
 
@@ -27,6 +29,8 @@ type Props = {
 };
 
 const Layout = ({ children }: Props) => {
+  const router = useRouter();
+  const { category: activeCategoryName } = router.query;
   const [categories, setCategories] = useState<CouponCategory[]>([]);
 
   useEffect(() => {
@@ -57,19 +61,28 @@ const Layout = ({ children }: Props) => {
       >
         <SimpleGrid columns={{ base: 2, sm: 4, md: 6, xl: 6 }} spacing="10px">
           {categories.map((category) => (
-            <Button key={category.sys.id}>
-              <HStack height="100%">
-                <Box width="20px" height="50%" position="relative">
-                  <Image
-                    src={category?.image?.url}
-                    alt={category.name}
-                    layout="fill"
-                  />
-                </Box>
+            <Link
+              shallow
+              key={category.sys.id}
+              href={`/promos/brands?category=${category.name.toLowerCase()}`}
+              passHref
+            >
+              <Button
+                isActive={activeCategoryName === category?.name?.toLowerCase()}
+              >
+                <HStack height="100%">
+                  <Box width="20px" height="50%" position="relative">
+                    <Image
+                      src={category?.image?.url}
+                      alt={category.name}
+                      layout="fill"
+                    />
+                  </Box>
 
-                <Text>{category.name}</Text>
-              </HStack>
-            </Button>
+                  <Text>{category.name}</Text>
+                </HStack>
+              </Button>
+            </Link>
           ))}
         </SimpleGrid>
       </Container>
