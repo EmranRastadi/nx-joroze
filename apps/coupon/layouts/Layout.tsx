@@ -31,6 +31,7 @@ type Props = {
 const Layout = ({ children }: Props) => {
   const router = useRouter();
   const { category: activeCategoryName } = router.query;
+  const isBrandsPath = router.pathname === '/promos/brands';
   const [categories, setCategories] = useState<CouponCategory[]>([]);
 
   useEffect(() => {
@@ -63,12 +64,16 @@ const Layout = ({ children }: Props) => {
           {categories.map((category) => (
             <Link
               shallow
+              replace
               key={category.sys.id}
               href={`/promos/brands?category=${category.name.toLowerCase()}`}
               passHref
             >
               <Button
-                isActive={activeCategoryName === category?.name?.toLowerCase()}
+                isActive={
+                  isBrandsPath &&
+                  activeCategoryName === category?.name?.toLowerCase()
+                }
               >
                 <HStack height="100%">
                   <Box width="20px" height="50%" position="relative">
