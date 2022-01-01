@@ -21,7 +21,7 @@ const Footer = () => (
       >
         <Flex flex="1">
           <Image
-            src="/logo.svg"
+            src="/assets/logo.svg"
             alt="logo"
             draggable={false}
             layout="fixed"

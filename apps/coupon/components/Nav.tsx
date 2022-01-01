@@ -44,7 +44,7 @@ const Nav = ({ children, ...rest }: HTMLChakraProps<'div'>) => {
                 <Image
                   priority
                   draggable={false}
-                  src="/logo.svg"
+                  src="/assets/logo.svg"
                   alt="logo"
                   layout="fixed"
                   width={150}
