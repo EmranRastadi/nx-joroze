@@ -2,6 +2,7 @@ import {
   Button,
   Flex,
   Heading,
+  HStack,
   SimpleGrid,
   Text,
   VStack,
@@ -155,15 +156,18 @@ export default function BrandsPage({ preview, brands }: Props) {
         <Heading as="h1" mt={4} mb={4} textTransform="capitalize">
           {activeCategoryName} Promo Codes
         </Heading>
-        <Heading as="h2" size="md">
-          All brands{' '}
-        </Heading>
 
-        {(activeCategoryName || selectedAlphabetLetter) && (
-          <Button onClick={handleOnShowAllBrandsButtonClick} variant="link">
-            <Text>Show All</Text>
-          </Button>
-        )}
+        <HStack>
+          <Heading as="h2" size="md">
+            All brands
+          </Heading>
+
+          {(activeCategoryName || selectedAlphabetLetter) && (
+            <Button onClick={handleOnShowAllBrandsButtonClick} variant="link">
+              <Text>Show All</Text>
+            </Button>
+          )}
+        </HStack>
 
         <Flex gap="2" flexWrap="wrap">
           {filteredAlphabetLetters.map((alphabetLetter) => {

@@ -1,8 +1,6 @@
 import {
   Flex,
   Container,
-  Input,
-  SimpleGrid,
   Button,
   HStack,
   Box,
@@ -32,8 +30,8 @@ type Props = {
 const Layout = ({ children }: Props) => {
   const router = useRouter();
   const { category: activeCategoryName } = router.query;
-  const isBrandsPath = router.pathname === '/promos/brands';
   const [categories, setCategories] = useState<CouponCategory[]>([]);
+  const isBrandsPath = router.pathname === '/promos/brands';
 
   useEffect(() => {
     (async () => {
