@@ -1,4 +1,14 @@
-import { Box, Flex, Heading, Text, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  List,
+  ListIcon,
+  ListItem,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
 import cms, { CouponEntity } from '@joroze/cms';
 import { motion } from 'framer-motion';
 import { GetStaticPropsContext } from 'next';
@@ -6,6 +16,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Flickity from 'react-flickity-component';
 import BrandCard from '../components/BrandCard';
+import { BiPurchaseTag, BiBadgeCheck, BiHappy } from 'react-icons/bi';
 
 export const fetchFromContentful = (preview?: boolean) =>
   cms(
@@ -16,28 +27,60 @@ export const fetchFromContentful = (preview?: boolean) =>
   );
 
 type Props = {
-  brandsWithSales: CouponEntity[];
+  brands: CouponEntity[];
 };
 
-export default function Index({ brandsWithSales }: Props) {
-  // const brandCardWidth;
+export default function Index({ brands }: Props) {
   return (
     <Flex direction="column">
-      <VStack>
-        <Heading as="h1" mt={2} mb={4}>
-          All valid promotional codes on one site
-        </Heading>
-        <Text fontSize="xl">
-          Welcome to the <b>SSHARELY</b> website, which contains the most
-          relevant promotions, coupons, discounts and freebets for various
-          services! We constantly monitor the Internet so that you can save
-          money and receive all kinds of bonuses!
-        </Text>
-        <Text fontSize="xl">
-          With us, you can save and earn money in all spheres of life - from
-          bookmakers to food delivery to your home!
-        </Text>
-
+      <VStack spacing="5">
+        <Box
+          width="full"
+          sx={{
+            '> .flickity-enabled .flickity-viewport': {
+              borderRadius: '15px',
+            },
+          }}
+        >
+          <Flickity
+            static
+            options={{
+              groupCells: 1,
+              draggable: true,
+              autoPlay: 5000,
+              cellAlign: 'left',
+              contain: true,
+              prevNextButtons: false,
+              pageDots: false,
+              pauseAutoPlayOnHover: true,
+            }}
+          >
+            {brands.map((brand) => (
+              <Link
+                key={brand.sys.id}
+                passHref
+                href={`/promos/brands/${brand.slug}`}
+              >
+                <Box
+                  cursor="pointer"
+                  borderRadius="15px"
+                  overflow="hidden"
+                  width="full"
+                >
+                  <Image
+                    priority
+                    objectFit="cover"
+                    layout="responsive"
+                    width={700}
+                    height={200}
+                    alt="test"
+                    src="/assets/banner.jpg"
+                  />
+                </Box>
+              </Link>
+            ))}
+          </Flickity>
+        </Box>
         <Box width="full">
           <Flickity
             options={{
@@ -51,7 +94,7 @@ export default function Index({ brandsWithSales }: Props) {
               pauseAutoPlayOnHover: true,
             }}
           >
-            {brandsWithSales.map((brand) => (
+            {brands.map((brand) => (
               <Box key={brand.sys.id}>
                 <Link passHref href={`/promos/brands/${brand.slug}`}>
                   <motion.div
@@ -68,11 +111,54 @@ export default function Index({ brandsWithSales }: Props) {
             ))}
           </Flickity>
         </Box>
+        <Link href={'/promos/brands'} passHref>
+          <Button
+            colorScheme="purple"
+            width="250px"
+            borderRadius="full"
+            borderWidth="2px"
+            size="lg"
+            variant="outline"
+            fontWeight="extrabold"
+          >
+            All brands
+          </Button>
+        </Link>
+
+        <Heading as="h1" mt={2}>
+          All valid promo codes on one site
+        </Heading>
+        <Text>
+          Welcome to the{' '}
+          <Text as="span" color="purple.500" fontWeight="semibold">
+            SSHARELY
+          </Text>{' '}
+          website, which contains the most relevant promotions, coupons,
+          discounts and freebets for various services! We constantly monitor the
+          Internet so that you can save money and receive all kinds of bonuses!
+          With us, you can save and earn money in all spheres of life - from
+          bookmakers to food delivery to your home!
+        </Text>
+
+        <List width="full">
+          <ListItem>
+            <ListIcon as={BiPurchaseTag} color="purple.500" />
+            There are 15602 coupons on the site
+          </ListItem>
+          <ListItem>
+            <ListIcon as={BiBadgeCheck} color="purple.500" />
+            Only valid promotional codes of companies
+          </ListItem>
+          <ListItem>
+            <ListIcon as={BiHappy} color="purple.500" />
+            Promo codes from all walks of life
+          </ListItem>
+        </List>
 
         <Box padding="25px">
           <Image
             draggable={false}
-            src="/people.png"
+            src="/assets/people.png"
             alt="people"
             width={290}
             height={290}
@@ -101,7 +187,7 @@ export const getStaticProps = async ({ preview }: GetStaticPropsContext) => {
 
   return {
     props: {
-      brandsWithSales,
+      brands: brandsWithSales,
     },
   };
 };

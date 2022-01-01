@@ -8,6 +8,7 @@ import {
   Image,
   VStack,
 } from '@chakra-ui/react';
+
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactElement, useEffect, useState } from 'react';
@@ -42,23 +43,31 @@ const Layout = ({ children }: Props) => {
 
   return (
     <>
-      <Nav w="100%">
-        {Links.filter(({ name }) => name).map(function ({ href, name }, index) {
-          return (
-            <NavLink key={index} href={href} textAlign="center">
-              {name}
-            </NavLink>
-          );
-        })}
-      </Nav>
+      <VStack spacing="5">
+        <Nav w="100%">
+          {Links.filter(({ name }) => name).map(function (
+            { href, name },
+            index
+          ) {
+            return (
+              <NavLink key={index} href={href} textAlign="center">
+                {name}
+              </NavLink>
+            );
+          })}
+        </Nav>
 
-      <VStack>
         <Container
           mt="10px"
           maxW={{
             base: 'none',
             md: 'container.md',
             xl: 'container.xl',
+          }}
+          sx={{
+            '> .flickity-enabled .flickity-viewport': {
+              borderRadius: '6px',
+            },
           }}
         >
           <Flickity
@@ -123,7 +132,7 @@ const Layout = ({ children }: Props) => {
           </Flickity>
         </Container>
 
-        <Flex as="main" minHeight="calc(100vh - 64px)">
+        <Flex as="main" minHeight="calc(100vh - 64px)" width="full">
           <Container
             maxW={{
               base: 'none',

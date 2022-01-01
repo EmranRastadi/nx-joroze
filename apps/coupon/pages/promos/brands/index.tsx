@@ -151,61 +151,59 @@ export default function BrandsPage({ preview, brands }: Props) {
   }, [activeCategoryName]);
 
   return (
-    <div>
-      <VStack align="flex-start">
-        <Heading as="h1" mt={4} mb={4} textTransform="capitalize">
-          {activeCategoryName} Promo Codes
+    <VStack align="flex-start">
+      <Heading as="h1" mb={4} textTransform="capitalize">
+        {activeCategoryName} Promo Codes
+      </Heading>
+
+      <HStack>
+        <Heading as="h2" size="md">
+          All brands
         </Heading>
 
-        <HStack>
-          <Heading as="h2" size="md">
-            All brands
-          </Heading>
+        {(activeCategoryName || selectedAlphabetLetter) && (
+          <Button onClick={handleOnShowAllBrandsButtonClick} variant="link">
+            <Text>Show All</Text>
+          </Button>
+        )}
+      </HStack>
 
-          {(activeCategoryName || selectedAlphabetLetter) && (
-            <Button onClick={handleOnShowAllBrandsButtonClick} variant="link">
-              <Text>Show All</Text>
+      <Flex gap="2" flexWrap="wrap">
+        {filteredAlphabetLetters.map((alphabetLetter) => {
+          return (
+            <Button
+              isActive={selectedAlphabetLetter === alphabetLetter}
+              onClick={handleOnAlphabetLetterButtonClick(
+                alphabetLetter as AlphabetLetter
+              )}
+              variant="ghost"
+              key={alphabetLetter}
+            >
+              <Text color="gray.600" textTransform="capitalize">
+                {alphabetLetter}
+              </Text>
             </Button>
-          )}
-        </HStack>
-
-        <Flex gap="2" flexWrap="wrap">
-          {filteredAlphabetLetters.map((alphabetLetter) => {
-            return (
-              <Button
-                isActive={selectedAlphabetLetter === alphabetLetter}
-                onClick={handleOnAlphabetLetterButtonClick(
-                  alphabetLetter as AlphabetLetter
-                )}
-                variant="ghost"
-                key={alphabetLetter}
+          );
+        })}
+      </Flex>
+      <SimpleGrid columns={{ base: 2, sm: 3, md: 4, xl: 6 }} spacing="40px">
+        {filteredBrands.map((brand) => (
+          <Box key={brand.sys.id}>
+            <Link passHref href={`/promos/brands/${brand.slug}`}>
+              <motion.div
+                whileHover={{
+                  scale: 1.05,
+                  transition: { duration: 0.3 },
+                }}
+                whileTap={{ scale: 0.95 }}
               >
-                <Text color="gray.600" textTransform="capitalize">
-                  {alphabetLetter}
-                </Text>
-              </Button>
-            );
-          })}
-        </Flex>
-        <SimpleGrid columns={{ base: 2, sm: 3, md: 4, xl: 6 }} spacing="40px">
-          {filteredBrands.map((brand) => (
-            <Box key={brand.sys.id}>
-              <Link passHref href={`/promos/brands/${brand.slug}`}>
-                <motion.div
-                  whileHover={{
-                    scale: 1.05,
-                    transition: { duration: 0.3 },
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <BrandCard cursor="pointer" brand={brand} />
-                </motion.div>
-              </Link>
-            </Box>
-          ))}
-        </SimpleGrid>
-      </VStack>
-    </div>
+                <BrandCard cursor="pointer" brand={brand} />
+              </motion.div>
+            </Link>
+          </Box>
+        ))}
+      </SimpleGrid>
+    </VStack>
   );
 }
 

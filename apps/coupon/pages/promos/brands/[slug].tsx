@@ -1,8 +1,10 @@
 import { GetStaticPropsContext } from 'next';
 import { fetchFromContentful } from '../..';
-import { Box, Heading, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, Link, Flex, Heading, Text, VStack } from '@chakra-ui/react';
 import { CouponEntity } from '@joroze/cms';
 import Image from 'next/image';
+import NextLink from 'next/link';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 type Props = {
   brand: CouponEntity;
@@ -10,24 +12,32 @@ type Props = {
 
 export default function BrandPage({ brand }: Props) {
   return (
-    <VStack spacing="4">
-      <Heading mt="2" size="lg">
-        {brand.name} Promo Codes January 2022
-      </Heading>
-      {brand?.logoImage?.url && (
-        <Box>
-          <Image
-            draggable={false}
-            src={brand.logoImage.url}
-            alt={`${brand.name} logo`}
-            objectFit="contain"
-            width={'80px'}
-            height={'20px'}
-          />
-        </Box>
-      )}
-      <Text>{brand.description}</Text>
-    </VStack>
+    <Flex direction="column">
+      <VStack spacing="4">
+        <Heading size="lg">{brand.name} Promo Codes January 2022</Heading>
+        {brand?.logoImage?.url && (
+          <Box>
+            <Image
+              draggable={false}
+              src={brand.logoImage.url}
+              alt={`${brand.name} logo`}
+              objectFit="contain"
+              width={'80px'}
+              height={'20px'}
+            />
+          </Box>
+        )}
+        <Text>{brand.description}</Text>
+
+        {brand.slug === 'coinbase' && (
+          <NextLink href="/api/partner-redirect/M9G3h9VD6YFjxFgSEM0Ia" passHref>
+            <Link isExternal color="teal.500">
+              Sign up here <ExternalLinkIcon mx="2px" />
+            </Link>
+          </NextLink>
+        )}
+      </VStack>
+    </Flex>
   );
 }
 
@@ -79,8 +89,6 @@ export async function getStaticPaths() {
   const paths = couponEntityCollection?.items.map((brand) => ({
     params: { slug: brand?.slug },
   }));
-
-  console.log(couponEntityCollection?.items);
 
   return { paths, fallback: 'blocking' };
 }
