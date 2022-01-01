@@ -252,6 +252,7 @@ const BrandSearchInput = () => {
                               >
                                 {brand?.logoImage?.url ? (
                                   <Image
+                                    draggable={false}
                                     src={brand.logoImage.url}
                                     alt={`${brand.name} logo`}
                                     layout="fill"

@@ -19,7 +19,12 @@ export default async function userHandler(
             id: couponId,
           });
 
-        couponEntry?.referringUrl
+        res.setHeader(
+          'Cache-Control',
+          's-maxage=31536000, stale-while-revalidate'
+        );
+
+        return couponEntry?.referringUrl
           ? res.redirect(couponEntry.referringUrl)
           : res.redirect('/');
       } catch (error) {

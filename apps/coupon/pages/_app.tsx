@@ -1,5 +1,5 @@
 import { AppProps } from 'next/app';
-import './styles.css';
+import './styles.scss';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import type { ReactElement, ReactNode } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';

@@ -17,6 +17,11 @@ query Brands($slug: String) {
         }
         name
       }
+      linkedFrom {
+        couponEntryCollection {
+          total
+        }
+      }
       brandUrl
     }
   }

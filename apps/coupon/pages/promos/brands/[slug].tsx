@@ -1,20 +1,33 @@
 import { GetStaticPropsContext } from 'next';
 import { fetchFromContentful } from '../..';
-import { Text } from '@chakra-ui/react';
-import { Brand } from '../../../components/BrandSearchModal';
+import { Box, Heading, HStack, Text, VStack } from '@chakra-ui/react';
+import { CouponEntity } from '@joroze/cms';
+import Image from 'next/image';
 
 type Props = {
-  brand: Brand;
+  brand: CouponEntity;
 };
 
 export default function BrandPage({ brand }: Props) {
   return (
-    <div>
-      <Text>Brand Page</Text>
-
-      <Text>{brand.name}</Text>
+    <VStack spacing="4">
+      <Heading mt="2" size="lg">
+        {brand.name} Promo Codes January 2022
+      </Heading>
+      {brand?.logoImage?.url && (
+        <Box>
+          <Image
+            draggable={false}
+            src={brand.logoImage.url}
+            alt={`${brand.name} logo`}
+            objectFit="contain"
+            width={'80px'}
+            height={'20px'}
+          />
+        </Box>
+      )}
       <Text>{brand.description}</Text>
-    </div>
+    </VStack>
   );
 }
 

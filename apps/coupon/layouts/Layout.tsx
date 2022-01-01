@@ -6,6 +6,7 @@ import {
   Box,
   Text,
   Image,
+  VStack,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -51,82 +52,89 @@ const Layout = ({ children }: Props) => {
         })}
       </Nav>
 
-      <Container
-        mt="10px"
-        maxW={{
-          base: 'none',
-          md: 'container.md',
-          xl: 'container.xl',
-        }}
-      >
-        <Flickity
-          options={{
-            groupCells: 1,
-            draggable: true,
-            // autoPlay: 1000,
-            // wrapAround: true,
-            cellAlign: 'left',
-            contain: true,
-            prevNextButtons: false,
-            pageDots: false,
-            // pauseAutoPlayOnHover: true,
-          }}
-        >
-          {categories.map((category) => (
-            <Button
-              mr="5px"
-              key={category.sys.id}
-              zIndex={'overlay'}
-              isActive={
-                isBrandsPath &&
-                activeCategoryName === category?.name?.toLowerCase()
-              }
-            >
-              <Link
-                shallow
-                replace
-                href={`/promos/brands?category=${category?.name?.toLowerCase()}`}
-                passHref
-              >
-                <HStack height="100%">
-                  {category?.image?.url && (
-                    <Box width="20px" height="50%" position="relative">
-                      <Image
-                        src={category?.image?.url}
-                        alt={category.name || ''}
-                        layout="fill"
-                      />
-                    </Box>
-                  )}
-
-                  <Text
-                    color="gray.600"
-                    fontSize="smaller"
-                    fontWeight="semibold"
-                  >
-                    {category.name}
-                  </Text>
-                  <Text color="gray.600" fontSize="smaller" fontWeight="normal">
-                    {category.linkedFrom?.couponEntityCollection?.items.length}
-                  </Text>
-                </HStack>
-              </Link>
-            </Button>
-          ))}
-        </Flickity>
-      </Container>
-
-      <Flex as="main" minHeight="calc(100vh - 64px)">
+      <VStack>
         <Container
+          mt="10px"
           maxW={{
             base: 'none',
             md: 'container.md',
             xl: 'container.xl',
           }}
         >
-          {children}
+          <Flickity
+            options={{
+              groupCells: 1,
+              draggable: true,
+              cellAlign: 'left',
+              contain: true,
+              prevNextButtons: false,
+              pageDots: false,
+            }}
+          >
+            {categories.map((category) => (
+              <Button
+                mr="5px"
+                key={category.sys.id}
+                zIndex={'overlay'}
+                isActive={
+                  isBrandsPath &&
+                  activeCategoryName === category?.name?.toLowerCase()
+                }
+              >
+                <Link
+                  shallow
+                  replace
+                  href={`/promos/brands?category=${category?.name?.toLowerCase()}`}
+                  passHref
+                >
+                  <HStack height="100%">
+                    {category?.image?.url && (
+                      <Box width="20px" height="50%" position="relative">
+                        <Image
+                          draggable={false}
+                          src={category?.image?.url}
+                          alt={category.name || ''}
+                          layout="fill"
+                        />
+                      </Box>
+                    )}
+
+                    <Text
+                      color="gray.600"
+                      fontSize="smaller"
+                      fontWeight="semibold"
+                    >
+                      {category.name}
+                    </Text>
+                    <Text
+                      color="gray.600"
+                      fontSize="smaller"
+                      fontWeight="normal"
+                    >
+                      {
+                        category.linkedFrom?.couponEntityCollection?.items
+                          .length
+                      }
+                    </Text>
+                  </HStack>
+                </Link>
+              </Button>
+            ))}
+          </Flickity>
         </Container>
-      </Flex>
+
+        <Flex as="main" minHeight="calc(100vh - 64px)">
+          <Container
+            maxW={{
+              base: 'none',
+              md: 'container.md',
+              xl: 'container.xl',
+            }}
+          >
+            {children}
+          </Container>
+        </Flex>
+      </VStack>
       <Footer />
     </>
   );

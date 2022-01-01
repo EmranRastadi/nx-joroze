@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Flex,
   Heading,
@@ -10,12 +11,11 @@ import {
 import { GetStaticPropsContext } from 'next';
 import { fetchFromContentful } from '../..';
 import { useEffect, useMemo, useState } from 'react';
-import { Card } from '@joroze/ui';
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { CouponEntity } from '@joroze/cms';
+import BrandCard from '../../../components/BrandCard';
 
 export type CouponCategory = {
   sys: {
@@ -189,33 +189,20 @@ export default function BrandsPage({ preview, brands }: Props) {
         </Flex>
         <SimpleGrid columns={{ base: 2, sm: 3, md: 4, xl: 6 }} spacing="40px">
           {filteredBrands.map((brand) => (
-            <motion.div
-              key={brand.sys.id}
-              whileHover={{
-                scale: 1.05,
-                transition: { duration: 0.3 },
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <Box key={brand.sys.id}>
               <Link passHref href={`/promos/brands/${brand.slug}`}>
-                <Card cursor="pointer" borderRadius={'15px'}>
-                  <VStack>
-                    <Text>{`${brand.name}`}</Text>
-                    <Text>{`THIS IS A TEST`}</Text>
-                  </VStack>
-                </Card>
+                <motion.div
+                  whileHover={{
+                    scale: 1.05,
+                    transition: { duration: 0.3 },
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <BrandCard cursor="pointer" brand={brand} />
+                </motion.div>
               </Link>
-            </motion.div>
+            </Box>
           ))}
-
-          {/* {new Array(50).fill(0).map((_, index) => (
-              <Card borderRadius={'15px'} key={index}>
-                <VStack>
-                  <Text>{`THIS IS A ${activeCategory.name}`}</Text>
-                  <Text>{`THIS IS A ${activeCategory.name}`}</Text>
-                </VStack>
-              </Card>
-            ))} */}
         </SimpleGrid>
       </VStack>
     </div>
