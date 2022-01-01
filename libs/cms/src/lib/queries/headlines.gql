@@ -1,0 +1,15 @@
+query Headlines {
+  couponHeadlineCollection {
+    items {
+      sys {
+        id
+      }
+      image {
+        url
+      }
+      description
+      url
+      title
+    }
+  }
+}

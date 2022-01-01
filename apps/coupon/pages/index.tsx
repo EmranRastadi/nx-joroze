@@ -9,7 +9,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import cms, { CouponEntity } from '@joroze/cms';
+import cms, { CouponEntity, CouponHeadline } from '@joroze/cms';
 import { motion } from 'framer-motion';
 import { GetStaticPropsContext } from 'next';
 import Image from 'next/image';
@@ -28,9 +28,10 @@ export const fetchFromContentful = (preview?: boolean) =>
 
 type Props = {
   brands: CouponEntity[];
+  headlines: CouponHeadline[];
 };
 
-export default function Index({ brands }: Props) {
+export default function Index({ brands, headlines }: Props) {
   return (
     <Flex direction="column">
       <VStack spacing="5">
@@ -55,30 +56,76 @@ export default function Index({ brands }: Props) {
               pauseAutoPlayOnHover: true,
             }}
           >
-            {brands.map((brand) => (
-              <Link
-                key={brand.sys.id}
-                passHref
-                href={`/promos/brands/${brand.slug}`}
-              >
+            {headlines.map((headline) =>
+              headline.url ? (
+                <Link key={headline.sys.id} passHref href={headline.url}>
+                  <Box
+                    marginRight={2}
+                    cursor="pointer"
+                    borderRadius="15px"
+                    overflow="hidden"
+                    width="full"
+                  >
+                    {headline?.image?.url ? (
+                      <Image
+                        priority
+                        objectFit="cover"
+                        layout="responsive"
+                        width={700}
+                        height={200}
+                        alt="headline image"
+                        src={headline?.image?.url}
+                      />
+                    ) : (
+                      <Box
+                        padding="2"
+                        border="1px solid"
+                        borderRadius="15px"
+                        borderColor="purple.500"
+                        minHeight="200px"
+                      >
+                        <VStack spacing="2">
+                          <Heading>{headline.title}</Heading>
+                          <Text>{headline.description}</Text>
+                        </VStack>
+                      </Box>
+                    )}
+                  </Box>
+                </Link>
+              ) : (
                 <Box
-                  cursor="pointer"
+                  marginRight={2}
                   borderRadius="15px"
                   overflow="hidden"
                   width="full"
                 >
-                  <Image
-                    priority
-                    objectFit="cover"
-                    layout="responsive"
-                    width={700}
-                    height={200}
-                    alt="test"
-                    src="/assets/banner.jpg"
-                  />
+                  {headline?.image?.url ? (
+                    <Image
+                      priority
+                      objectFit="cover"
+                      layout="responsive"
+                      width={700}
+                      height={200}
+                      alt="headline image"
+                      src={headline?.image?.url}
+                    />
+                  ) : (
+                    <Box
+                      padding="2"
+                      border="1px solid"
+                      borderRadius="15px"
+                      borderColor="purple.500"
+                      minHeight="200px"
+                    >
+                      <VStack spacing="2">
+                        <Heading>{headline.title}</Heading>
+                        <Text>{headline.description}</Text>
+                      </VStack>
+                    </Box>
+                  )}
                 </Box>
-              </Link>
-            ))}
+              )
+            )}
           </Flickity>
         </Box>
         <Box width="full">
@@ -178,16 +225,23 @@ Index.defaultProps = {
 };
 
 export const getStaticProps = async ({ preview }: GetStaticPropsContext) => {
-  const { couponEntityCollection } = await fetchFromContentful().Brands();
+  const [{ couponEntityCollection }, { couponHeadlineCollection }] =
+    await Promise.all([
+      fetchFromContentful().Brands(),
+      fetchFromContentful().Headlines(),
+    ]);
 
   const brands = couponEntityCollection?.items;
   const brandsWithSales = brands?.filter(
     (brand) => (brand?.linkedFrom?.couponEntryCollection?.total || 0) > 0
   );
 
+  const headlines = couponHeadlineCollection?.items;
+
   return {
     props: {
       brands: brandsWithSales,
+      headlines: headlines,
     },
   };
 };

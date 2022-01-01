@@ -141,6 +141,7 @@ export type AssetLinkingCollections = {
   couponCategoryCollection?: Maybe<CouponCategoryCollection>;
   couponEntityCollection?: Maybe<CouponEntityCollection>;
   couponEntryCollection?: Maybe<CouponEntryCollection>;
+  couponHeadlineCollection?: Maybe<CouponHeadlineCollection>;
   entryCollection?: Maybe<EntryCollection>;
   personCollection?: Maybe<PersonCollection>;
   productCollection?: Maybe<ProductCollection>;
@@ -172,6 +173,14 @@ export type AssetLinkingCollectionsCouponEntityCollectionArgs = {
 
 
 export type AssetLinkingCollectionsCouponEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type AssetLinkingCollectionsCouponHeadlineCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -842,6 +851,114 @@ export enum CouponEntryOrder {
   TitleDesc = 'title_DESC'
 }
 
+/** Coupon website hero headline entity [See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/couponHeadline) */
+export type CouponHeadline = Entry & {
+  __typename?: 'CouponHeadline';
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']>;
+  image?: Maybe<Asset>;
+  linkedFrom?: Maybe<CouponHeadlineLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
+
+
+/** Coupon website hero headline entity [See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/couponHeadline) */
+export type CouponHeadlineDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Coupon website hero headline entity [See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/couponHeadline) */
+export type CouponHeadlineImageArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+/** Coupon website hero headline entity [See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/couponHeadline) */
+export type CouponHeadlineLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** Coupon website hero headline entity [See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/couponHeadline) */
+export type CouponHeadlineTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Coupon website hero headline entity [See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/couponHeadline) */
+export type CouponHeadlineUrlArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type CouponHeadlineCollection = {
+  __typename?: 'CouponHeadlineCollection';
+  items: Array<Maybe<CouponHeadline>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type CouponHeadlineFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CouponHeadlineFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CouponHeadlineFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  description_not?: InputMaybe<Scalars['String']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  image_exists?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  url?: InputMaybe<Scalars['String']>;
+  url_contains?: InputMaybe<Scalars['String']>;
+  url_exists?: InputMaybe<Scalars['Boolean']>;
+  url_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  url_not?: InputMaybe<Scalars['String']>;
+  url_not_contains?: InputMaybe<Scalars['String']>;
+  url_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type CouponHeadlineLinkingCollections = {
+  __typename?: 'CouponHeadlineLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type CouponHeadlineLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum CouponHeadlineOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  UrlAsc = 'url_ASC',
+  UrlDesc = 'url_DESC'
+}
+
 export type Entry = {
   contentfulMetadata: ContentfulMetadata;
   sys: Sys;
@@ -1348,6 +1465,8 @@ export type Query = {
   couponEntityCollection?: Maybe<CouponEntityCollection>;
   couponEntry?: Maybe<CouponEntry>;
   couponEntryCollection?: Maybe<CouponEntryCollection>;
+  couponHeadline?: Maybe<CouponHeadline>;
+  couponHeadlineCollection?: Maybe<CouponHeadlineCollection>;
   entryCollection?: Maybe<EntryCollection>;
   person?: Maybe<Person>;
   personCollection?: Maybe<PersonCollection>;
@@ -1438,6 +1557,23 @@ export type QueryCouponEntryCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<CouponEntryFilter>;
+};
+
+
+export type QueryCouponHeadlineArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryCouponHeadlineCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<CouponHeadlineOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CouponHeadlineFilter>;
 };
 
 
@@ -1622,6 +1758,11 @@ export type CouponByIdReferringUrlQueryVariables = Exact<{
 
 export type CouponByIdReferringUrlQuery = { __typename?: 'Query', couponEntry?: { __typename?: 'CouponEntry', referringUrl?: string | null | undefined } | null | undefined };
 
+export type HeadlinesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type HeadlinesQuery = { __typename?: 'Query', couponHeadlineCollection?: { __typename?: 'CouponHeadlineCollection', items: Array<{ __typename?: 'CouponHeadline', description?: string | null | undefined, url?: string | null | undefined, title?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined } | null | undefined> } | null | undefined };
+
 export const SysFragmentDoc = gql`
     fragment Sys on Sys {
   id
@@ -1727,6 +1868,23 @@ export const CouponByIdReferringUrlDocument = gql`
   }
 }
     `;
+export const HeadlinesDocument = gql`
+    query Headlines {
+  couponHeadlineCollection {
+    items {
+      sys {
+        id
+      }
+      image {
+        url
+      }
+      description
+      url
+      title
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
 
@@ -1746,6 +1904,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     CouponByIdReferringUrl(variables: CouponByIdReferringUrlQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CouponByIdReferringUrlQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<CouponByIdReferringUrlQuery>(CouponByIdReferringUrlDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CouponByIdReferringUrl');
+    },
+    Headlines(variables?: HeadlinesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<HeadlinesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<HeadlinesQuery>(HeadlinesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Headlines');
     }
   };
 }
