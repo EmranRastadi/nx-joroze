@@ -11,17 +11,19 @@ import {
 
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement } from 'react';
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
 import NavLink from '../components/NavLink';
 import Flickity from 'react-flickity-component';
 import { CouponCategory } from '@joroze/cms';
+import { useQuery } from 'react-query';
+import ROUTES from '../lib/routes';
 
 const Links = [
   {
     name: '🎁 Brands',
-    href: '/promos/brands',
+    href: ROUTES.BRANDS,
   },
 ];
 
@@ -32,14 +34,9 @@ type Props = {
 const Layout = ({ children }: Props) => {
   const router = useRouter();
   const { category: activeCategoryName } = router.query;
-  const [categories, setCategories] = useState<CouponCategory[]>([]);
-  const isBrandsPath = router.pathname === '/promos/brands';
-
-  useEffect(() => {
-    (async () => {
-      setCategories(await (await fetch('/api/categories')).json());
-    })();
-  }, []);
+  const { data: categories = [] } = useQuery<CouponCategory[], Error>(
+    '/api/categories'
+  );
 
   return (
     <>
@@ -86,14 +83,16 @@ const Layout = ({ children }: Props) => {
                 key={category.sys.id}
                 zIndex={'overlay'}
                 isActive={
-                  isBrandsPath &&
+                  router.pathname === ROUTES.BRANDS &&
                   activeCategoryName === category?.name?.toLowerCase()
                 }
               >
                 <Link
                   shallow
                   replace
-                  href={`/promos/brands?category=${category?.name?.toLowerCase()}`}
+                  href={`${
+                    ROUTES.BRANDS
+                  }?category=${category?.name?.toLowerCase()}`}
                   passHref
                 >
                   <HStack height="100%">

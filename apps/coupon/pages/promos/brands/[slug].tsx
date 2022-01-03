@@ -14,7 +14,14 @@ export default function BrandPage({ brand }: Props) {
   return (
     <Flex direction="column">
       <VStack spacing="4">
-        <Heading size="lg">{brand.name} Promo Codes January 2022</Heading>
+        <Heading size="lg">
+          {brand.name} Promo Codes{' '}
+          {new Date().toLocaleString('default', {
+            month: 'long',
+            day: 'numeric',
+          })}
+        </Heading>
+
         {brand?.logoImage?.url && (
           <Box>
             <Image

@@ -16,6 +16,7 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { CouponEntity } from '@joroze/cms';
 import BrandCard from '../../../components/BrandCard';
+import ROUTES from '../../../lib/routes';
 
 export type CouponCategory = {
   sys: {
@@ -90,7 +91,7 @@ export default function BrandsPage({ preview, brands }: Props) {
 
   const handleOnShowAllBrandsButtonClick = () => {
     setSelectedAlphabetLetter('');
-    router.replace('/promos/brands');
+    router.replace(ROUTES.BRANDS);
   };
   const handleOnAlphabetLetterButtonClick =
     (alphabetLetter: AlphabetLetter) => () =>
@@ -189,7 +190,7 @@ export default function BrandsPage({ preview, brands }: Props) {
       <SimpleGrid columns={{ base: 2, sm: 3, md: 4, xl: 6 }} spacing="40px">
         {filteredBrands.map((brand) => (
           <Box key={brand.sys.id}>
-            <Link passHref href={`/promos/brands/${brand.slug}`}>
+            <Link passHref href={`${ROUTES.BRANDS}/${brand.slug}`}>
               <motion.div
                 whileHover={{
                   scale: 1.05,

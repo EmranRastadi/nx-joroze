@@ -22,23 +22,28 @@ import { FaSearch } from 'react-icons/fa';
 import {
   ChangeEvent,
   KeyboardEvent,
-  MutableRefObject,
   useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from 'react';
 import { useRouter } from 'next/router';
 import { CouponEntity } from '@joroze/cms';
-import { useDebouncedCallback } from '@joroze/react-utils';
 import Link from 'next/link';
 import { IoReturnDownBack } from 'react-icons/io5';
+import ROUTES from '../lib/routes';
+import { useQuery } from 'react-query';
 
 const BrandSearchInput = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
-  const [brands, setBrands] = useState<CouponEntity[]>([]);
+  const {
+    data: brands = [],
+    isLoading,
+    refetch: refetchBrands,
+  } = useQuery<CouponEntity[], Error>('/api/brands', {
+    enabled: false,
+  });
   const [searchValue, setSearchValue] = useState('');
   const filteredBrandOptions = useMemo(
     () =>
@@ -48,7 +53,6 @@ const BrandSearchInput = () => {
     [brands, searchValue]
   );
   const [cursor, setCursor] = useState<number>(0);
-  const [isFetching, setIsFetching] = useState(false);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     // arrow up/down button should select next/previous list element
@@ -67,7 +71,7 @@ const BrandSearchInput = () => {
         return;
       }
 
-      router.push(`/promos/brands/${activeBrand.slug}`);
+      router.push(`${ROUTES.BRANDS}/${activeBrand.slug}`);
       handleOnBrandOptionClick();
     }
   };
@@ -75,22 +79,8 @@ const BrandSearchInput = () => {
   const handleSearchItemOnMouseEnter = (index: number) => () =>
     setCursor(index);
 
-  const fetchBrands = async () => {
-    setIsFetching(true);
-    setBrands(await (await fetch('/api/brands')).json());
-    setIsFetching(false);
-  };
-
-  const fetchBrandsDebounced = useDebouncedCallback(fetchBrands, 300);
-
-  const handleOnInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchValue(value);
-
-    if (value.length && brands.length === 0) {
-      fetchBrandsDebounced();
-    }
-  };
+  const handleOnInputChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setSearchValue(e.target.value);
 
   const handleOnBrandOptionClick = () => {
     onClose();
@@ -98,11 +88,11 @@ const BrandSearchInput = () => {
 
   useEffect(() => {
     if (isOpen && brands.length === 0) {
-      fetchBrands();
+      refetchBrands();
     }
 
     setSearchValue('');
-  }, [isOpen, brands]);
+  }, [isOpen, brands, refetchBrands]);
 
   useEffect(() => {
     setCursor(0);
@@ -190,7 +180,7 @@ const BrandSearchInput = () => {
           <ModalBody padding="0">
             <Flex pl="4" pr="4" flexDir="column">
               <Flex borderTopWidth="1px" pt="2" pb="4" flexDir="column">
-                {isFetching && (
+                {isLoading && (
                   <Flex flexDir="column">
                     <Flex pl="4" pr="4" pt="2" pb="2" mt="2">
                       <SkeletonCircle size="10" mr="10px" />
@@ -202,12 +192,12 @@ const BrandSearchInput = () => {
                     </Flex>
                   </Flex>
                 )}
-                {!isFetching && filteredBrandOptions.length === 0 && (
+                {!isLoading && filteredBrandOptions.length === 0 && (
                   <Flex flexDir="column">
                     <Text textAlign="center">No results</Text>
                   </Flex>
                 )}
-                {!isFetching && filteredBrandOptions.length > 0 && (
+                {!isLoading && filteredBrandOptions.length > 0 && (
                   <List>
                     {filteredBrandOptions.map((brand, index) => {
                       const isActive = cursor === index;
@@ -216,7 +206,7 @@ const BrandSearchInput = () => {
                         <Link
                           key={brand?.sys?.id}
                           passHref
-                          href={`/promos/brands/${brand.slug}`}
+                          href={`${ROUTES.BRANDS}/${brand.slug}`}
                         >
                           <ListItem
                             onClick={handleOnBrandOptionClick}

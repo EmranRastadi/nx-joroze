@@ -17,6 +17,7 @@ import Link from 'next/link';
 import Flickity from 'react-flickity-component';
 import BrandCard from '../components/BrandCard';
 import { BiPurchaseTag, BiBadgeCheck, BiHappy } from 'react-icons/bi';
+import ROUTES from '../lib/routes';
 
 export const fetchFromContentful = (preview?: boolean) =>
   cms(
@@ -40,12 +41,14 @@ export default function Index({ brands, headlines }: Props) {
           sx={{
             '> .flickity-enabled .flickity-viewport': {
               borderRadius: '15px',
+              transition: 'height 0.2s',
             },
           }}
         >
           <Flickity
             static
             options={{
+              adaptiveHeight: true,
               groupCells: 1,
               draggable: true,
               autoPlay: 5000,
@@ -82,7 +85,7 @@ export default function Index({ brands, headlines }: Props) {
                         border="1px solid"
                         borderRadius="15px"
                         borderColor="purple.500"
-                        minHeight="200px"
+                        height="full"
                       >
                         <VStack spacing="2">
                           <Heading>{headline.title}</Heading>
@@ -115,7 +118,7 @@ export default function Index({ brands, headlines }: Props) {
                       border="1px solid"
                       borderRadius="15px"
                       borderColor="purple.500"
-                      minHeight="200px"
+                      height="full"
                     >
                       <VStack spacing="2">
                         <Heading>{headline.title}</Heading>
@@ -143,7 +146,7 @@ export default function Index({ brands, headlines }: Props) {
           >
             {brands.map((brand) => (
               <Box key={brand.sys.id}>
-                <Link passHref href={`/promos/brands/${brand.slug}`}>
+                <Link passHref href={`${ROUTES.BRANDS}/${brand.slug}`}>
                   <motion.div
                     whileHover={{
                       scale: 1.05,
@@ -158,7 +161,7 @@ export default function Index({ brands, headlines }: Props) {
             ))}
           </Flickity>
         </Box>
-        <Link href={'/promos/brands'} passHref>
+        <Link href={ROUTES.BRANDS} passHref>
           <Button
             colorScheme="purple"
             width="250px"
