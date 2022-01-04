@@ -22,9 +22,9 @@ import ROUTES from '../lib/routes';
 export const fetchFromContentful = (preview?: boolean) =>
   cms(
     process.env.CONTENTFUL_GRAPHQL_ENDPOINT as string,
-    preview
-      ? (process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN as string)
-      : (process.env.CONTENTFUL_ACCESS_TOKEN as string)
+    (preview
+      ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
+      : process.env.CONTENTFUL_ACCESS_TOKEN) as string
   );
 
 type Props = {

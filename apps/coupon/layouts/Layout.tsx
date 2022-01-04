@@ -19,6 +19,7 @@ import Flickity from 'react-flickity-component';
 import { CouponCategory } from '@joroze/cms';
 import { useQuery } from 'react-query';
 import ROUTES from '../lib/routes';
+import AlertBanner from '../components/AlertBanner';
 
 const Links = [
   {
@@ -41,18 +42,21 @@ const Layout = ({ children }: Props) => {
   return (
     <>
       <VStack spacing="5">
-        <Nav w="100%">
-          {Links.filter(({ name }) => name).map(function (
-            { href, name },
-            index
-          ) {
-            return (
-              <NavLink key={index} href={href} textAlign="center">
-                {name}
-              </NavLink>
-            );
-          })}
-        </Nav>
+        <Box width="full">
+          <AlertBanner />
+          <Nav w="100%">
+            {Links.filter(({ name }) => name).map(function (
+              { href, name },
+              index
+            ) {
+              return (
+                <NavLink key={index} href={href} textAlign="center">
+                  {name}
+                </NavLink>
+              );
+            })}
+          </Nav>
+        </Box>
 
         <Container
           mt="10px"

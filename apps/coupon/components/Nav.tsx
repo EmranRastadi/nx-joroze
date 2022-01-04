@@ -19,8 +19,8 @@ const Nav = ({ children, ...rest }: HTMLChakraProps<'div'>) => {
   return (
     <Box
       as="header"
-      paddingTop="10px"
-      paddingBottom="10px"
+      paddingTop="5"
+      paddingBottom="5"
       borderBottom="1px solid #d6d8e7"
       {...rest}
     >
