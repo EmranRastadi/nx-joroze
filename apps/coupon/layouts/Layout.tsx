@@ -18,8 +18,8 @@ import NavLink from '../components/NavLink';
 import Flickity from 'react-flickity-component';
 import { CouponCategory } from '@joroze/cms';
 import { useQuery } from 'react-query';
-import ROUTES from '../lib/routes';
 import AlertBanner from '../components/AlertBanner';
+import ROUTES from '../lib/routes';
 
 const Links = [
   {
