@@ -17,15 +17,15 @@ export default async function categoryHandler(
 
         const categories = couponCategoryCollection?.items || [];
 
+        res.setHeader(
+          'Cache-Control',
+          's-maxage=31536000, stale-while-revalidate'
+        );
         return res.json(categories);
       } catch (error) {
         const responseMessage =
           error instanceof Error ? error.message : 'Something went wrong.';
 
-        res.setHeader(
-          'Cache-Control',
-          's-maxage=31536000, stale-while-revalidate'
-        );
         res.status(500).json({ message: responseMessage });
       }
       break;
