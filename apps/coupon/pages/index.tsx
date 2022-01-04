@@ -46,7 +46,6 @@ export default function Index({ brands, headlines }: Props) {
           }}
         >
           <Flickity
-            static
             options={{
               adaptiveHeight: true,
               groupCells: 1,
