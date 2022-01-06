@@ -1,5 +1,5 @@
 query Brands($slug: String) {
-  couponEntityCollection(where: {slug: $slug}) {
+  couponEntityCollection(where: {slug: $slug}, order: name_ASC) {
     items {
       sys {
         id

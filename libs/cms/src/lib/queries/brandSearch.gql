@@ -1,5 +1,5 @@
 query BrandSearch($name_contains: String!) {
-  couponEntityCollection(where: {name_contains: $name_contains}) {
+  couponEntityCollection(where: {name_contains: $name_contains}, order: name_ASC) {
     items {
       sys {
         id

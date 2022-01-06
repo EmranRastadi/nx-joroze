@@ -1858,7 +1858,7 @@ export const BrandDocument = gql`
     `;
 export const BrandSearchDocument = gql`
     query BrandSearch($name_contains: String!) {
-  couponEntityCollection(where: {name_contains: $name_contains}) {
+  couponEntityCollection(where: {name_contains: $name_contains}, order: name_ASC) {
     items {
       sys {
         id
@@ -1875,7 +1875,7 @@ export const BrandSearchDocument = gql`
     `;
 export const BrandsDocument = gql`
     query Brands($slug: String) {
-  couponEntityCollection(where: {slug: $slug}) {
+  couponEntityCollection(where: {slug: $slug}, order: name_ASC) {
     items {
       sys {
         id
