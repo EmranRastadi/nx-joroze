@@ -86,11 +86,12 @@ const BrandLayout = ({ brand, children }: Props) => {
         maxWidth={{ lg: '25%' }}
         align="stretch"
       >
-        <Card>
+        <Card bgColor="gray.100">
           <VStack align="flex-start">
             <Box mb="2" width="full" height="50px" position="relative">
               {brand?.logoImage?.url && (
                 <Image
+                  draggable={false}
                   objectFit="contain"
                   src={brand?.logoImage?.url}
                   alt="logo"

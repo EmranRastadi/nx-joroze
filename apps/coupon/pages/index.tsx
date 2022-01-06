@@ -6,6 +6,7 @@ import {
   List,
   ListIcon,
   ListItem,
+  Stack,
   Text,
   VStack,
 } from '@chakra-ui/react';
@@ -34,69 +35,35 @@ type Props = {
 
 export default function Index({ brands, headlines }: Props) {
   return (
-    <Flex direction="column">
-      <VStack spacing="5">
-        <Box
-          width="full"
-          sx={{
-            '> .flickity-enabled .flickity-viewport': {
-              borderRadius: '15px',
-              transition: 'height 0.2s',
-            },
+    <VStack align="stretch" spacing="7">
+      <Box
+        mt={3}
+        sx={{
+          '> .flickity-enabled .flickity-viewport': {
+            borderRadius: '15px',
+            transition: 'height 0.2s',
+          },
+        }}
+      >
+        <Flickity
+          options={{
+            adaptiveHeight: true,
+            groupCells: 1,
+            draggable: true,
+            autoPlay: 5000,
+            cellAlign: 'left',
+            contain: true,
+            prevNextButtons: false,
+            pageDots: false,
+            pauseAutoPlayOnHover: true,
           }}
         >
-          <Flickity
-            options={{
-              adaptiveHeight: true,
-              groupCells: 1,
-              draggable: true,
-              autoPlay: 5000,
-              cellAlign: 'left',
-              contain: true,
-              prevNextButtons: false,
-              pageDots: false,
-              pauseAutoPlayOnHover: true,
-            }}
-          >
-            {headlines.map((headline) =>
-              headline.url ? (
-                <Link key={headline.sys.id} passHref href={headline.url}>
-                  <Box
-                    marginRight={2}
-                    cursor="pointer"
-                    borderRadius="15px"
-                    overflow="hidden"
-                    width="full"
-                  >
-                    {headline?.image?.url ? (
-                      <Image
-                        priority
-                        objectFit="cover"
-                        layout="responsive"
-                        width={700}
-                        height={200}
-                        alt="headline image"
-                        src={headline?.image?.url}
-                      />
-                    ) : (
-                      <Box
-                        padding="2"
-                        border="1px solid"
-                        borderRadius="15px"
-                        borderColor="purple.500"
-                        height="full"
-                      >
-                        <VStack spacing="2">
-                          <Heading>{headline.title}</Heading>
-                          <Text>{headline.description}</Text>
-                        </VStack>
-                      </Box>
-                    )}
-                  </Box>
-                </Link>
-              ) : (
+          {headlines.map((headline) =>
+            headline.url ? (
+              <Link key={headline.sys.id} passHref href={headline.url}>
                 <Box
                   marginRight={2}
+                  cursor="pointer"
                   borderRadius="15px"
                   overflow="hidden"
                   width="full"
@@ -126,95 +93,147 @@ export default function Index({ brands, headlines }: Props) {
                     </Box>
                   )}
                 </Box>
-              )
-            )}
-          </Flickity>
-        </Box>
-        <Box width="full">
-          <Flickity
-            options={{
-              groupCells: 1,
-              draggable: true,
-              autoPlay: 1500,
-              cellAlign: 'left',
-              contain: true,
-              prevNextButtons: false,
-              pageDots: false,
-              pauseAutoPlayOnHover: true,
-            }}
-          >
-            {brands.map((brand) => (
-              <Box key={brand.sys.id}>
-                <Link passHref href={`${ROUTES.BRANDS}/${brand.slug}`}>
-                  <motion.div
-                    whileHover={{
-                      scale: 1.05,
-                      transition: { duration: 0.3 },
-                    }}
-                    whileTap={{ scale: 0.95 }}
+              </Link>
+            ) : (
+              <Box
+                marginRight={2}
+                borderRadius="15px"
+                overflow="hidden"
+                width="full"
+              >
+                {headline?.image?.url ? (
+                  <Image
+                    priority
+                    objectFit="cover"
+                    layout="responsive"
+                    width={700}
+                    height={200}
+                    alt="headline image"
+                    src={headline?.image?.url}
+                  />
+                ) : (
+                  <Box
+                    padding="2"
+                    border="1px solid"
+                    borderRadius="15px"
+                    borderColor="purple.500"
+                    height="full"
                   >
-                    <BrandCard cursor="pointer" brand={brand} />
-                  </motion.div>
-                </Link>
+                    <VStack spacing="2">
+                      <Heading>{headline.title}</Heading>
+                      <Text>{headline.description}</Text>
+                    </VStack>
+                  </Box>
+                )}
               </Box>
-            ))}
-          </Flickity>
-        </Box>
-        <Link href={ROUTES.BRANDS} passHref>
-          <Button
-            colorScheme="purple"
-            width="250px"
-            borderRadius="full"
-            borderWidth="2px"
-            size="lg"
-            variant="outline"
-            fontWeight="extrabold"
-          >
-            All brands
-          </Button>
-        </Link>
+            )
+          )}
+        </Flickity>
+      </Box>
+      <Box>
+        <VStack width="full" gap={4} mt={10} mb="20">
+          <Box width="full">
+            <Flickity
+              options={{
+                groupCells: 1,
+                draggable: true,
+                autoPlay: 1500,
+                cellAlign: 'left',
+                contain: true,
+                prevNextButtons: false,
+                pageDots: false,
+                pauseAutoPlayOnHover: true,
+              }}
+            >
+              {brands.map((brand) => (
+                <Box key={brand.sys.id}>
+                  <Link passHref href={`${ROUTES.BRANDS}/${brand.slug}`}>
+                    <motion.div
+                      whileHover={{
+                        scale: 1.05,
+                        transition: { duration: 0.3 },
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <BrandCard cursor="pointer" brand={brand} />
+                    </motion.div>
+                  </Link>
+                </Box>
+              ))}
+            </Flickity>
+          </Box>
+          <Link href={ROUTES.BRANDS} passHref>
+            <Button
+              colorScheme="purple"
+              width="250px"
+              borderRadius="full"
+              borderWidth="2px"
+              size="lg"
+              variant="outline"
+              fontWeight="extrabold"
+            >
+              All brands
+            </Button>
+          </Link>
+        </VStack>
+      </Box>
 
-        <Heading as="h1" mt={2}>
-          All valid promo codes on one site
-        </Heading>
-        <Text>
-          Welcome to the{' '}
-          <Text as="span" color="purple.500" fontWeight="semibold">
-            SSHARELY
-          </Text>{' '}
-          website, which contains the most relevant promotions, coupons,
-          discounts and freebets for various services! We constantly monitor the
-          Internet so that you can save money and receive all kinds of bonuses!
-          With us, you can save and earn money in all spheres of life - from
-          bookmakers to food delivery to your home!
-        </Text>
+      {/* <Heading as="h1" mt={2}>
+        Most popular
+      </Heading> */}
 
-        <List width="full">
-          <ListItem>
-            <ListIcon as={BiPurchaseTag} color="purple.500" />
-            There are 15602 coupons on the site
-          </ListItem>
-          <ListItem>
-            <ListIcon as={BiBadgeCheck} color="purple.500" />
-            Only valid promotional codes of companies
-          </ListItem>
-          <ListItem>
-            <ListIcon as={BiHappy} color="purple.500" />
-            Promo codes from all walks of life
-          </ListItem>
-        </List>
+      <Stack spacing="10" direction={{ base: 'column', xl: 'row' }}>
+        <VStack align="stretch" spacing="7">
+          <Heading as="h1" mt={2}>
+            All valid promo codes on one site
+          </Heading>
+          <Text>
+            Welcome to the{' '}
+            <Text
+              bgClip="text"
+              bgGradient="linear(to-l, purple.700, purple.800, purple.900)"
+              as="span"
+              fontWeight="bold"
+            >
+              SSHARELY
+            </Text>{' '}
+            website, which contains the most relevant promotions, coupons,
+            discounts and freebets for various services! We constantly monitor
+            the Internet so that you can save money and receive all kinds of
+            bonuses! With us, you can save and earn money in all spheres of life
+            - from bookmakers to food delivery to your home!
+          </Text>
 
-        <Box padding="25px">
+          <List spacing={3} width="full">
+            <ListItem>
+              <ListIcon as={BiPurchaseTag} color="purple.700" />
+              There are 15602 coupons on the site
+            </ListItem>
+            <ListItem>
+              <ListIcon as={BiBadgeCheck} color="purple.700" />
+              Only valid promotional codes of companies
+            </ListItem>
+            <ListItem>
+              <ListIcon as={BiHappy} color="purple.700" />
+              Promo codes from all walks of life
+            </ListItem>
+          </List>
+        </VStack>
+        <Box
+          position="relative"
+          minWidth={{ base: '350', xl: '400' }}
+          height={{ base: '350', xl: '400' }}
+        >
           <Image
             draggable={false}
             src="/assets/people.png"
             alt="people"
-            width={290}
-            height={290}
+            objectFit="contain"
+            layout="fill"
           />
         </Box>
-      </VStack>
-    </Flex>
+      </Stack>
+    </VStack>
   );
 }
 

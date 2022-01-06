@@ -19,16 +19,16 @@ const Nav = ({ children, ...rest }: HTMLChakraProps<'div'>) => {
   return (
     <Box
       as="header"
-      paddingTop="5"
-      paddingBottom="5"
+      paddingTop="4"
+      paddingBottom="4"
       borderBottom="1px solid #d6d8e7"
+      width="full"
       {...rest}
     >
       <Container
         maxW={{
-          base: 'none',
-          md: 'container.md',
-          lg: 'container.lg',
+          base: 'container.sm',
+          xl: 'container.xl',
         }}
       >
         <Flex justifyContent={'space-between'}>

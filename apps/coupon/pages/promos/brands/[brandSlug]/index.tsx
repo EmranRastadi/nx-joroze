@@ -25,7 +25,7 @@ type Props = {
 
 export default function BrandPage({ brand, coupons }: Props) {
   return (
-    <VStack spacing="4" width="full">
+    <VStack spacing="7" width="full">
       <VStack spacing="4" width="full" align="flex-start">
         <Heading size="lg">
           {brand.name} promo codes{' '}
@@ -81,6 +81,7 @@ export default function BrandPage({ brand, coupons }: Props) {
                         position="relative"
                       >
                         <Image
+                          draggable={false}
                           src="/assets/logo.svg"
                           alt="logo"
                           layout="fill"

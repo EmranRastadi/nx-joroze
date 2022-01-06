@@ -21,10 +21,10 @@ type Props = {
 
 const Layout = ({ children }: Props) => {
   return (
-    <VStack spacing="5">
+    <VStack spacing="7">
       <Box width="full">
         <AlertBanner />
-        <Nav w="100%">
+        <Nav>
           {Links.filter(({ name }) => name).map(function (
             { href, name },
             index
@@ -39,32 +39,18 @@ const Layout = ({ children }: Props) => {
       </Box>
 
       <Container
-        mt="10px"
         maxW={{
-          base: 'none',
-          md: 'container.md',
-          lg: 'container.lg',
-        }}
-        sx={{
-          '> .flickity-enabled .flickity-viewport': {
-            borderRadius: '6px',
-          },
+          base: 'container.sm',
+          xl: 'container.xl',
         }}
       >
-        <CategoryCarousel />
+        <VStack spacing="7" align="stretch">
+          <CategoryCarousel />
+          <Flex as="main" minHeight="calc(100vh - 64px)" align="stretch">
+            {children}
+          </Flex>
+        </VStack>
       </Container>
-
-      <Flex as="main" minHeight="calc(100vh - 64px)" width="full">
-        <Container
-          maxW={{
-            base: 'none',
-            md: 'container.md',
-            lg: 'container.lg',
-          }}
-        >
-          {children}
-        </Container>
-      </Flex>
       <Footer />
     </VStack>
   );

@@ -152,19 +152,23 @@ export default function BrandsPage({ preview, brands }: Props) {
   }, [activeCategoryName]);
 
   return (
-    <VStack align="flex-start">
-      <Heading as="h1" mb={4} textTransform="capitalize">
+    <VStack align="stretch" w="full" spacing={6}>
+      <Heading as="h1" textTransform="capitalize">
         {activeCategoryName} Promo Codes
       </Heading>
 
-      <HStack>
+      <HStack spacing={6}>
         <Heading as="h2" size="md">
           All brands
         </Heading>
 
         {(activeCategoryName || selectedAlphabetLetter) && (
-          <Button onClick={handleOnShowAllBrandsButtonClick} variant="link">
-            <Text>Show All</Text>
+          <Button
+            onClick={handleOnShowAllBrandsButtonClick}
+            fontSize="sm"
+            variant="link"
+          >
+            Show All
           </Button>
         )}
       </HStack>
@@ -187,23 +191,26 @@ export default function BrandsPage({ preview, brands }: Props) {
           );
         })}
       </Flex>
-      <SimpleGrid columns={{ base: 2, sm: 3, md: 4, lg: 6 }} spacing="40px">
-        {filteredBrands.map((brand) => (
-          <Box key={brand.sys.id}>
-            <Link passHref href={`${ROUTES.BRANDS}/${brand.slug}`}>
-              <motion.div
-                whileHover={{
-                  scale: 1.05,
-                  transition: { duration: 0.3 },
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <BrandCard cursor="pointer" brand={brand} />
-              </motion.div>
-            </Link>
-          </Box>
-        ))}
-      </SimpleGrid>
+
+      <VStack>
+        <SimpleGrid columns={{ base: 3, md: 4, xl: 8 }} spacing="30px">
+          {filteredBrands.map((brand) => (
+            <Box key={brand.sys.id}>
+              <Link passHref href={`${ROUTES.BRANDS}/${brand.slug}`}>
+                <motion.div
+                  whileHover={{
+                    scale: 1.05,
+                    transition: { duration: 0.3 },
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <BrandCard cursor="pointer" brand={brand} />
+                </motion.div>
+              </Link>
+            </Box>
+          ))}
+        </SimpleGrid>
+      </VStack>
     </VStack>
   );
 }

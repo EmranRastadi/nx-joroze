@@ -125,10 +125,11 @@ const BrandSearchInput = () => {
       <Button
         height="43px"
         onClick={onOpen}
+        transitionProperty="background-color"
         variant="outline"
+        bgColor="gray.100"
         _hover={{ bgColor: 'white' }}
         _active={{ bgColor: 'white' }}
-        transition="none"
       >
         <Icon mr="10px" as={FaSearch} color="gray.300" />
         <Box width={'full'}>
