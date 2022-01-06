@@ -15,7 +15,16 @@ const BrandCard = ({
   const totalSales = brand.linkedFrom?.couponEntryCollection?.total || 0;
 
   return (
-    <Card key={brand.sys.id} gap="2" pl="7" pr="7" pb="3" pt="3" {...rest}>
+    <Card
+      key={brand.sys.id}
+      gap="2"
+      pl="7"
+      pr="7"
+      m={3}
+      pb="3"
+      pt="3"
+      {...rest}
+    >
       {brand?.logoImage?.url ? (
         <Image
           draggable={false}
