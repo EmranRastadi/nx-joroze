@@ -2,7 +2,6 @@ import { GetStaticPropsContext } from 'next';
 import { fetchFromContentful } from '../../..';
 import {
   Box,
-  Link,
   Flex,
   Heading,
   Text,
@@ -12,6 +11,7 @@ import {
   BreadcrumbLink,
   Button,
   chakra,
+  Link,
 } from '@chakra-ui/react';
 import { CouponEntity, CouponEntry } from '@joroze/cms';
 import Image from 'next/image';
@@ -82,21 +82,43 @@ export default function BrandPage({ brand, coupons }: Props) {
                   width="full"
                   flexDir={{ base: 'column', md: 'row' }}
                 >
-                  <Box minWidth="100px" minHeight="30px" position="relative">
-                    <Image src="/assets/logo.svg" alt="logo" layout="fill" />
-                  </Box>
-                  <VStack align="flex-start">
+                  <NextLink
+                    passHref
+                    href={`${ROUTES.BRANDS}/${coupon?.brandEntity?.slug}/${coupon?.slug}`}
+                  >
+                    <Link>
+                      <Box
+                        width={{ base: 'full', md: 'initial' }}
+                        cursor="pointer"
+                      >
+                        <Box
+                          minWidth="100px"
+                          minHeight={{ base: '30px', md: '100px' }}
+                          position="relative"
+                        >
+                          <Image
+                            src="/assets/logo.svg"
+                            alt="logo"
+                            layout="fill"
+                          />
+                        </Box>
+                      </Box>
+                    </Link>
+                  </NextLink>
+                  <VStack flexGrow={1} align="flex-start">
                     <NextLink
                       passHref
                       href={`${ROUTES.BRANDS}/${coupon?.brandEntity?.slug}/${coupon?.slug}`}
                     >
-                      <Text
-                        cursor="pointer"
-                        fontSize="larger"
-                        fontWeight="extrabold"
-                      >
-                        {coupon.title}
-                      </Text>
+                      <Link>
+                        <Text
+                          cursor="pointer"
+                          fontSize="larger"
+                          fontWeight="extrabold"
+                        >
+                          {coupon.title}
+                        </Text>
+                      </Link>
                     </NextLink>
 
                     <Text fontSize="small" fontWeight="semibold">

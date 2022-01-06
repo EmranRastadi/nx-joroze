@@ -10,6 +10,7 @@ import {
   BreadcrumbLink,
   Button,
   Box,
+  chakra,
 } from '@chakra-ui/react';
 import { CouponEntry } from '@joroze/cms';
 import NextLink from 'next/link';
@@ -61,9 +62,11 @@ export default function CouponPage({ coupon }: Props) {
           </Text>
 
           <NextLink href={`/api/partner-redirect/${coupon.sys.id}`} passHref>
-            <Button rounded="full" colorScheme={'purple'}>
-              Open a share
-            </Button>
+            <chakra.a target="_blank" rel="noopener noreferrer">
+              <Button rounded="full" colorScheme={'purple'}>
+                Open a share
+              </Button>
+            </chakra.a>
           </NextLink>
         </Card>
 
