@@ -1,6 +1,5 @@
-query Brands($slug: String) {
-  couponEntityCollection(where: {slug: $slug}) {
-    items {
+query Brand($id: String!) {
+  couponEntity(id: $id) {
       sys {
         id
       }
@@ -24,6 +23,5 @@ query Brands($slug: String) {
         }
       }
       brandUrl
-    }
   }
 }

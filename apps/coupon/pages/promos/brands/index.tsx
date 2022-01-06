@@ -222,11 +222,14 @@ export const getStaticProps = async ({
   const { couponEntityCollection } = await fetchFromContentful().Brands();
 
   const brands = couponEntityCollection?.items;
+  const brandsWithSales = brands?.filter(
+    (brand) => (brand?.linkedFrom?.couponEntryCollection?.total || 0) > 0
+  );
 
   return {
     props: {
       preview,
-      brands,
+      brands: brandsWithSales,
     },
   };
 };

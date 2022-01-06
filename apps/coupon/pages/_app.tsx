@@ -40,7 +40,7 @@ const queryClient = new QueryClient({
 });
 
 function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>);
+  const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);
 
   useEffect(() => {
     const handleRouteStart = () => NProgress.start();

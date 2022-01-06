@@ -1,0 +1,26 @@
+query Coupons($active: Boolean, $brandId: String, $slug: String) {
+  couponEntryCollection(where: {active: $active, slug: $slug, brandEntity: {sys: {id: $brandId}}}) {
+    items {
+      title
+      slug
+      bannerImagesCollection {
+        items {
+          url
+        }
+      }
+      brandEntity {
+        name
+        slug
+        category {
+          name
+        }
+      }
+      description
+      expiresAt
+      referringUrl
+      sys {
+        id
+      }
+    }
+  }
+}

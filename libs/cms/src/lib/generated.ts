@@ -549,6 +549,7 @@ export type CouponEntity = Entry & {
   category?: Maybe<CouponCategory>;
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
+  headline?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<CouponEntityLinkingCollections>;
   logoImage?: Maybe<Asset>;
   name?: Maybe<Scalars['String']>;
@@ -572,6 +573,12 @@ export type CouponEntityCategoryArgs = {
 
 /** Coupon website brand entity. Such as: "Coinbase, Robinhood, BigBank, etc" [See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/couponEntity) */
 export type CouponEntityDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Coupon website brand entity. Such as: "Coinbase, Robinhood, BigBank, etc" [See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/couponEntity) */
+export type CouponEntityHeadlineArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
@@ -628,6 +635,13 @@ export type CouponEntityFilter = {
   description_not?: InputMaybe<Scalars['String']>;
   description_not_contains?: InputMaybe<Scalars['String']>;
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headline?: InputMaybe<Scalars['String']>;
+  headline_contains?: InputMaybe<Scalars['String']>;
+  headline_exists?: InputMaybe<Scalars['Boolean']>;
+  headline_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headline_not?: InputMaybe<Scalars['String']>;
+  headline_not_contains?: InputMaybe<Scalars['String']>;
+  headline_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   logoImage_exists?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
   name_contains?: InputMaybe<Scalars['String']>;
@@ -671,6 +685,8 @@ export type CouponEntityLinkingCollectionsEntryCollectionArgs = {
 export enum CouponEntityOrder {
   BrandUrlAsc = 'brandUrl_ASC',
   BrandUrlDesc = 'brandUrl_DESC',
+  HeadlineAsc = 'headline_ASC',
+  HeadlineDesc = 'headline_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
   SlugAsc = 'slug_ASC',
@@ -1708,6 +1724,13 @@ export type CfCouponEntityNestedFilter = {
   description_not?: InputMaybe<Scalars['String']>;
   description_not_contains?: InputMaybe<Scalars['String']>;
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headline?: InputMaybe<Scalars['String']>;
+  headline_contains?: InputMaybe<Scalars['String']>;
+  headline_exists?: InputMaybe<Scalars['Boolean']>;
+  headline_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  headline_not?: InputMaybe<Scalars['String']>;
+  headline_not_contains?: InputMaybe<Scalars['String']>;
+  headline_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   logoImage_exists?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
   name_contains?: InputMaybe<Scalars['String']>;
@@ -1730,6 +1753,13 @@ export type AssetFragment = { __typename?: 'Asset', title?: string | null | unde
 
 export type SysFragment = { __typename?: 'Sys', id: string, spaceId: string, environmentId: string, publishedAt?: any | null | undefined, firstPublishedAt?: any | null | undefined, publishedVersion?: number | null | undefined };
 
+export type BrandQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type BrandQuery = { __typename?: 'Query', couponEntity?: { __typename?: 'CouponEntity', name?: string | null | undefined, headline?: string | null | undefined, slug?: string | null | undefined, description?: string | null | undefined, brandUrl?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, logoImage?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, category?: { __typename?: 'CouponCategory', description?: string | null | undefined, name?: string | null | undefined, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined } | null | undefined, linkedFrom?: { __typename?: 'CouponEntityLinkingCollections', couponEntryCollection?: { __typename?: 'CouponEntryCollection', total: number } | null | undefined } | null | undefined } | null | undefined };
+
 export type BrandSearchQueryVariables = Exact<{
   name_contains: Scalars['String'];
 }>;
@@ -1742,7 +1772,7 @@ export type BrandsQueryVariables = Exact<{
 }>;
 
 
-export type BrandsQuery = { __typename?: 'Query', couponEntityCollection?: { __typename?: 'CouponEntityCollection', items: Array<{ __typename?: 'CouponEntity', name?: string | null | undefined, slug?: string | null | undefined, description?: string | null | undefined, brandUrl?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, logoImage?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, category?: { __typename?: 'CouponCategory', description?: string | null | undefined, name?: string | null | undefined, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined } | null | undefined, linkedFrom?: { __typename?: 'CouponEntityLinkingCollections', couponEntryCollection?: { __typename?: 'CouponEntryCollection', total: number } | null | undefined } | null | undefined } | null | undefined> } | null | undefined };
+export type BrandsQuery = { __typename?: 'Query', couponEntityCollection?: { __typename?: 'CouponEntityCollection', items: Array<{ __typename?: 'CouponEntity', name?: string | null | undefined, headline?: string | null | undefined, slug?: string | null | undefined, description?: string | null | undefined, brandUrl?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, logoImage?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, category?: { __typename?: 'CouponCategory', description?: string | null | undefined, name?: string | null | undefined, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined } | null | undefined, linkedFrom?: { __typename?: 'CouponEntityLinkingCollections', couponEntryCollection?: { __typename?: 'CouponEntryCollection', total: number } | null | undefined } | null | undefined } | null | undefined> } | null | undefined };
 
 export type CategoriesQueryVariables = Exact<{
   preview: Scalars['Boolean'];
@@ -1757,6 +1787,15 @@ export type CouponByIdReferringUrlQueryVariables = Exact<{
 
 
 export type CouponByIdReferringUrlQuery = { __typename?: 'Query', couponEntry?: { __typename?: 'CouponEntry', referringUrl?: string | null | undefined } | null | undefined };
+
+export type CouponsQueryVariables = Exact<{
+  active?: InputMaybe<Scalars['Boolean']>;
+  brandId?: InputMaybe<Scalars['String']>;
+  slug?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type CouponsQuery = { __typename?: 'Query', couponEntryCollection?: { __typename?: 'CouponEntryCollection', items: Array<{ __typename?: 'CouponEntry', title?: string | null | undefined, slug?: string | null | undefined, description?: string | null | undefined, expiresAt?: any | null | undefined, referringUrl?: string | null | undefined, bannerImagesCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url?: string | null | undefined } | null | undefined> } | null | undefined, brandEntity?: { __typename?: 'CouponEntity', name?: string | null | undefined, slug?: string | null | undefined, category?: { __typename?: 'CouponCategory', name?: string | null | undefined } | null | undefined } | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined> } | null | undefined };
 
 export type HeadlinesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1788,6 +1827,35 @@ export const AssetFragmentDoc = gql`
   height
 }
     ${SysFragmentDoc}`;
+export const BrandDocument = gql`
+    query Brand($id: String!) {
+  couponEntity(id: $id) {
+    sys {
+      id
+    }
+    name
+    headline
+    slug
+    logoImage {
+      url
+    }
+    description
+    category {
+      description
+      image {
+        url
+      }
+      name
+    }
+    linkedFrom {
+      couponEntryCollection {
+        total
+      }
+    }
+    brandUrl
+  }
+}
+    `;
 export const BrandSearchDocument = gql`
     query BrandSearch($name_contains: String!) {
   couponEntityCollection(where: {name_contains: $name_contains}) {
@@ -1813,6 +1881,7 @@ export const BrandsDocument = gql`
         id
       }
       name
+      headline
       slug
       logoImage {
         url
@@ -1868,6 +1937,36 @@ export const CouponByIdReferringUrlDocument = gql`
   }
 }
     `;
+export const CouponsDocument = gql`
+    query Coupons($active: Boolean, $brandId: String, $slug: String) {
+  couponEntryCollection(
+    where: {active: $active, slug: $slug, brandEntity: {sys: {id: $brandId}}}
+  ) {
+    items {
+      title
+      slug
+      bannerImagesCollection {
+        items {
+          url
+        }
+      }
+      brandEntity {
+        name
+        slug
+        category {
+          name
+        }
+      }
+      description
+      expiresAt
+      referringUrl
+      sys {
+        id
+      }
+    }
+  }
+}
+    `;
 export const HeadlinesDocument = gql`
     query Headlines {
   couponHeadlineCollection {
@@ -1893,6 +1992,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    Brand(variables: BrandQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<BrandQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<BrandQuery>(BrandDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Brand');
+    },
     BrandSearch(variables: BrandSearchQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<BrandSearchQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<BrandSearchQuery>(BrandSearchDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'BrandSearch');
     },
@@ -1904,6 +2006,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     CouponByIdReferringUrl(variables: CouponByIdReferringUrlQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CouponByIdReferringUrlQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<CouponByIdReferringUrlQuery>(CouponByIdReferringUrlDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CouponByIdReferringUrl');
+    },
+    Coupons(variables?: CouponsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CouponsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CouponsQuery>(CouponsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Coupons');
     },
     Headlines(variables?: HeadlinesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<HeadlinesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<HeadlinesQuery>(HeadlinesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Headlines');
