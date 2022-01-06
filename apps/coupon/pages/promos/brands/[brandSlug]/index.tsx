@@ -2,13 +2,13 @@ import { GetStaticPropsContext } from 'next';
 import { fetchFromContentful } from '../../..';
 import {
   Box,
-  Flex,
   Heading,
   Text,
   VStack,
   Button,
   chakra,
   Link,
+  Flex,
 } from '@chakra-ui/react';
 import { CouponEntity, CouponEntry } from '@joroze/cms';
 import Image from 'next/image';
@@ -36,20 +36,21 @@ export default function BrandPage({ brand, coupons }: Props) {
         </Heading>
 
         <Text fontWeight="medium">{brand.headline}</Text>
-      </VStack>
 
-      {brand?.logoImage?.url && (
-        <Box>
-          <Image
-            draggable={false}
-            src={brand.logoImage.url}
-            alt={`${brand.name} logo`}
-            objectFit="contain"
-            width={'80px'}
-            height={'20px'}
-          />
-        </Box>
-      )}
+        {!coupons.length && (
+          <Flex
+            justifyContent="center"
+            width="full"
+            bg="blue.600"
+            padding={5}
+            rounded="base"
+          >
+            <Text color="white" fontSize="xl" fontWeight="semibold">
+              Sorry, the coupons of this brand have run out.
+            </Text>
+          </Flex>
+        )}
+      </VStack>
 
       {coupons.map((coupon) => {
         return (

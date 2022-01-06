@@ -21,7 +21,7 @@ type Props = {
 
 export default function CouponPage({ coupon, brand }: Props) {
   return (
-    <VStack spacing="4" width={'full'}>
+    <VStack spacing="4" width="full">
       <Box width="full">
         <Heading
           size="lg"

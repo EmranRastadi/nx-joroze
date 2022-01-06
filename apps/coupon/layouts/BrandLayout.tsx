@@ -35,7 +35,7 @@ const BrandLayout = ({ brand, children }: Props) => {
       spacing="5"
       align="stretch"
     >
-      <VStack spacing="5" align="stretch">
+      <VStack spacing="5" align="stretch" flexGrow={1}>
         <Breadcrumb mt="2" fontWeight="medium" fontSize="smaller">
           <BreadcrumbItem>
             <Link href={ROUTES.BRANDS} passHref>
@@ -80,7 +80,12 @@ const BrandLayout = ({ brand, children }: Props) => {
         {children}
       </VStack>
 
-      <VStack spacing="5" maxWidth={{ lg: '25%' }} align="stretch">
+      <VStack
+        spacing="5"
+        width={'full'}
+        maxWidth={{ lg: '25%' }}
+        align="stretch"
+      >
         <Card>
           <VStack align="flex-start">
             <Box mb="2" width="full" height="50px" position="relative">
