@@ -187,7 +187,7 @@ export default function BrandsPage({ preview, brands }: Props) {
           );
         })}
       </Flex>
-      <SimpleGrid columns={{ base: 2, sm: 3, md: 4, xl: 6 }} spacing="40px">
+      <SimpleGrid columns={{ base: 2, sm: 3, md: 4, lg: 6 }} spacing="40px">
         {filteredBrands.map((brand) => (
           <Box key={brand.sys.id}>
             <Link passHref href={`${ROUTES.BRANDS}/${brand.slug}`}>

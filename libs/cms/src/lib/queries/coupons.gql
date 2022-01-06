@@ -9,11 +9,10 @@ query Coupons($active: Boolean, $brandId: String, $slug: String) {
         }
       }
       brandEntity {
-        name
-        slug
-        category {
-          name
+        sys {
+          id
         }
+        slug
       }
       description
       expiresAt

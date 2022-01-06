@@ -13,6 +13,7 @@ const Footer = () => (
     py="12"
     px={{ base: '4', md: '8' }}
     bgColor="rgb(239, 240, 247)"
+    width="full"
   >
     <Stack spacing="10" divider={<StackDivider />}>
       <Stack

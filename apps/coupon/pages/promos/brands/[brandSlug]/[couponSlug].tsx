@@ -5,79 +5,54 @@ import {
   Heading,
   Text,
   VStack,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
   Button,
   Box,
   chakra,
 } from '@chakra-ui/react';
-import { CouponEntry } from '@joroze/cms';
+import { CouponEntity, CouponEntry } from '@joroze/cms';
 import NextLink from 'next/link';
-import ROUTES from '../../../../lib/routes';
 import { Card } from '@joroze/ui';
+import { getLayout } from '../../../../layouts/BrandLayout';
 
 type Props = {
   coupon: CouponEntry;
+  brand: CouponEntity;
 };
 
-export default function CouponPage({ coupon }: Props) {
+export default function CouponPage({ coupon, brand }: Props) {
   return (
-    <Flex direction="column">
-      <VStack spacing="4">
-        <Breadcrumb mt="2" fontWeight="medium" fontSize="smaller" width="full">
-          <BreadcrumbItem>
-            <NextLink href={ROUTES.BRANDS} passHref>
-              <BreadcrumbLink>Brands</BreadcrumbLink>
-            </NextLink>
-          </BreadcrumbItem>
+    <VStack spacing="4" width={'full'}>
+      <Box width="full">
+        <Heading
+          size="lg"
+          fontWeight="extrabold"
+          textAlign={{ base: 'center', lg: 'left' }}
+        >
+          Promotion {brand.name} - {coupon.title}
+        </Heading>
+      </Box>
 
-          <BreadcrumbItem>
-            <NextLink
-              href={`${ROUTES.BRANDS}/${coupon?.brandEntity?.slug}`}
-              passHref
-            >
-              <BreadcrumbLink>{coupon?.brandEntity?.name}</BreadcrumbLink>
-            </NextLink>
-          </BreadcrumbItem>
+      <Card width="full">
+        <Text cursor="pointer" fontWeight="extrabold">
+          Information
+        </Text>
 
-          <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink color="gray">Coupon</BreadcrumbLink>
-          </BreadcrumbItem>
-        </Breadcrumb>
+        <NextLink href={`/api/partner-redirect/${coupon.sys.id}`} passHref>
+          <chakra.a target="_blank" rel="noopener noreferrer">
+            <Button rounded="full" colorScheme={'purple'}>
+              Open a share
+            </Button>
+          </chakra.a>
+        </NextLink>
+      </Card>
 
-        <Box width="full">
-          <Heading
-            size="lg"
-            fontWeight="extrabold"
-            textAlign={{ base: 'center', xl: 'left' }}
-          >
-            Promotion {coupon?.brandEntity?.name} - {coupon.title}
-          </Heading>
-        </Box>
-
-        <Card width="full">
-          <Text cursor="pointer" fontWeight="extrabold">
-            Information
-          </Text>
-
-          <NextLink href={`/api/partner-redirect/${coupon.sys.id}`} passHref>
-            <chakra.a target="_blank" rel="noopener noreferrer">
-              <Button rounded="full" colorScheme={'purple'}>
-                Open a share
-              </Button>
-            </chakra.a>
-          </NextLink>
-        </Card>
-
-        <Card width="full" alignItems="flex-start">
-          <Text cursor="pointer" fontWeight="extrabold">
-            Coupon description
-          </Text>
-          <Text>{coupon.description}</Text>
-        </Card>
-      </VStack>
-    </Flex>
+      <Card width="full" alignItems="flex-start">
+        <Text cursor="pointer" fontWeight="extrabold">
+          Coupon description
+        </Text>
+        <Text>{coupon.description}</Text>
+      </Card>
+    </VStack>
   );
 }
 
@@ -88,6 +63,8 @@ CouponPage.defaultProps = {
     imgSrc: '',
   },
 };
+
+CouponPage.getLayout = getLayout;
 
 export const getStaticProps = async ({
   params,
@@ -102,8 +79,19 @@ export const getStaticProps = async ({
   });
 
   const coupon = couponEntryCollection?.items[0];
+  const brandId = coupon?.brandEntity?.sys.id;
 
-  if (!coupon) {
+  if (!coupon || !brandId) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const { couponEntity } = await fetchFromContentful().Brand({
+    id: brandId,
+  });
+
+  if (!couponEntity) {
     return {
       notFound: true,
     };
@@ -113,6 +101,7 @@ export const getStaticProps = async ({
     props: {
       preview,
       coupon,
+      brand: couponEntity,
       meta: {
         title: coupon.title,
         description: 'Test coupon description',

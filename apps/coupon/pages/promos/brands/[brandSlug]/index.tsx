@@ -6,9 +6,6 @@ import {
   Heading,
   Text,
   VStack,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
   Button,
   chakra,
   Link,
@@ -19,6 +16,7 @@ import NextLink from 'next/link';
 import ROUTES from '../../../../lib/routes';
 import { Card } from '@joroze/ui';
 import { motion } from 'framer-motion';
+import { getLayout } from '../../../../layouts/BrandLayout';
 
 type Props = {
   brand: CouponEntity;
@@ -26,129 +24,111 @@ type Props = {
 };
 
 export default function BrandPage({ brand, coupons }: Props) {
-  console.log('coupons: ', coupons);
-
   return (
-    <Flex direction="column">
-      <VStack spacing="4">
-        <Breadcrumb mt="2" fontWeight="medium" fontSize="smaller" width="full">
-          <BreadcrumbItem>
-            <NextLink href={ROUTES.BRANDS} passHref>
-              <BreadcrumbLink>Brands</BreadcrumbLink>
-            </NextLink>
-          </BreadcrumbItem>
+    <VStack spacing="4" width="full">
+      <VStack spacing="4" width="full" align="flex-start">
+        <Heading size="lg">
+          {brand.name} promo codes{' '}
+          {new Date().toLocaleString('default', {
+            month: 'long',
+            day: 'numeric',
+          })}
+        </Heading>
 
-          <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink color="gray">{brand?.name}</BreadcrumbLink>
-          </BreadcrumbItem>
-        </Breadcrumb>
+        <Text fontWeight="medium">{brand.headline}</Text>
+      </VStack>
 
-        <VStack spacing="4" width="full" align="flex-start">
-          <Heading size="lg">
-            {brand.name} promo codes{' '}
-            {new Date().toLocaleString('default', {
-              month: 'long',
-              day: 'numeric',
-            })}
-          </Heading>
+      {brand?.logoImage?.url && (
+        <Box>
+          <Image
+            draggable={false}
+            src={brand.logoImage.url}
+            alt={`${brand.name} logo`}
+            objectFit="contain"
+            width={'80px'}
+            height={'20px'}
+          />
+        </Box>
+      )}
 
-          <Text fontWeight="medium">{brand.headline}</Text>
-        </VStack>
-
-        {brand?.logoImage?.url && (
-          <Box>
-            <Image
-              draggable={false}
-              src={brand.logoImage.url}
-              alt={`${brand.name} logo`}
-              objectFit="contain"
-              width={'80px'}
-              height={'20px'}
-            />
-          </Box>
-        )}
-
-        {coupons.map((coupon) => {
-          return (
-            <Box w="full" key={coupon.sys.id}>
-              <motion.div
-                whileHover={{
-                  scale: 1.02,
-                  transition: { duration: 0.3 },
-                }}
+      {coupons.map((coupon) => {
+        return (
+          <Box w="full" key={coupon.sys.id}>
+            <motion.div
+              whileHover={{
+                scale: 1.02,
+                transition: { duration: 0.3 },
+              }}
+            >
+              <Card
+                gap={{ base: '0', md: '5' }}
+                width="full"
+                flexDir={{ base: 'column', md: 'row' }}
               >
-                <Card
-                  gap={{ base: '0', md: '5' }}
-                  width="full"
-                  flexDir={{ base: 'column', md: 'row' }}
+                <NextLink
+                  passHref
+                  href={`${ROUTES.BRANDS}/${coupon?.brandEntity?.slug}/${coupon?.slug}`}
                 >
+                  <Link>
+                    <Box
+                      width={{ base: 'full', md: 'initial' }}
+                      cursor="pointer"
+                    >
+                      <Box
+                        minWidth="100px"
+                        minHeight={{ base: '30px', md: '100px' }}
+                        position="relative"
+                      >
+                        <Image
+                          src="/assets/logo.svg"
+                          alt="logo"
+                          layout="fill"
+                        />
+                      </Box>
+                    </Box>
+                  </Link>
+                </NextLink>
+                <VStack flexGrow={1} align="flex-start">
                   <NextLink
                     passHref
                     href={`${ROUTES.BRANDS}/${coupon?.brandEntity?.slug}/${coupon?.slug}`}
                   >
                     <Link>
-                      <Box
-                        width={{ base: 'full', md: 'initial' }}
+                      <Text
                         cursor="pointer"
+                        fontSize="larger"
+                        fontWeight="extrabold"
                       >
-                        <Box
-                          minWidth="100px"
-                          minHeight={{ base: '30px', md: '100px' }}
-                          position="relative"
-                        >
-                          <Image
-                            src="/assets/logo.svg"
-                            alt="logo"
-                            layout="fill"
-                          />
-                        </Box>
-                      </Box>
+                        {coupon.title}
+                      </Text>
                     </Link>
                   </NextLink>
-                  <VStack flexGrow={1} align="flex-start">
-                    <NextLink
-                      passHref
-                      href={`${ROUTES.BRANDS}/${coupon?.brandEntity?.slug}/${coupon?.slug}`}
+
+                  <Text fontSize="small" fontWeight="semibold">
+                    {coupon.description}
+                  </Text>
+
+                  <NextLink
+                    href={`/api/partner-redirect/${coupon.sys.id}`}
+                    passHref
+                  >
+                    <chakra.a
+                      w="full"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      <Link>
-                        <Text
-                          cursor="pointer"
-                          fontSize="larger"
-                          fontWeight="extrabold"
-                        >
-                          {coupon.title}
-                        </Text>
-                      </Link>
-                    </NextLink>
-
-                    <Text fontSize="small" fontWeight="semibold">
-                      {coupon.description}
-                    </Text>
-
-                    <NextLink
-                      href={`/api/partner-redirect/${coupon.sys.id}`}
-                      passHref
-                    >
-                      <chakra.a
-                        w="full"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Button w="full" rounded="full" colorScheme={'purple'}>
-                          Open a share
-                        </Button>
-                      </chakra.a>
-                    </NextLink>
-                  </VStack>
-                </Card>
-              </motion.div>
-            </Box>
-          );
-        })}
-
-        <Text>{brand.description}</Text>
-      </VStack>
-    </Flex>
+                      <Button w="full" rounded="full" colorScheme={'purple'}>
+                        Open a share
+                      </Button>
+                    </chakra.a>
+                  </NextLink>
+                </VStack>
+              </Card>
+            </motion.div>
+          </Box>
+        );
+      })}
+    </VStack>
   );
 }
 
@@ -159,6 +139,8 @@ BrandPage.defaultProps = {
     imgSrc: '',
   },
 };
+
+BrandPage.getLayout = getLayout;
 
 export const getStaticProps = async ({
   params,

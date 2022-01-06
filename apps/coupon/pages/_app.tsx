@@ -14,7 +14,10 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 type NextPageWithLayout = NextPage & {
-  getLayout?: (page: ReactElement) => ReactNode;
+  getLayout?: (
+    page: ReactElement,
+    pageProps: Record<string, unknown>
+  ) => ReactNode;
 };
 
 type AppPropsWithLayout = AppProps & {
@@ -65,7 +68,7 @@ function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
       <QueryClientProvider client={queryClient}>
-        {getLayout(<Component {...pageProps} />)}
+        {getLayout(<Component {...pageProps} />, pageProps)}
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ChakraProvider>

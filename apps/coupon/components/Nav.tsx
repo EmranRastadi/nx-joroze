@@ -28,7 +28,7 @@ const Nav = ({ children, ...rest }: HTMLChakraProps<'div'>) => {
         maxW={{
           base: 'none',
           md: 'container.md',
-          xl: 'container.xl',
+          lg: 'container.lg',
         }}
       >
         <Flex justifyContent={'space-between'}>
