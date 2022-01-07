@@ -18,8 +18,8 @@ const BrandCard = ({
     <Card
       key={brand.sys.id}
       gap="2"
-      pl="7"
-      pr="7"
+      pl={{ md: '7' }}
+      pr={{ md: '7' }}
       m={3}
       pb="3"
       pt="3"
