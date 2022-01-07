@@ -74,24 +74,26 @@ export const getStaticProps = async ({
     ? params?.couponSlug[0]
     : params?.couponSlug;
 
-  const { couponEntryCollection } = await fetchFromContentful().Coupons({
-    slug: couponSlug,
-  });
+  const [{ couponEntryCollection }, { couponEntityCollection }] =
+    await Promise.all([
+      fetchFromContentful().Coupons({
+        slug: couponSlug,
+      }),
+      fetchFromContentful().Brands(),
+    ]);
 
   const coupon = couponEntryCollection?.items[0];
-  const brandId = coupon?.brandEntity?.sys.id;
+  const brands = couponEntityCollection?.items;
+  const brand = brands?.find(
+    (brand) => brand?.sys.id === coupon?.brandEntity?.sys.id
+  );
+  const otherBrandsWithSales = brands?.filter(
+    (pBrand) =>
+      pBrand?.sys.id !== brand?.sys.id &&
+      (pBrand?.linkedFrom?.couponEntryCollection?.total || 0) > 0
+  );
 
-  if (!coupon || !brandId) {
-    return {
-      notFound: true,
-    };
-  }
-
-  const { couponEntity } = await fetchFromContentful().Brand({
-    id: brandId,
-  });
-
-  if (!couponEntity) {
+  if (!coupon || !brand) {
     return {
       notFound: true,
     };
@@ -101,7 +103,8 @@ export const getStaticProps = async ({
     props: {
       preview,
       coupon,
-      brand: couponEntity,
+      brand,
+      brands: otherBrandsWithSales,
       meta: {
         title: coupon.title,
         description: 'Test coupon description',

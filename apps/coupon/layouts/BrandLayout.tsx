@@ -20,13 +20,15 @@ import { useRouter } from 'next/router';
 import { Card } from '@joroze/ui';
 import Image from 'next/image';
 import { CheckIcon } from '@chakra-ui/icons';
+import BrandCarousel from '../components/BrandCarousel';
 
 type Props = {
   children: React.ReactNode;
   brand?: CouponEntity;
+  brands?: CouponEntity[];
 };
 
-const BrandLayout = ({ brand, children }: Props) => {
+const BrandLayout = ({ brand, brands, children }: Props) => {
   const router = useRouter();
 
   return (
@@ -78,6 +80,11 @@ const BrandLayout = ({ brand, children }: Props) => {
           )}
         </Breadcrumb>
         {children}
+
+        <Text fontSize="xl" fontWeight="bold">
+          Other Brands
+        </Text>
+        <BrandCarousel brands={brands} />
       </VStack>
 
       <VStack

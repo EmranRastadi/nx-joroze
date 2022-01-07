@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Flex,
   Heading,
   List,
   ListIcon,
@@ -11,14 +10,13 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import cms, { CouponEntity, CouponHeadline } from '@joroze/cms';
-import { motion } from 'framer-motion';
 import { GetStaticPropsContext } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import Flickity from 'react-flickity-component';
-import BrandCard from '../components/BrandCard';
 import { BiPurchaseTag, BiBadgeCheck, BiHappy } from 'react-icons/bi';
 import ROUTES from '../lib/routes';
+import BrandCarousel from '../components/BrandCarousel';
 
 export const fetchFromContentful = (preview?: boolean) =>
   cms(
@@ -132,36 +130,7 @@ export default function Index({ brands, headlines }: Props) {
       </Box>
       <Box>
         <VStack width="full" gap={4} mt={10} mb="20">
-          <Box width="full">
-            <Flickity
-              options={{
-                groupCells: 1,
-                draggable: true,
-                autoPlay: 1500,
-                cellAlign: 'left',
-                contain: true,
-                prevNextButtons: false,
-                pageDots: false,
-                pauseAutoPlayOnHover: true,
-              }}
-            >
-              {brands.map((brand) => (
-                <Box key={brand.sys.id}>
-                  <Link passHref href={`${ROUTES.BRANDS}/${brand.slug}`}>
-                    <motion.div
-                      whileHover={{
-                        scale: 1.05,
-                        transition: { duration: 0.3 },
-                      }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <BrandCard cursor="pointer" brand={brand} />
-                    </motion.div>
-                  </Link>
-                </Box>
-              ))}
-            </Flickity>
-          </Box>
+          <BrandCarousel brands={brands} />
           <Link href={ROUTES.BRANDS} passHref>
             <Button
               colorScheme="purple"

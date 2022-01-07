@@ -152,11 +152,15 @@ export const getStaticProps = async ({
     ? params?.brandSlug[0]
     : params?.brandSlug;
 
-  const { couponEntityCollection } = await fetchFromContentful().Brands({
-    slug: brandSlug,
-  });
+  const { couponEntityCollection } = await fetchFromContentful().Brands();
 
-  const brand = couponEntityCollection?.items[0];
+  const brands = couponEntityCollection?.items;
+  const brand = brands?.find((brand) => brand?.slug === brandSlug);
+  const otherBrandsWithSales = brands?.filter(
+    (pBrand) =>
+      pBrand?.sys.id !== brand?.sys.id &&
+      (pBrand?.linkedFrom?.couponEntryCollection?.total || 0) > 0
+  );
 
   if (!brand) {
     return {
@@ -175,6 +179,7 @@ export const getStaticProps = async ({
     props: {
       preview,
       brand,
+      brands: otherBrandsWithSales,
       coupons,
       meta: {
         title: brand.name,
