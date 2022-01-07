@@ -1,5 +1,3 @@
-import Pusher from 'pusher-js';
-
 import { BellIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import {
   Box,
@@ -11,7 +9,8 @@ import {
   Flex,
   Collapse,
 } from '@chakra-ui/react';
-import React, { useEffect, useRef, useState } from 'react';
+import { useChannel, useEvent } from '@harelpls/use-pusher';
+import React, { useState } from 'react';
 import Flickity from 'react-flickity-component';
 
 type Alert = {
@@ -20,45 +19,31 @@ type Alert = {
   id: string;
 };
 
-type useAlertNotificationCbFn = (payload: Alert[]) => void;
-type useAlertNotificationOptions = {
-  channelName?: string;
-  eventName?: string;
+type UseAlertSubscriptionOptions = {
+  channelName: 'alert-notifications';
+  eventName: 'alert';
+  cb: (payload?: Alert[]) => void;
 };
 
-const useAlertNotifications = (
-  cb: useAlertNotificationCbFn,
-  options?: useAlertNotificationOptions
-) => {
-  const channelName = options?.channelName || 'alert-notifications';
-  const eventName = options?.eventName || 'alert';
-
-  useEffect(() => {
-    const pusher = new Pusher(
-      process.env.NEXT_PUBLIC_PUSHER_APP_KEY as string,
-      {
-        cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
-      }
-    );
-
-    const channel = pusher.subscribe(channelName);
-
-    channel.bind(eventName, cb);
-
-    return function () {
-      pusher.unsubscribe(channelName);
-    };
-  }, [cb, channelName, eventName]);
-};
+const useAlertSubscription = ({
+  channelName,
+  eventName,
+  cb,
+}: UseAlertSubscriptionOptions) =>
+  useEvent(useChannel(channelName), eventName, cb);
 
 const AlertBanner = () => {
   const [alerts, setAlerts] = useState<Alert[]>([]);
-  const prevAlertsCountRef = useRef(0);
   const dismissAlerts = () => setAlerts([]);
 
-  useAlertNotifications((incomingAlerts) => {
-    prevAlertsCountRef.current = alerts.length;
-    setAlerts([...alerts, ...incomingAlerts]);
+  useAlertSubscription({
+    channelName: 'alert-notifications',
+    eventName: 'alert',
+    cb: (incomingAlerts) => {
+      if (incomingAlerts) {
+        setAlerts([...alerts, ...incomingAlerts]);
+      }
+    },
   });
 
   return (

@@ -12,6 +12,24 @@ import Layout from '../layouts/Layout';
 import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { PusherProvider } from '@harelpls/use-pusher';
+
+const pusherConfig = {
+  // required config props
+  clientKey: process.env.NEXT_PUBLIC_PUSHER_APP_KEY as string,
+  cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER as string,
+
+  // optional if you'd like to trigger events. BYO endpoint.
+  // see "Trigger Server" below for more info
+  // triggerEndpoint: '/pusher/trigger',
+
+  // required for private/presence channels
+  // also sends auth headers to trigger endpoint
+  // authEndpoint: '/pusher/auth',
+  // auth: {
+  //   headers: { Authorization: 'Bearer token' },
+  // },
+};
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (
@@ -68,7 +86,9 @@ function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
       <QueryClientProvider client={queryClient}>
-        {getLayout(<Component {...pageProps} />, pageProps)}
+        <PusherProvider {...pusherConfig}>
+          {getLayout(<Component {...pageProps} />, pageProps)}
+        </PusherProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ChakraProvider>

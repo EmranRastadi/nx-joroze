@@ -33,7 +33,7 @@ const BrandLayout = ({ brand, brands, children }: Props) => {
 
   return (
     <Stack
-      direction={{ base: 'column', lg: 'row' }}
+      direction={{ base: 'column', xl: 'row' }}
       spacing="5"
       align="stretch"
     >
@@ -48,7 +48,7 @@ const BrandLayout = ({ brand, brands, children }: Props) => {
           <BreadcrumbItem
             isCurrentPage={router.pathname === '/promos/brands/[brandSlug]'}
             sx={{
-              '& > span:first-child': {
+              '& > span:first-of-type': {
                 color: 'gray',
               },
             }}
@@ -70,7 +70,7 @@ const BrandLayout = ({ brand, brands, children }: Props) => {
                 router.pathname === '/promos/brands/[brandSlug]/[couponSlug]'
               }
               sx={{
-                '& > span:first-child': {
+                '& > span:first-of-type': {
                   color: 'gray',
                 },
               }}

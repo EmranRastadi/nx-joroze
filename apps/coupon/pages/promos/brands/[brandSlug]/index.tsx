@@ -1,22 +1,11 @@
 import { GetStaticPropsContext } from 'next';
 import { fetchFromContentful } from '../../..';
-import {
-  Box,
-  Heading,
-  Text,
-  VStack,
-  Button,
-  chakra,
-  Link,
-  Flex,
-} from '@chakra-ui/react';
+import { Box, Heading, Text, VStack, Flex } from '@chakra-ui/react';
 import { CouponEntity, CouponEntry } from '@joroze/cms';
-import Image from 'next/image';
-import NextLink from 'next/link';
-import ROUTES from '../../../../lib/routes';
-import { Card } from '@joroze/ui';
 import { motion } from 'framer-motion';
 import { getLayout } from '../../../../layouts/BrandLayout';
+import CouponCard from '../../../../components/CouponCard';
+import { useQuery } from 'react-query';
 
 type Props = {
   brand: CouponEntity;
@@ -24,6 +13,12 @@ type Props = {
 };
 
 export default function BrandPage({ brand, coupons }: Props) {
+  // TODO - Fetch
+  // const { data: csrCoupons = [], isLoading } = useQuery<CouponEntry[], Error>(
+  //   `/api/brands/${brand.sys.id}/coupons`
+  // );
+  // const csrMap =
+
   return (
     <VStack spacing="7" width="full">
       <VStack spacing="4" width="full" align="flex-start">
@@ -61,71 +56,7 @@ export default function BrandPage({ brand, coupons }: Props) {
                 transition: { duration: 0.3 },
               }}
             >
-              <Card
-                gap={{ base: '0', md: '5' }}
-                width="full"
-                flexDir={{ base: 'column', md: 'row' }}
-              >
-                <NextLink
-                  passHref
-                  href={`${ROUTES.BRANDS}/${coupon?.brandEntity?.slug}/${coupon?.slug}`}
-                >
-                  <Link>
-                    <Box
-                      width={{ base: 'full', md: 'initial' }}
-                      cursor="pointer"
-                    >
-                      <Box
-                        minWidth="100px"
-                        minHeight={{ base: '30px', md: '100px' }}
-                        position="relative"
-                      >
-                        <Image
-                          draggable={false}
-                          src="/assets/logo.svg"
-                          alt="logo"
-                          layout="fill"
-                        />
-                      </Box>
-                    </Box>
-                  </Link>
-                </NextLink>
-                <VStack flexGrow={1} align="flex-start">
-                  <NextLink
-                    passHref
-                    href={`${ROUTES.BRANDS}/${coupon?.brandEntity?.slug}/${coupon?.slug}`}
-                  >
-                    <Link>
-                      <Text
-                        cursor="pointer"
-                        fontSize="larger"
-                        fontWeight="extrabold"
-                      >
-                        {coupon.title}
-                      </Text>
-                    </Link>
-                  </NextLink>
-
-                  <Text fontSize="small" fontWeight="semibold">
-                    {coupon.description}
-                  </Text>
-
-                  <NextLink
-                    href={`/api/partner-redirect/${coupon.sys.id}`}
-                    passHref
-                  >
-                    <chakra.a
-                      w="full"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button w="full" rounded="full" colorScheme={'purple'}>
-                        Open a share
-                      </Button>
-                    </chakra.a>
-                  </NextLink>
-                </VStack>
-              </Card>
+              <CouponCard coupon={coupon} />
             </motion.div>
           </Box>
         );
