@@ -90,7 +90,7 @@ const BrandLayout = ({ brand, brands, children }: Props) => {
       <VStack
         spacing="5"
         width={'full'}
-        maxWidth={{ lg: '25%' }}
+        maxWidth={{ xl: '25%' }}
         align="stretch"
       >
         <Card bgColor="gray.100">

@@ -17,7 +17,7 @@ import { useDebouncedCallback } from '@joroze/react-utils';
 import { Card } from '@joroze/ui';
 import Image from 'next/image';
 import NextLink from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
 import { useMutation } from 'react-query';
 import ROUTES from '../lib/routes';
@@ -27,20 +27,6 @@ import {
   ReactionPusherEventName,
   ReactionPusherEventPayload,
 } from '../pages/api/coupons/reactions';
-
-// export type ReactionPusherChannelName = 'coupons';
-// export type ReactionPusherEventName = 'reaction';
-// export type ReactionType = 'like' | 'dislike';
-// export type ReactionPusherEventPayload = {
-//   type: ReactionType;
-//   couponId: string;
-//   count: number;
-// };
-
-// export type ReactionPostVariables = {
-//   type: ReactionType;
-//   id: string;
-// };
 
 type UseCouponSubscriptionOptions = {
   channelName: ReactionPusherChannelName;
@@ -105,7 +91,12 @@ const CouponCard = ({
     },
   });
 
-  const debouncedMutate = useDebouncedCallback(mutate, 500);
+  useEffect(() => {
+    setLikes(likeCount);
+    setDislikes(dislikeCount);
+  }, [likeCount, dislikeCount]);
+
+  const debouncedMutate = useDebouncedCallback(mutate, 100);
 
   const handleOnReactionButtonClick =
     (type: ReactionPostVariables['type']) => () =>

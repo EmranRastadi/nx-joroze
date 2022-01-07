@@ -24,15 +24,43 @@ export type ReactionPostVariables = {
   id: string;
 };
 
-// export function getCouponReactionCount(couponId: string, type: ReactionType) {
-//   return redis.get(`coupon.${couponId}.${type}`);
-// }
+export async function getCouponReactionDictionary() {
+  const couponDictionaryData = await redis.get('coupons');
+  const couponDictionary: Record<
+    string,
+    { id: string; likes: number; dislikes: number }
+  > = JSON.parse(couponDictionaryData || '{}');
 
-export function increaseCouponReactionCount(
+  return couponDictionary;
+}
+
+export async function increaseCouponReactionCount(
   couponId: string,
   type: ReactionType
 ) {
-  return redis.incrby(`coupon.${couponId}.${type}`, 1);
+  const couponDictionary = await getCouponReactionDictionary();
+
+  if (!(couponId in couponDictionary)) {
+    couponDictionary[couponId] = {
+      id: couponId,
+      likes: 0,
+      dislikes: 0,
+    };
+  }
+
+  let count = 0;
+
+  if (type === 'like') {
+    count = couponDictionary[couponId].likes + 1;
+    couponDictionary[couponId].likes = count;
+  } else {
+    count = couponDictionary[couponId].dislikes + 1;
+    couponDictionary[couponId].dislikes = count;
+  }
+
+  await redis.set('coupons', JSON.stringify(couponDictionary));
+
+  return count;
 }
 
 const pushCouponReactionEvent = (
@@ -49,6 +77,16 @@ export default async function reactionsHandler(
   const { type, id }: ReactionPostVariables = body;
 
   switch (method) {
+    case 'GET':
+      try {
+        return res.json(await getCouponReactionDictionary());
+      } catch (error) {
+        const responseMessage =
+          error instanceof Error ? error.message : 'Something went wrong.';
+
+        res.status(500).json({ message: responseMessage });
+      }
+      break;
     case 'POST':
       try {
         const eventPayload: ReactionPusherEventPayload = {
@@ -70,7 +108,7 @@ export default async function reactionsHandler(
       }
       break;
     default:
-      res.setHeader('Allow', ['POST']);
+      res.setHeader('Allow', ['GET', 'POST']);
       res.status(405).end(`Method ${method} Not Allowed`);
   }
 }

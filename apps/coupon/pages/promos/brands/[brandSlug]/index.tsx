@@ -13,11 +13,17 @@ type Props = {
 };
 
 export default function BrandPage({ brand, coupons }: Props) {
-  // TODO - Fetch
-  // const { data: csrCoupons = [], isLoading } = useQuery<CouponEntry[], Error>(
-  //   `/api/brands/${brand.sys.id}/coupons`
-  // );
-  // const csrMap =
+  const { data: couponReactionDictionary } = useQuery<
+    Record<
+      string,
+      {
+        id: string;
+        likes: number;
+        dislikes: number;
+      }
+    >,
+    Error
+  >('/api/coupons/reactions');
 
   return (
     <VStack spacing="7" width="full">
@@ -48,6 +54,10 @@ export default function BrandPage({ brand, coupons }: Props) {
       </VStack>
 
       {coupons.map((coupon) => {
+        const likeCount = couponReactionDictionary?.[coupon.sys.id]?.likes;
+        const dislikeCount =
+          couponReactionDictionary?.[coupon.sys.id]?.dislikes;
+
         return (
           <Box w="full" key={coupon.sys.id}>
             <motion.div
@@ -56,7 +66,11 @@ export default function BrandPage({ brand, coupons }: Props) {
                 transition: { duration: 0.3 },
               }}
             >
-              <CouponCard coupon={coupon} />
+              <CouponCard
+                likeCount={likeCount}
+                dislikeCount={dislikeCount}
+                coupon={coupon}
+              />
             </motion.div>
           </Box>
         );
