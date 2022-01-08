@@ -12,7 +12,7 @@ const pusher = new Pusher({
 
 export type ReactionPusherChannelName = 'coupons';
 export type ReactionPusherEventName = 'reaction';
-export type ReactionType = 'like' | 'dislike';
+export type ReactionType = 'like' | 'dislike' | 'linkClick';
 export type ReactionPusherEventPayload = {
   type?: ReactionType;
   couponId?: string;
@@ -28,7 +28,7 @@ export async function getCouponReactionDictionary() {
   const couponDictionaryData = await redis.get('coupons');
   const couponDictionary: Record<
     string,
-    { id: string; likes: number; dislikes: number }
+    { id: string; likes: number; dislikes: number; linkOpened: number }
   > = JSON.parse(couponDictionaryData || '{}');
 
   return couponDictionary;
@@ -45,6 +45,7 @@ export async function increaseCouponReactionCount(
       id: couponId,
       likes: 0,
       dislikes: 0,
+      linkOpened: 0,
     };
   }
 
@@ -63,7 +64,7 @@ export async function increaseCouponReactionCount(
   return count;
 }
 
-const pushCouponReactionEvent = (
+export const pushCouponReactionEvent = (
   channelName: ReactionPusherChannelName,
   eventName: ReactionPusherEventName,
   payload: ReactionPusherEventPayload

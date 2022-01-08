@@ -9,7 +9,7 @@ import {
   Stack,
   IconButton,
   HStack,
-  Flex,
+  Icon,
 } from '@chakra-ui/react';
 import { useChannel, useEvent } from '@harelpls/use-pusher';
 import { CouponEntry } from '@joroze/cms';
@@ -18,7 +18,7 @@ import { Card } from '@joroze/ui';
 import Image from 'next/image';
 import NextLink from 'next/link';
 import { useEffect, useState } from 'react';
-import { FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
+import { FaLink, FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
 import { useMutation } from 'react-query';
 import ROUTES from '../lib/routes';
 import {
@@ -43,8 +43,10 @@ const useCouponSubscription = ({
 
 type Props = {
   coupon: CouponEntry;
+  imgSrc?: string;
   likeCount?: number;
   dislikeCount?: number;
+  linkClickCount?: number;
 };
 
 const postReaction = async (data: ReactionPostVariables) => {
@@ -63,14 +65,17 @@ const postReaction = async (data: ReactionPostVariables) => {
 
 const CouponCard = ({
   coupon,
+  imgSrc,
   children,
   likeCount,
   dislikeCount,
+  linkClickCount,
   ...rest
 }: Props & HTMLChakraProps<'div'>) => {
   const { mutate } = useMutation(postReaction);
   const [likes, setLikes] = useState<number | undefined>();
   const [dislikes, setDislikes] = useState<number | undefined>();
+  const [linkClicks, setLinkClicks] = useState<number | undefined>();
 
   useCouponSubscription({
     channelName: 'coupons',
@@ -85,6 +90,9 @@ const CouponCard = ({
         case 'dislike':
           setDislikes(count);
           break;
+        case 'linkClick':
+          setLinkClicks(count);
+          break;
         default:
           break;
       }
@@ -94,7 +102,8 @@ const CouponCard = ({
   useEffect(() => {
     setLikes(likeCount);
     setDislikes(dislikeCount);
-  }, [likeCount, dislikeCount]);
+    setLinkClicks(linkClickCount);
+  }, [likeCount, dislikeCount, linkClickCount]);
 
   const debouncedMutate = useDebouncedCallback(mutate, 100);
 
@@ -109,27 +118,30 @@ const CouponCard = ({
       flexDir={{ base: 'column', md: 'row' }}
       {...rest}
     >
-      <NextLink
-        passHref
-        href={`${ROUTES.BRANDS}/${coupon?.brandEntity?.slug}/${coupon?.slug}`}
-      >
-        <Link>
-          <Box width={{ base: 'full', md: 'initial' }} cursor="pointer">
-            <Box
-              minWidth="100px"
-              minHeight={{ base: '30px', md: '100px' }}
-              position="relative"
-            >
-              <Image
-                draggable={false}
-                src="/assets/logo.svg"
-                alt="logo"
-                layout="fill"
-              />
+      {imgSrc && (
+        <NextLink
+          passHref
+          href={`${ROUTES.BRANDS}/${coupon?.brandEntity?.slug}/${coupon?.slug}`}
+        >
+          <Link>
+            <Box width={{ base: 'full', md: 'initial' }} cursor="pointer">
+              <Box
+                minWidth="100px"
+                minHeight={{ base: '30px', md: '100px' }}
+                position="relative"
+              >
+                <Image
+                  objectFit="contain"
+                  draggable={false}
+                  src={imgSrc}
+                  alt="logo"
+                  layout="fill"
+                />
+              </Box>
             </Box>
-          </Box>
-        </Link>
-      </NextLink>
+          </Link>
+        </NextLink>
+      )}
       <Stack
         direction={{ base: 'column', xl: 'row' }}
         flexGrow={1}
@@ -163,6 +175,10 @@ const CouponCard = ({
                 isRound
               />
               <Text>{dislikes ? dislikes : '--'}</Text>
+            </HStack>
+            <HStack>
+              <Icon color="purple.600" as={FaLink} />
+              <Text>{linkClicks ? linkClicks : '--'}</Text>
             </HStack>
           </HStack>
           <NextLink

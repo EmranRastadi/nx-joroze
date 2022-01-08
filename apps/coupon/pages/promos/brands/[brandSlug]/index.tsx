@@ -20,6 +20,7 @@ export default function BrandPage({ brand, coupons }: Props) {
         id: string;
         likes: number;
         dislikes: number;
+        linkOpened: number;
       }
     >,
     Error
@@ -57,6 +58,8 @@ export default function BrandPage({ brand, coupons }: Props) {
         const likeCount = couponReactionDictionary?.[coupon.sys.id]?.likes;
         const dislikeCount =
           couponReactionDictionary?.[coupon.sys.id]?.dislikes;
+        const linkClickCount =
+          couponReactionDictionary?.[coupon.sys.id]?.linkOpened;
 
         return (
           <Box w="full" key={coupon.sys.id}>
@@ -69,6 +72,8 @@ export default function BrandPage({ brand, coupons }: Props) {
               <CouponCard
                 likeCount={likeCount}
                 dislikeCount={dislikeCount}
+                imgSrc={brand?.logoImage?.url || ''}
+                linkClickCount={linkClickCount}
                 coupon={coupon}
               />
             </motion.div>
