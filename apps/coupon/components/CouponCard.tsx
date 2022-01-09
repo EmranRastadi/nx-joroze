@@ -18,13 +18,8 @@ import { Card } from '@joroze/ui';
 import Image from 'next/image';
 import NextLink from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
-import {
-  FaUserCheck,
-  FaThumbsDown,
-  FaThumbsUp,
-  FaHandsWash,
-} from 'react-icons/fa';
-import { useMutation } from 'react-query';
+import { FaThumbsDown, FaThumbsUp, FaHandsWash } from 'react-icons/fa';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import ROUTES from '../lib/routes';
 import {
   CouponPostVariables,
@@ -34,16 +29,9 @@ import {
   CouponStats,
 } from '../pages/api/coupons/stats';
 
-type UseCouponSubscriptionOptions = {
-  channelName: CouponPusherChannelName;
-  eventName: CouponPusherEventType;
-  cb: (payload?: CouponPusherEventPayload) => void;
-};
-
 type Props = {
   coupon: CouponEntry;
   imgSrc?: string;
-  csrCouponStats?: CouponStats;
 };
 
 const postCouponStats = async (data: CouponPostVariables) => {
@@ -63,13 +51,22 @@ const postCouponStats = async (data: CouponPostVariables) => {
 const CouponCard = ({
   coupon,
   imgSrc,
-  csrCouponStats,
   children,
   ...rest
 }: Props & HTMLChakraProps<'div'>) => {
-  const { mutate } = useMutation(postCouponStats);
+  const queryClient = useQueryClient();
+  const { data: couponStatsDictionary } = useQuery<
+    Record<string, CouponStats>,
+    Error
+  >('/api/coupons/stats');
+  const { mutate } = useMutation(postCouponStats, {
+    onSuccess: (data) => {
+      queryClient.setQueryData('/api/coupons/stats', data);
+    },
+  });
+
   const [couponStats, setCouponStats] = useState<CouponStats | undefined>();
-  const { likes, dislikes, linkOpened } = couponStats || {};
+  const { likes, dislikes, linkOpened, lastChosen } = couponStats || {};
 
   const couponsPusherChannel = useChannel('coupons');
   const couponStatsEventHandler = useCallback(
@@ -95,8 +92,10 @@ const CouponCard = ({
   );
 
   useEffect(() => {
-    setCouponStats(csrCouponStats);
-  }, [csrCouponStats]);
+    if (couponStatsDictionary) {
+      setCouponStats(couponStatsDictionary[coupon.sys.id]);
+    }
+  }, [coupon, couponStatsDictionary]);
 
   const debouncedMutate = useDebouncedCallback(mutate, 100);
 
@@ -107,7 +106,7 @@ const CouponCard = ({
   return (
     <Card
       gap="6"
-      width="full"
+      align="stretch"
       flexDir={{ base: 'column', md: 'row' }}
       {...rest}
     >
@@ -141,8 +140,8 @@ const CouponCard = ({
         align="center"
         gap={2}
       >
-        <VStack gap={{ base: '2', sm: 0 }} flexGrow={0.75} align="stretch">
-          <HStack gap={2} justify={{ base: 'center', sm: 'start' }}>
+        <VStack gap={{ base: '2', sm: 0 }} flexGrow={0.75} align="start">
+          <HStack gap={2}>
             <HStack>
               <IconButton
                 variant="outline"
@@ -153,6 +152,7 @@ const CouponCard = ({
                 icon={<FaThumbsUp />}
                 onClick={handleOnReactionButtonClick('like')}
                 isRound
+                isActive={lastChosen === 'like'}
               />
               <Text>{likes ? likes : '--'}</Text>
             </HStack>
@@ -166,6 +166,7 @@ const CouponCard = ({
                 onClick={handleOnReactionButtonClick('dislike')}
                 icon={<FaThumbsDown />}
                 isRound
+                isActive={lastChosen === 'dislike'}
               />
               <Text>{dislikes ? dislikes : '--'}</Text>
             </HStack>
@@ -185,7 +186,7 @@ const CouponCard = ({
             </Link>
           </NextLink>
 
-          <Text fontSize="sm" fontWeight="semibold">
+          <Text textAlign={'start'} fontSize="sm" fontWeight="semibold">
             {coupon.description}
           </Text>
         </VStack>

@@ -5,8 +5,6 @@ import { CouponEntity, CouponEntry } from '@joroze/cms';
 import { motion } from 'framer-motion';
 import { getLayout } from '../../../../layouts/BrandLayout';
 import CouponCard from '../../../../components/CouponCard';
-import { useQuery } from 'react-query';
-import { CouponStats } from '../../../api/coupons/stats';
 
 type Props = {
   brand: CouponEntity;
@@ -14,11 +12,6 @@ type Props = {
 };
 
 export default function BrandPage({ brand, coupons }: Props) {
-  const { data: couponStatsDictionary } = useQuery<
-    Record<string, CouponStats>,
-    Error
-  >('/api/coupons/stats');
-
   return (
     <VStack spacing="7" width="full">
       <VStack spacing="4" width="full" align="flex-start">
@@ -48,10 +41,8 @@ export default function BrandPage({ brand, coupons }: Props) {
       </VStack>
 
       {coupons.map((coupon) => {
-        const couponStats = couponStatsDictionary?.[coupon.sys.id];
-
         return (
-          <Box w="full" key={coupon.sys.id}>
+          <Box w="full" key={coupon.sys.id} align="center">
             <motion.div
               whileHover={{
                 scale: 1.02,
@@ -60,7 +51,6 @@ export default function BrandPage({ brand, coupons }: Props) {
             >
               <CouponCard
                 imgSrc={brand?.logoImage?.url || ''}
-                csrCouponStats={couponStats}
                 coupon={coupon}
               />
             </motion.div>
