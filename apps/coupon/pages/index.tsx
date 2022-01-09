@@ -9,7 +9,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import cms, { CouponEntity, CouponHeadline } from '@joroze/cms';
+import cms, { CouponEntity, CouponEntry, CouponHeadline } from '@joroze/cms';
 import { GetStaticPropsContext } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -17,6 +17,11 @@ import Flickity from 'react-flickity-component';
 import { BiPurchaseTag, BiBadgeCheck, BiHappy } from 'react-icons/bi';
 import ROUTES from '../lib/routes';
 import BrandCarousel from '../components/BrandCarousel';
+import CouponCarousel from '../components/CouponCarousel';
+import { CouponStats, getCouponStatsDictionary } from './api/coupons/stats';
+import { access } from 'fs';
+
+const MAX_COUPON_STATS_ITEMS = 10;
 
 export const fetchFromContentful = (preview?: boolean) =>
   cms(
@@ -27,11 +32,16 @@ export const fetchFromContentful = (preview?: boolean) =>
   );
 
 type Props = {
+  couponsMostPopular: CouponEntry[];
   brands: CouponEntity[];
   headlines: CouponHeadline[];
 };
 
-export default function Index({ brands, headlines }: Props) {
+export default function Index({
+  couponsMostPopular,
+  brands,
+  headlines,
+}: Props) {
   return (
     <VStack align="stretch" spacing="7">
       <Box
@@ -147,9 +157,10 @@ export default function Index({ brands, headlines }: Props) {
         </VStack>
       </Box>
 
-      {/* <Heading as="h1" mt={2}>
-        Most popular
-      </Heading> */}
+      <Heading as="h1" mt={2}>
+        Most popular 🔥
+        <CouponCarousel coupons={couponsMostPopular} />
+      </Heading>
 
       <Stack spacing="10" direction={{ base: 'column', xl: 'row' }}>
         <VStack align="stretch" spacing="7">
@@ -215,11 +226,47 @@ Index.defaultProps = {
 };
 
 export const getStaticProps = async ({ preview }: GetStaticPropsContext) => {
-  const [{ couponEntityCollection }, { couponHeadlineCollection }] =
-    await Promise.all([
-      fetchFromContentful().Brands(),
-      fetchFromContentful().Headlines(),
-    ]);
+  const [
+    couponStatsDictionary,
+    { couponEntryCollection },
+    { couponEntityCollection },
+    { couponHeadlineCollection },
+  ] = await Promise.all([
+    getCouponStatsDictionary(),
+    fetchFromContentful().Coupons(),
+    fetchFromContentful().Brands(),
+    fetchFromContentful().Headlines(),
+  ]);
+
+  const popularCouponStatsDictionary = Object.values(couponStatsDictionary)
+    .filter((couponStats) => couponStats.likes > 0)
+    .sort((a, b) => b.likes - a.likes)
+    .slice(0, MAX_COUPON_STATS_ITEMS)
+    .reduce<Record<string, CouponStats>>((acc, couponStats) => {
+      acc[couponStats.id] = couponStats;
+      return acc;
+    }, {});
+
+  const couponsMostPopular = couponEntryCollection?.items
+    ?.filter((coupon) => {
+      const couponId = coupon?.sys.id;
+
+      if (!couponId) return false;
+
+      const couponStats = couponStatsDictionary[couponId];
+
+      return couponStats?.likes > 0;
+    })
+    .sort((couponA, couponB) => {
+      const couponIdA = couponA?.sys.id;
+      const couponIdB = couponB?.sys.id;
+
+      return (
+        (couponStatsDictionary[couponIdB || '']?.likes || 0) -
+        (couponStatsDictionary[couponIdA || '']?.likes || 0)
+      );
+    })
+    .slice(0, MAX_COUPON_STATS_ITEMS);
 
   const brands = couponEntityCollection?.items;
   const brandsWithSales = brands?.filter(
@@ -230,9 +277,11 @@ export const getStaticProps = async ({ preview }: GetStaticPropsContext) => {
 
   return {
     props: {
+      couponsMostPopular: couponsMostPopular,
       brands: brandsWithSales,
       headlines: headlines,
     },
+    revalidate: 10, // In seconds
   };
 };
 

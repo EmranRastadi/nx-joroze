@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { getLayout } from '../../../../layouts/BrandLayout';
 import CouponCard from '../../../../components/CouponCard';
 import { useQuery } from 'react-query';
+import { CouponStats } from '../../../api/coupons/stats';
 
 type Props = {
   brand: CouponEntity;
@@ -13,18 +14,10 @@ type Props = {
 };
 
 export default function BrandPage({ brand, coupons }: Props) {
-  const { data: couponReactionDictionary } = useQuery<
-    Record<
-      string,
-      {
-        id: string;
-        likes: number;
-        dislikes: number;
-        linkOpened: number;
-      }
-    >,
+  const { data: couponStatsDictionary } = useQuery<
+    Record<string, CouponStats>,
     Error
-  >('/api/coupons/reactions');
+  >('/api/coupons/stats');
 
   return (
     <VStack spacing="7" width="full">
@@ -55,11 +48,7 @@ export default function BrandPage({ brand, coupons }: Props) {
       </VStack>
 
       {coupons.map((coupon) => {
-        const likeCount = couponReactionDictionary?.[coupon.sys.id]?.likes;
-        const dislikeCount =
-          couponReactionDictionary?.[coupon.sys.id]?.dislikes;
-        const linkClickCount =
-          couponReactionDictionary?.[coupon.sys.id]?.linkOpened;
+        const couponStats = couponStatsDictionary?.[coupon.sys.id];
 
         return (
           <Box w="full" key={coupon.sys.id}>
@@ -70,10 +59,8 @@ export default function BrandPage({ brand, coupons }: Props) {
               }}
             >
               <CouponCard
-                likeCount={likeCount}
-                dislikeCount={dislikeCount}
                 imgSrc={brand?.logoImage?.url || ''}
-                linkClickCount={linkClickCount}
+                csrCouponStats={couponStats}
                 coupon={coupon}
               />
             </motion.div>

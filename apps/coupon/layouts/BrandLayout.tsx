@@ -35,10 +35,11 @@ const BrandLayout = ({ brand, brands, children }: Props) => {
     <Stack
       direction={{ base: 'column', xl: 'row' }}
       spacing="5"
+      width="full"
       align="stretch"
     >
       <VStack spacing="5" align="stretch" flexGrow={1}>
-        <Breadcrumb mt="2" fontWeight="medium" fontSize="smaller">
+        <Breadcrumb mt="2" fontWeight="medium" fontSize="sm">
           <BreadcrumbItem>
             <Link href={ROUTES.BRANDS} passHref>
               <BreadcrumbLink>Brands</BreadcrumbLink>
@@ -106,10 +107,10 @@ const BrandLayout = ({ brand, brands, children }: Props) => {
                 />
               )}
             </Box>
-            <Text fontSize="small" color="gray">
+            <Text fontSize="sm" color="gray">
               {brand?.brandUrl?.replace('https://', '')}
             </Text>
-            <Text fontSize="small" color="gray.700">
+            <Text fontSize="sm" color="gray.700">
               {brand?.description}
             </Text>
           </VStack>
@@ -120,11 +121,11 @@ const BrandLayout = ({ brand, brands, children }: Props) => {
           </Text>
           <List
             display="flex"
-            flexDirection={{ base: 'column', md: 'row', lg: 'column' }}
+            flexDirection="column"
             alignItems="start"
             fontSize="sm"
             width="full"
-            spacing={{ lg: 2 }}
+            spacing={{ base: 1, xl: 2 }}
           >
             <ListItem display="flex">
               <ListIcon mt="1" as={CheckIcon} color="purple.500" />

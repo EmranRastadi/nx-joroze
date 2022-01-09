@@ -62,10 +62,10 @@ const CategoryCarousel = () => {
                   </Box>
                 )}
 
-                <Text color="gray.600" fontSize="smaller" fontWeight="semibold">
+                <Text color="gray.600" fontSize="sm" fontWeight="semibold">
                   {category.name}
                 </Text>
-                <Text color="gray.600" fontSize="smaller" fontWeight="normal">
+                <Text color="gray.600" fontSize="sm" fontWeight="normal">
                   {category.linkedFrom?.couponEntityCollection?.items.length}
                 </Text>
               </HStack>

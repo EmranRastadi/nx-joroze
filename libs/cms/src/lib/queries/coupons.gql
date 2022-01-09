@@ -12,6 +12,9 @@ query Coupons($active: Boolean, $brandId: String, $slug: String) {
         sys {
           id
         }
+        logoImage {
+          url
+        }
         slug
       }
       description

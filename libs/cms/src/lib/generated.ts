@@ -1795,7 +1795,7 @@ export type CouponsQueryVariables = Exact<{
 }>;
 
 
-export type CouponsQuery = { __typename?: 'Query', couponEntryCollection?: { __typename?: 'CouponEntryCollection', items: Array<{ __typename?: 'CouponEntry', title?: string | null | undefined, slug?: string | null | undefined, description?: string | null | undefined, expiresAt?: any | null | undefined, referringUrl?: string | null | undefined, bannerImagesCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url?: string | null | undefined } | null | undefined> } | null | undefined, brandEntity?: { __typename?: 'CouponEntity', slug?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined> } | null | undefined };
+export type CouponsQuery = { __typename?: 'Query', couponEntryCollection?: { __typename?: 'CouponEntryCollection', items: Array<{ __typename?: 'CouponEntry', title?: string | null | undefined, slug?: string | null | undefined, description?: string | null | undefined, expiresAt?: any | null | undefined, referringUrl?: string | null | undefined, bannerImagesCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url?: string | null | undefined } | null | undefined> } | null | undefined, brandEntity?: { __typename?: 'CouponEntity', slug?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, logoImage?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined } | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined> } | null | undefined };
 
 export type HeadlinesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1953,6 +1953,9 @@ export const CouponsDocument = gql`
       brandEntity {
         sys {
           id
+        }
+        logoImage {
+          url
         }
         slug
       }

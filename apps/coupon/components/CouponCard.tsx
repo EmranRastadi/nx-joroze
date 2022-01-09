@@ -17,41 +17,38 @@ import { useDebouncedCallback } from '@joroze/react-utils';
 import { Card } from '@joroze/ui';
 import Image from 'next/image';
 import NextLink from 'next/link';
-import { useEffect, useState } from 'react';
-import { FaLink, FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
+import { useCallback, useEffect, useState } from 'react';
+import {
+  FaUserCheck,
+  FaThumbsDown,
+  FaThumbsUp,
+  FaHandsWash,
+} from 'react-icons/fa';
 import { useMutation } from 'react-query';
 import ROUTES from '../lib/routes';
 import {
-  ReactionPostVariables,
-  ReactionPusherChannelName,
-  ReactionPusherEventName,
-  ReactionPusherEventPayload,
-} from '../pages/api/coupons/reactions';
+  CouponPostVariables,
+  CouponPusherChannelName,
+  CouponPusherEventType,
+  CouponPusherEventPayload,
+  CouponStats,
+} from '../pages/api/coupons/stats';
 
 type UseCouponSubscriptionOptions = {
-  channelName: ReactionPusherChannelName;
-  eventName: ReactionPusherEventName;
-  cb: (payload?: ReactionPusherEventPayload) => void;
+  channelName: CouponPusherChannelName;
+  eventName: CouponPusherEventType;
+  cb: (payload?: CouponPusherEventPayload) => void;
 };
-
-const useCouponSubscription = ({
-  channelName,
-  eventName,
-  cb,
-}: UseCouponSubscriptionOptions) =>
-  useEvent(useChannel(channelName), eventName, cb);
 
 type Props = {
   coupon: CouponEntry;
   imgSrc?: string;
-  likeCount?: number;
-  dislikeCount?: number;
-  linkClickCount?: number;
+  csrCouponStats?: CouponStats;
 };
 
-const postReaction = async (data: ReactionPostVariables) => {
+const postCouponStats = async (data: CouponPostVariables) => {
   const response = await (
-    await fetch('/api/coupons/reactions', {
+    await fetch('/api/coupons/stats', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -66,49 +63,45 @@ const postReaction = async (data: ReactionPostVariables) => {
 const CouponCard = ({
   coupon,
   imgSrc,
+  csrCouponStats,
   children,
-  likeCount,
-  dislikeCount,
-  linkClickCount,
   ...rest
 }: Props & HTMLChakraProps<'div'>) => {
-  const { mutate } = useMutation(postReaction);
-  const [likes, setLikes] = useState<number | undefined>();
-  const [dislikes, setDislikes] = useState<number | undefined>();
-  const [linkClicks, setLinkClicks] = useState<number | undefined>();
+  const { mutate } = useMutation(postCouponStats);
+  const [couponStats, setCouponStats] = useState<CouponStats | undefined>();
+  const { likes, dislikes, linkOpened } = couponStats || {};
 
-  useCouponSubscription({
-    channelName: 'coupons',
-    eventName: 'reaction',
-    cb: ({ couponId, type, count } = {}) => {
-      if (couponId !== coupon?.sys?.id) return;
+  const couponsPusherChannel = useChannel('coupons');
+  const couponStatsEventHandler = useCallback(
+    (couponStats) =>
+      couponStats?.id === coupon?.sys?.id && setCouponStats(couponStats),
+    [coupon]
+  );
 
-      switch (type) {
-        case 'like':
-          setLikes(count);
-          break;
-        case 'dislike':
-          setDislikes(count);
-          break;
-        case 'linkClick':
-          setLinkClicks(count);
-          break;
-        default:
-          break;
-      }
-    },
-  });
+  useEvent<CouponPusherEventPayload>(
+    couponsPusherChannel,
+    'like' as CouponPusherEventType,
+    couponStatsEventHandler
+  );
+  useEvent<CouponPusherEventPayload>(
+    couponsPusherChannel,
+    'dislike' as CouponPusherEventType,
+    couponStatsEventHandler
+  );
+  useEvent<CouponPusherEventPayload>(
+    couponsPusherChannel,
+    'linkClick' as CouponPusherEventType,
+    couponStatsEventHandler
+  );
 
   useEffect(() => {
-    setLikes(likeCount);
-    setDislikes(dislikeCount);
-    setLinkClicks(linkClickCount);
-  }, [likeCount, dislikeCount, linkClickCount]);
+    setCouponStats(csrCouponStats);
+  }, [csrCouponStats]);
 
   const debouncedMutate = useDebouncedCallback(mutate, 100);
 
   const handleOnReactionButtonClick =
-    (type: ReactionPostVariables['type']) => () =>
+    (type: CouponPostVariables['type']) => () =>
       debouncedMutate({ id: coupon.sys.id, type: type });
 
   return (
@@ -177,8 +170,8 @@ const CouponCard = ({
               <Text>{dislikes ? dislikes : '--'}</Text>
             </HStack>
             <HStack>
-              <Icon color="purple.600" as={FaLink} />
-              <Text>{linkClicks ? linkClicks : '--'}</Text>
+              <Icon fontSize="2xl" color="purple.700" as={FaHandsWash} />
+              <Text>{linkOpened ? linkOpened : '--'}</Text>
             </HStack>
           </HStack>
           <NextLink
@@ -186,13 +179,13 @@ const CouponCard = ({
             href={`${ROUTES.BRANDS}/${coupon?.brandEntity?.slug}/${coupon?.slug}`}
           >
             <Link>
-              <Text cursor="pointer" fontSize="larger" fontWeight="extrabold">
+              <Text cursor="pointer" fontSize="lg" fontWeight="extrabold">
                 {coupon.title}
               </Text>
             </Link>
           </NextLink>
 
-          <Text fontSize="small" fontWeight="semibold">
+          <Text fontSize="sm" fontWeight="semibold">
             {coupon.description}
           </Text>
         </VStack>
