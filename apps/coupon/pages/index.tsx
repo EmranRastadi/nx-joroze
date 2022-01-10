@@ -19,7 +19,6 @@ import ROUTES from '../lib/routes';
 import BrandCarousel from '../components/BrandCarousel';
 import CouponCarousel from '../components/CouponCarousel';
 import { CouponStats, getCouponStatsDictionary } from './api/coupons/stats';
-import { access } from 'fs';
 
 const MAX_COUPON_STATS_ITEMS = 10;
 
@@ -237,15 +236,6 @@ export const getStaticProps = async ({ preview }: GetStaticPropsContext) => {
     fetchFromContentful().Brands(),
     fetchFromContentful().Headlines(),
   ]);
-
-  const popularCouponStatsDictionary = Object.values(couponStatsDictionary)
-    .filter((couponStats) => couponStats.likes > 0)
-    .sort((a, b) => b.likes - a.likes)
-    .slice(0, MAX_COUPON_STATS_ITEMS)
-    .reduce<Record<string, CouponStats>>((acc, couponStats) => {
-      acc[couponStats.id] = couponStats;
-      return acc;
-    }, {});
 
   const couponsMostPopular = couponEntryCollection?.items
     ?.filter((coupon) => {

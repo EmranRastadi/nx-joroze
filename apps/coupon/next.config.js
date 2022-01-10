@@ -25,9 +25,14 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/test',
-        destination: 'https://www.coinbase.com/join/rosenb_826',
-        permanent: false,
+        source: '/login',
+        destination: '/api/auth/login',
+        permanent: true,
+      },
+      {
+        source: '/logout',
+        destination: '/api/auth/logout',
+        permanent: true,
       },
     ];
   },

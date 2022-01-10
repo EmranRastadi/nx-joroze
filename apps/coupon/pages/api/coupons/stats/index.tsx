@@ -1,7 +1,7 @@
-import pusher from '../../../lib/pusher';
+import pusher from '../../../../lib/pusher';
 import { IncomingHttpHeaders } from 'http';
 import { NextApiRequest, NextApiResponse } from 'next';
-import redis from '../../../lib/redis';
+import redis from '../../../../lib/redis';
 
 export type CouponStats = {
   id: string;
@@ -13,13 +13,34 @@ export type CouponStats = {
 
 export type CouponPusherChannelName = 'coupons';
 export type CouponPusherEventVoteType = 'like' | 'dislike';
-export type CouponPusherEventType = CouponPusherEventVoteType | 'linkClick';
+export type CouponPusherEventType =
+  | CouponPusherEventVoteType
+  | 'linkClick'
+  | 'clear';
 export type CouponPusherEventPayload = CouponStats;
 
 export type CouponPostVariables = {
   type: CouponPusherEventType;
   id: string;
 };
+
+export async function resetClientVotesByCouponId(couponId: string) {
+  const couponVoteDictionaryData = await redis.hgetall('client:ip');
+
+  for (const ipAddress in couponVoteDictionaryData) {
+    const couponIdToPusherTypeDictionary: Record<
+      string,
+      CouponPusherEventType
+    > = JSON.parse(couponVoteDictionaryData[ipAddress]);
+    delete couponIdToPusherTypeDictionary[couponId];
+
+    couponVoteDictionaryData[ipAddress] = JSON.stringify(
+      couponIdToPusherTypeDictionary
+    );
+  }
+
+  redis.hset('client:ip', couponVoteDictionaryData);
+}
 
 export async function getClientVoteDictionaryByIpAddress(ipAddress: string) {
   const couponVoteDictionaryData = await redis.hget('client:ip', ipAddress);

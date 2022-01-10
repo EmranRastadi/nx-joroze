@@ -15,7 +15,7 @@ const CouponCarousel = ({ coupons }: Props) => {
         options={{
           groupCells: 1,
           draggable: true,
-          autoPlay: 3000,
+          autoPlay: 5000,
           cellAlign: 'left',
           contain: true,
           prevNextButtons: false,
@@ -25,7 +25,10 @@ const CouponCarousel = ({ coupons }: Props) => {
       >
         {coupons.map((coupon) => {
           return (
-            <Box key={coupon.sys.id}>
+            <Box
+              key={coupon.sys.id}
+              width={{ base: '300px', md: '50%', xl: '25%' }}
+            >
               <motion.div
                 whileHover={{
                   scale: 1.05,
@@ -35,9 +38,9 @@ const CouponCarousel = ({ coupons }: Props) => {
                 <CouponCard
                   imgSrc={coupon?.brandEntity?.logoImage?.url || ''}
                   coupon={coupon}
-                  flexDir="column"
+                  carouselView
                   m={3}
-                  width={{ base: '300px', md: 'full' }}
+                  height="350px"
                 />
               </motion.div>
             </Box>
