@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Flex,
   Heading,
   List,
   ListIcon,
@@ -162,7 +163,11 @@ export default function Index({
         </Text>
         <CouponCarousel coupons={couponsMostPopular} />
       </VStack>
-      <Stack spacing="10" direction={{ base: 'column', xl: 'row' }}>
+      <Stack
+        spacing="10"
+        direction={{ base: 'column', xl: 'row' }}
+        align="stretch"
+      >
         <VStack align="stretch" spacing="7">
           <Text fontSize="3xl" fontWeight="bold">
             All valid promo codes on one site
@@ -199,21 +204,21 @@ export default function Index({
             </ListItem>
           </List>
         </VStack>
-        <Box px={{ base: '14', xl: '0' }}>
+        <Flex justify="center">
           <Box
-            position="relative"
-            minWidth={{ base: '350', xl: '400' }}
-            height={{ base: '350', xl: '400' }}
+            opacity={{ base: '0.75', xl: '1' }}
+            width={{ base: '50%', xl: '100%' }}
           >
             <Image
               draggable={false}
               src="/assets/gifts.svg"
               alt="people"
               objectFit="contain"
-              layout="fill"
+              width="1000px"
+              height="700px"
             />
           </Box>
-        </Box>
+        </Flex>
       </Stack>
     </VStack>
   );
