@@ -3,6 +3,7 @@ query Coupons($active: Boolean, $brandId: String, $slug: String) {
     items {
       title
       slug
+      staffPick
       bannerImagesCollection {
         items {
           url

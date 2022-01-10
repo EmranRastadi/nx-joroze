@@ -25,6 +25,8 @@ import {
   FaThumbsUp,
   FaHandsWash,
   FaTrashAlt,
+  FaCheckCircle,
+  FaRegCheckCircle,
 } from 'react-icons/fa';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import ROUTES from '../lib/routes';
@@ -165,7 +167,7 @@ const CouponCard = ({
             <Box width={{ base: 'full', md: 'initial' }} cursor="pointer">
               <Box
                 minWidth="100px"
-                minHeight={{ base: '30px', md: '100px' }}
+                minHeight={{ base: '30px' }}
                 position="relative"
               >
                 <Image
@@ -220,10 +222,12 @@ const CouponCard = ({
               </Tooltip>
               <Text fontSize="md">{dislikes ? dislikes : 0}</Text>
             </HStack>
-            <HStack>
-              <Icon fontSize="lg" color="purple.700" as={FaHandsWash} />
-              <Text fontSize="md">{linkOpened ? linkOpened : 0}</Text>
-            </HStack>
+            <Tooltip label="Recent users">
+              <HStack>
+                <Icon fontSize="lg" color="purple.700" as={FaHandsWash} />
+                <Text fontSize="md">{linkOpened ? linkOpened : 0}</Text>
+              </HStack>
+            </Tooltip>
             {user && (
               <Tooltip label="Clear">
                 <IconButton
@@ -258,8 +262,12 @@ const CouponCard = ({
           >
             {coupon.description}
           </Text>
+          {coupon.staffPick && (
+            <Text color="green" fontWeight="semibold" fontSize="xs">
+              {"Editor's Pick"}
+            </Text>
+          )}
         </VStack>
-
         <NextLink href={`/api/partner-redirect/${coupon.sys.id}`} passHref>
           <chakra.a flexGrow={0.25} target="_blank" rel="noopener noreferrer">
             <Button width="full" rounded="full" colorScheme={'purple'}>

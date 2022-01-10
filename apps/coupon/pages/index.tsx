@@ -156,16 +156,17 @@ export default function Index({
         </VStack>
       </Box>
 
-      <Heading as="h1" mt={2}>
-        Most popular 🔥
+      <VStack align="start">
+        <Text fontSize="3xl" fontWeight="bold">
+          Most popular 🔥
+        </Text>
         <CouponCarousel coupons={couponsMostPopular} />
-      </Heading>
-
+      </VStack>
       <Stack spacing="10" direction={{ base: 'column', xl: 'row' }}>
         <VStack align="stretch" spacing="7">
-          <Heading as="h1" mt={2}>
+          <Text fontSize="3xl" fontWeight="bold">
             All valid promo codes on one site
-          </Heading>
+          </Text>
           <Text>
             Welcome to the{' '}
             <Text
@@ -198,18 +199,20 @@ export default function Index({
             </ListItem>
           </List>
         </VStack>
-        <Box
-          position="relative"
-          minWidth={{ base: '350', xl: '400' }}
-          height={{ base: '350', xl: '400' }}
-        >
-          <Image
-            draggable={false}
-            src="/assets/people.png"
-            alt="people"
-            objectFit="contain"
-            layout="fill"
-          />
+        <Box px={{ base: '14', xl: '0' }}>
+          <Box
+            position="relative"
+            minWidth={{ base: '350', xl: '400' }}
+            height={{ base: '350', xl: '400' }}
+          >
+            <Image
+              draggable={false}
+              src="/assets/gifts.svg"
+              alt="people"
+              objectFit="contain"
+              layout="fill"
+            />
+          </Box>
         </Box>
       </Stack>
     </VStack>

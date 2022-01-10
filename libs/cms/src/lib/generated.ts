@@ -713,6 +713,7 @@ export type CouponEntry = Entry & {
   linkedFrom?: Maybe<CouponEntryLinkingCollections>;
   referringUrl?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
+  staffPick?: Maybe<Scalars['Boolean']>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
 };
@@ -771,6 +772,12 @@ export type CouponEntrySlugArgs = {
 
 
 /** Represents an Entry of a Coupon website's brand entity [See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/couponEntry) */
+export type CouponEntryStaffPickArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Represents an Entry of a Coupon website's brand entity [See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/couponEntry) */
 export type CouponEntryTitleArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
@@ -823,6 +830,9 @@ export type CouponEntryFilter = {
   slug_not?: InputMaybe<Scalars['String']>;
   slug_not_contains?: InputMaybe<Scalars['String']>;
   slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  staffPick?: InputMaybe<Scalars['Boolean']>;
+  staffPick_exists?: InputMaybe<Scalars['Boolean']>;
+  staffPick_not?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
@@ -855,6 +865,8 @@ export enum CouponEntryOrder {
   ReferringUrlDesc = 'referringUrl_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
+  StaffPickAsc = 'staffPick_ASC',
+  StaffPickDesc = 'staffPick_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -1795,7 +1807,7 @@ export type CouponsQueryVariables = Exact<{
 }>;
 
 
-export type CouponsQuery = { __typename?: 'Query', couponEntryCollection?: { __typename?: 'CouponEntryCollection', items: Array<{ __typename?: 'CouponEntry', title?: string | null | undefined, slug?: string | null | undefined, description?: string | null | undefined, expiresAt?: any | null | undefined, referringUrl?: string | null | undefined, bannerImagesCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url?: string | null | undefined } | null | undefined> } | null | undefined, brandEntity?: { __typename?: 'CouponEntity', slug?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, logoImage?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined } | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined> } | null | undefined };
+export type CouponsQuery = { __typename?: 'Query', couponEntryCollection?: { __typename?: 'CouponEntryCollection', items: Array<{ __typename?: 'CouponEntry', title?: string | null | undefined, slug?: string | null | undefined, staffPick?: boolean | null | undefined, description?: string | null | undefined, expiresAt?: any | null | undefined, referringUrl?: string | null | undefined, bannerImagesCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url?: string | null | undefined } | null | undefined> } | null | undefined, brandEntity?: { __typename?: 'CouponEntity', slug?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, logoImage?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined } | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined> } | null | undefined };
 
 export type HeadlinesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1945,6 +1957,7 @@ export const CouponsDocument = gql`
     items {
       title
       slug
+      staffPick
       bannerImagesCollection {
         items {
           url
