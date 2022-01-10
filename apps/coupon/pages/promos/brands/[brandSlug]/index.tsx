@@ -100,7 +100,10 @@ export const getStaticProps = async ({
     active: true,
   });
 
-  const coupons = couponEntryCollection?.items;
+  const coupons = couponEntryCollection?.items.sort(
+    (couponX, couponY) =>
+      Number(couponY?.staffPick || false) - Number(couponX?.staffPick || false)
+  );
 
   return {
     props: {
