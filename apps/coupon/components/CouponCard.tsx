@@ -156,6 +156,7 @@ const CouponCard = ({
       gap="6"
       align="stretch"
       flexDir={carouselView ? 'column' : { base: 'column', xl: 'row' }}
+      textAlign="start"
       {...rest}
     >
       {imgSrc && (
@@ -186,10 +187,10 @@ const CouponCard = ({
         direction={carouselView ? 'column' : { base: 'column', xl: 'row' }}
         flexGrow={1}
         align="center"
-        gap={2}
+        spacing={4}
       >
-        <VStack gap={{ base: '2', sm: 0 }} flexGrow={0.75} align="start">
-          <HStack gap={2}>
+        <VStack spacing={{ base: 6, sm: 4 }} flexGrow={0.75} align="start">
+          <HStack spacing={3}>
             <HStack>
               <Tooltip label="Like">
                 <IconButton
@@ -254,12 +255,7 @@ const CouponCard = ({
             </Link>
           </NextLink>
 
-          <Text
-            noOfLines={3}
-            textAlign={'start'}
-            fontSize="sm"
-            fontWeight="semibold"
-          >
+          <Text noOfLines={3} fontSize="sm" fontWeight="semibold">
             {coupon.description}
           </Text>
           {coupon.staffPick && (
