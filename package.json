@@ -34,7 +34,7 @@
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
     "@harelpls/use-pusher": "^7.2.1",
-    "@nrwl/next": "13.4.3",
+    "@nrwl/next": "13.4.4",
     "@plaiceholder/next": "2.2.0",
     "@types/nprogress": "^0.2.0",
     "chakra-react-select": "2.0.0",
@@ -65,15 +65,15 @@
     "@graphql-codegen/typescript": "2.4.2",
     "@graphql-codegen/typescript-graphql-request": "4.3.3",
     "@graphql-codegen/typescript-operations": "2.2.2",
-    "@nrwl/cli": "13.4.3",
-    "@nrwl/cypress": "13.4.3",
-    "@nrwl/eslint-plugin-nx": "13.4.3",
-    "@nrwl/jest": "13.4.3",
-    "@nrwl/linter": "13.4.3",
-    "@nrwl/react": "13.4.3",
-    "@nrwl/tao": "13.4.3",
-    "@nrwl/web": "13.4.3",
-    "@nrwl/workspace": "13.4.3",
+    "@nrwl/cli": "13.4.4",
+    "@nrwl/cypress": "13.4.4",
+    "@nrwl/eslint-plugin-nx": "13.4.4",
+    "@nrwl/jest": "13.4.4",
+    "@nrwl/linter": "13.4.4",
+    "@nrwl/react": "13.4.4",
+    "@nrwl/tao": "13.4.4",
+    "@nrwl/web": "13.4.4",
+    "@nrwl/workspace": "13.4.4",
     "@testing-library/react": "12.1.2",
     "@testing-library/react-hooks": "7.0.2",
     "@types/ioredis": "^4.28.7",
@@ -106,3 +106,4 @@
     "typescript": "~4.5.4"
   }
 }
+
