@@ -1,13 +1,15 @@
 import { GetStaticPropsContext } from 'next';
 import { fetchFromContentful } from '../../..';
 import {
-  Flex,
   Heading,
   Text,
   VStack,
   Button,
   Box,
   chakra,
+  Stack,
+  StackDivider,
+  HStack,
 } from '@chakra-ui/react';
 import { CouponEntity, CouponEntry } from '@joroze/cms';
 import NextLink from 'next/link';
@@ -32,18 +34,55 @@ export default function CouponPage({ coupon, brand }: Props) {
         </Heading>
       </Box>
 
-      <Card width="full">
-        <Text cursor="pointer" fontWeight="extrabold">
-          Information
-        </Text>
-
-        <NextLink href={`/api/partner-redirect/${coupon.sys.id}`} passHref>
-          <chakra.a target="_blank" rel="noopener noreferrer">
-            <Button rounded="full" colorScheme={'purple'}>
-              Open a share
-            </Button>
-          </chakra.a>
-        </NextLink>
+      <Card width="full" alignItems="start">
+        <Stack
+          direction={{ base: 'column', xl: 'row' }}
+          spacing={4}
+          width="full"
+          align="center"
+        >
+          <Stack
+            width="full"
+            spacing={6}
+            align={{ base: 'center', xl: 'start' }}
+          >
+            <Text cursor="pointer" fontWeight="extrabold">
+              Information
+            </Text>
+            <HStack
+              width="full"
+              divider={<StackDivider borderColor="gray.200" />}
+              textAlign="left"
+              spacing={{ base: 0, xl: '6' }}
+            >
+              <VStack width={{ base: '33%', xl: 'initial' }}>
+                <Text fontSize="sm" color="gray.600">
+                  Coupons received
+                </Text>
+                <Text fontSize="xs">...</Text>
+              </VStack>
+              <VStack width={{ base: '33%', xl: 'initial' }}>
+                <Text fontSize="sm" color="gray.600">
+                  Coupon validity
+                </Text>
+                <Text fontSize="xs">{coupon.expiresAt || 'endless'}</Text>
+              </VStack>
+              <VStack width={{ base: '33%', xl: 'initial' }}>
+                <Text fontSize="sm" color="gray.600">
+                  Rating
+                </Text>
+                <Text fontSize="xs">...</Text>
+              </VStack>
+            </HStack>
+          </Stack>
+          <NextLink href={`/api/partner-redirect/${coupon.sys.id}`} passHref>
+            <chakra.a target="_blank" rel="noopener noreferrer">
+              <Button rounded="full" colorScheme={'purple'}>
+                Open a share
+              </Button>
+            </chakra.a>
+          </NextLink>
+        </Stack>
       </Card>
 
       <Card width="full" alignItems="flex-start">
