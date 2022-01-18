@@ -144,9 +144,9 @@ export const getStaticProps = async ({
     title: websiteTitle,
     'og:title': websiteTitle,
     'twitter:title': websiteTitle,
-    description: `${brand.description}`,
-    'og:description': `${brand.description}`,
-    'twitter:description': `${brand.description}`,
+    description: `${coupon.description}`,
+    'og:description': `${coupon.description}`,
+    'twitter:description': `${coupon.description}`,
   };
 
   return {
