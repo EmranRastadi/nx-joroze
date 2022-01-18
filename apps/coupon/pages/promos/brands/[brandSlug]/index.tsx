@@ -105,17 +105,24 @@ export const getStaticProps = async ({
       Number(couponY?.staffPick || false) - Number(couponX?.staffPick || false)
   );
 
+  const websiteTitle = `Promo codes for ${brand.name} today - valid discounts ${brand.name}`;
+
+  const metaTags = {
+    title: websiteTitle,
+    'og:title': websiteTitle,
+    'twitter:title': websiteTitle,
+    description: `${brand.description}`,
+    'og:description': `${brand.description}`,
+    'twitter:description': `${brand.description}`,
+  };
+
   return {
     props: {
       preview,
       brand,
       brands: otherBrandsWithSales,
       coupons,
-      meta: {
-        title: brand.name,
-        description: 'Test brand name',
-        imgSrc: brand?.logoImage?.url,
-      },
+      metaTags,
     },
   };
 };

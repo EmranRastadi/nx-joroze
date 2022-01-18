@@ -152,7 +152,8 @@ export const getLayout = (
 ) =>
   getSiteLayout(
     // <BrandContextProvider>
-    <BrandLayout {...pageProps}>{page}</BrandLayout>
+    <BrandLayout {...pageProps}>{page}</BrandLayout>,
+    pageProps
     // </BrandContextProvider>
   );
 

@@ -138,17 +138,24 @@ export const getStaticProps = async ({
     };
   }
 
+  const websiteTitle = `Promotion ${brand.name} ${coupon.title}`;
+
+  const metaTags = {
+    title: websiteTitle,
+    'og:title': websiteTitle,
+    'twitter:title': websiteTitle,
+    description: `${brand.description}`,
+    'og:description': `${brand.description}`,
+    'twitter:description': `${brand.description}`,
+  };
+
   return {
     props: {
       preview,
       coupon,
       brand,
       brands: otherBrandsWithSales,
-      meta: {
-        title: coupon.title,
-        description: 'Test coupon description',
-        imgSrc: coupon?.bannerImagesCollection?.items?.[0]?.url || null,
-      },
+      metaTags,
     },
   };
 };

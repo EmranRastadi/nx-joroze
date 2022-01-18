@@ -5,7 +5,7 @@ import { AppProps } from 'next/app';
 import type { NextPage } from 'next';
 import { ReactElement, ReactNode, useEffect } from 'react';
 import NProgress from 'nprogress';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Theme } from '@joroze/ui';
 import Layout from '../layouts/Layout';
@@ -61,8 +61,12 @@ const queryClient = new QueryClient({
   },
 });
 
+const WEBSITE_TITLE = `SSHARELY.com - Promo codes and free discount coupons`;
+
 function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);
+  const router = useRouter();
+  const metaUrl = `https://ssharely.joroze.com${router.asPath}`;
 
   useEffect(() => {
     const handleRouteStart = () => NProgress.start();
@@ -83,6 +87,21 @@ function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <ChakraProvider resetCSS theme={Theme}>
       <Head>
+        <title>{WEBSITE_TITLE}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        {/* <!-- Primary Meta Tags --> */}
+        <meta name="title" content={WEBSITE_TITLE} />
+        {/* <!-- Open Graph / Facebook --> */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={'https://ssharely.joroze.com'} />
+        <meta property="og:title" content={WEBSITE_TITLE} />
+        <meta property="og:image" content={'/assets/logo.svg'} />
+        {/* <!-- Twitter --> */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={metaUrl} />
+        <meta property="twitter:title" content={WEBSITE_TITLE} />
+        {/* <meta property="twitter:description" content={description} /> */}
+        <meta property="twitter:image" content={'/assets/logo.svg'} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
