@@ -3,13 +3,41 @@ schema:
   - ${CONTENTFUL_GRAPHQL_ENDPOINT}:
       headers:
         Authorization: Bearer ${CONTENTFUL_ACCESS_TOKEN}
+config:
+  # We want to avoid `any` types in our schema
+  strictScalars: true
+  scalars:
+    Date: string
+    DateTime: string
+    Decimal: number
+    GenericScalar: unknown
+    JSONString: string
+    UUID: string
+    Dimension: string
+    HexColor: string
+    JSON: string
+    Quality: string
 documents: 'libs/cms/src/lib/**/*.{gql,graphql}'
 generates:
-  libs/cms/src/lib/generated.ts:
+  # All the 'base' types that come from schema.graphql go into this file:
+  libs/cms/src/lib/types.generated.ts:
     plugins:
+      # https://www.graphql-code-generator.com/plugins/typescript
       - 'typescript'
+  # Each .graphql document file will have a matching .generated.ts file
+  # containing TS types, hooks, helper methods.
+  libs/cms/src/lib/:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.ts
+      baseTypesPath: types.generated.ts
+    plugins:
+      # https://www.graphql-code-generator.com/plugins/typescript-operations
       - 'typescript-operations'
       - 'typescript-graphql-request'
-  libs/cms/src/lib/graphql.schema.json:
+    config:
+      dedupeFragments: true
+      dedupeOperationSuffix: true
+  libs/cms/src/lib/schema.graphql:
     plugins:
-      - 'introspection'
+      - 'schema-ast'

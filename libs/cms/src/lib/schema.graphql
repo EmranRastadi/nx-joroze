@@ -1,0 +1,1126 @@
+"""Represents a binary file in a space. An asset can be any file type."""
+type Asset {
+  contentType(locale: String): String
+  contentfulMetadata: ContentfulMetadata!
+  description(locale: String): String
+  fileName(locale: String): String
+  height(locale: String): Int
+  linkedFrom(allowedLocales: [String]): AssetLinkingCollections
+  size(locale: String): Int
+  sys: Sys!
+  title(locale: String): String
+  url(locale: String, transform: ImageTransformOptions): String
+  width(locale: String): Int
+}
+
+type AssetCollection {
+  items: [Asset]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input AssetFilter {
+  AND: [AssetFilter]
+  OR: [AssetFilter]
+  contentType: String
+  contentType_contains: String
+  contentType_exists: Boolean
+  contentType_in: [String]
+  contentType_not: String
+  contentType_not_contains: String
+  contentType_not_in: [String]
+  contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
+  fileName: String
+  fileName_contains: String
+  fileName_exists: Boolean
+  fileName_in: [String]
+  fileName_not: String
+  fileName_not_contains: String
+  fileName_not_in: [String]
+  height: Int
+  height_exists: Boolean
+  height_gt: Int
+  height_gte: Int
+  height_in: [Int]
+  height_lt: Int
+  height_lte: Int
+  height_not: Int
+  height_not_in: [Int]
+  size: Int
+  size_exists: Boolean
+  size_gt: Int
+  size_gte: Int
+  size_in: [Int]
+  size_lt: Int
+  size_lte: Int
+  size_not: Int
+  size_not_in: [Int]
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+  url: String
+  url_contains: String
+  url_exists: Boolean
+  url_in: [String]
+  url_not: String
+  url_not_contains: String
+  url_not_in: [String]
+  width: Int
+  width_exists: Boolean
+  width_gt: Int
+  width_gte: Int
+  width_in: [Int]
+  width_lt: Int
+  width_lte: Int
+  width_not: Int
+  width_not_in: [Int]
+}
+
+type AssetLinkingCollections {
+  blogPostCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): BlogPostCollection
+  couponCategoryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): CouponCategoryCollection
+  couponEntityCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): CouponEntityCollection
+  couponEntryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): CouponEntryCollection
+  couponHeadlineCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): CouponHeadlineCollection
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  personCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PersonCollection
+  productCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ProductCollection
+}
+
+enum AssetOrder {
+  contentType_ASC
+  contentType_DESC
+  fileName_ASC
+  fileName_DESC
+  height_ASC
+  height_DESC
+  size_ASC
+  size_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  url_ASC
+  url_DESC
+  width_ASC
+  width_DESC
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/blogPost)
+"""
+type BlogPost implements Entry {
+  author(locale: String, preview: Boolean): Entry
+  body(locale: String): BlogPostBody
+  contentfulMetadata: ContentfulMetadata!
+  description(locale: String): String
+  heroImage(locale: String, preview: Boolean): Asset
+  linkedFrom(allowedLocales: [String]): BlogPostLinkingCollections
+  publishDate(locale: String): DateTime
+  slug(locale: String): String
+  sys: Sys!
+  tags(locale: String): [String]
+  title(locale: String): String
+}
+
+type BlogPostBody {
+  json: JSON!
+  links: BlogPostBodyLinks!
+}
+
+type BlogPostBodyAssets {
+  block: [Asset]!
+  hyperlink: [Asset]!
+}
+
+type BlogPostBodyEntries {
+  block: [Entry]!
+  hyperlink: [Entry]!
+  inline: [Entry]!
+}
+
+type BlogPostBodyLinks {
+  assets: BlogPostBodyAssets!
+  entries: BlogPostBodyEntries!
+}
+
+type BlogPostCollection {
+  items: [BlogPost]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input BlogPostFilter {
+  AND: [BlogPostFilter]
+  OR: [BlogPostFilter]
+  author_exists: Boolean
+  body_contains: String
+  body_exists: Boolean
+  body_not_contains: String
+  contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
+  heroImage_exists: Boolean
+  publishDate: DateTime
+  publishDate_exists: Boolean
+  publishDate_gt: DateTime
+  publishDate_gte: DateTime
+  publishDate_in: [DateTime]
+  publishDate_lt: DateTime
+  publishDate_lte: DateTime
+  publishDate_not: DateTime
+  publishDate_not_in: [DateTime]
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  sys: SysFilter
+  tags_contains_all: [String]
+  tags_contains_none: [String]
+  tags_contains_some: [String]
+  tags_exists: Boolean
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+type BlogPostLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum BlogPostOrder {
+  publishDate_ASC
+  publishDate_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+type ContentfulMetadata {
+  tags: [ContentfulTag]!
+}
+
+input ContentfulMetadataFilter {
+  tags: ContentfulMetadataTagsFilter
+  tags_exists: Boolean
+}
+
+input ContentfulMetadataTagsFilter {
+  id_contains_all: [String]
+  id_contains_none: [String]
+  id_contains_some: [String]
+}
+
+"""
+Represents a tag entity for finding and organizing content easily.
+    Find out more here: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/content-tags
+"""
+type ContentfulTag {
+  id: String
+  name: String
+}
+
+"""
+Coupon website "Category" type [See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/couponCategory)
+"""
+type CouponCategory implements Entry {
+  contentfulMetadata: ContentfulMetadata!
+  description(locale: String): String
+  image(locale: String, preview: Boolean): Asset
+  linkedFrom(allowedLocales: [String]): CouponCategoryLinkingCollections
+  name(locale: String): String
+  sys: Sys!
+}
+
+type CouponCategoryCollection {
+  items: [CouponCategory]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input CouponCategoryFilter {
+  AND: [CouponCategoryFilter]
+  OR: [CouponCategoryFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
+  image_exists: Boolean
+  name: String
+  name_contains: String
+  name_exists: Boolean
+  name_in: [String]
+  name_not: String
+  name_not_contains: String
+  name_not_in: [String]
+  sys: SysFilter
+}
+
+type CouponCategoryLinkingCollections {
+  couponEntityCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): CouponEntityCollection
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum CouponCategoryOrder {
+  name_ASC
+  name_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
+Coupon website brand entity. Such as: "Coinbase, Robinhood, BigBank, etc" [See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/couponEntity)
+"""
+type CouponEntity implements Entry {
+  brandUrl(locale: String): String
+  category(locale: String, preview: Boolean): CouponCategory
+  contentfulMetadata: ContentfulMetadata!
+  description(locale: String): String
+  headline(locale: String): String
+  linkedFrom(allowedLocales: [String]): CouponEntityLinkingCollections
+  logoImage(locale: String, preview: Boolean): Asset
+  name(locale: String): String
+  slug(locale: String): String
+  sys: Sys!
+}
+
+type CouponEntityCollection {
+  items: [CouponEntity]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input CouponEntityFilter {
+  AND: [CouponEntityFilter]
+  OR: [CouponEntityFilter]
+  brandUrl: String
+  brandUrl_contains: String
+  brandUrl_exists: Boolean
+  brandUrl_in: [String]
+  brandUrl_not: String
+  brandUrl_not_contains: String
+  brandUrl_not_in: [String]
+  category: cfCouponCategoryNestedFilter
+  category_exists: Boolean
+  contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
+  headline: String
+  headline_contains: String
+  headline_exists: Boolean
+  headline_in: [String]
+  headline_not: String
+  headline_not_contains: String
+  headline_not_in: [String]
+  logoImage_exists: Boolean
+  name: String
+  name_contains: String
+  name_exists: Boolean
+  name_in: [String]
+  name_not: String
+  name_not_contains: String
+  name_not_in: [String]
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  sys: SysFilter
+}
+
+type CouponEntityLinkingCollections {
+  couponEntryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): CouponEntryCollection
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum CouponEntityOrder {
+  brandUrl_ASC
+  brandUrl_DESC
+  headline_ASC
+  headline_DESC
+  name_ASC
+  name_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
+Represents an Entry of a Coupon website's brand entity [See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/couponEntry)
+"""
+type CouponEntry implements Entry {
+  active(locale: String): Boolean
+  bannerImagesCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): AssetCollection
+  brandEntity(locale: String, preview: Boolean): CouponEntity
+  contentfulMetadata: ContentfulMetadata!
+  description(locale: String): String
+  expiresAt(locale: String): DateTime
+  linkedFrom(allowedLocales: [String]): CouponEntryLinkingCollections
+  referringUrl(locale: String): String
+  slug(locale: String): String
+  staffPick(locale: String): Boolean
+  sys: Sys!
+  title(locale: String): String
+}
+
+type CouponEntryCollection {
+  items: [CouponEntry]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input CouponEntryFilter {
+  AND: [CouponEntryFilter]
+  OR: [CouponEntryFilter]
+  active: Boolean
+  active_exists: Boolean
+  active_not: Boolean
+  bannerImagesCollection_exists: Boolean
+  brandEntity: cfCouponEntityNestedFilter
+  brandEntity_exists: Boolean
+  contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
+  expiresAt: DateTime
+  expiresAt_exists: Boolean
+  expiresAt_gt: DateTime
+  expiresAt_gte: DateTime
+  expiresAt_in: [DateTime]
+  expiresAt_lt: DateTime
+  expiresAt_lte: DateTime
+  expiresAt_not: DateTime
+  expiresAt_not_in: [DateTime]
+  referringUrl: String
+  referringUrl_contains: String
+  referringUrl_exists: Boolean
+  referringUrl_in: [String]
+  referringUrl_not: String
+  referringUrl_not_contains: String
+  referringUrl_not_in: [String]
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  staffPick: Boolean
+  staffPick_exists: Boolean
+  staffPick_not: Boolean
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+type CouponEntryLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum CouponEntryOrder {
+  active_ASC
+  active_DESC
+  expiresAt_ASC
+  expiresAt_DESC
+  referringUrl_ASC
+  referringUrl_DESC
+  slug_ASC
+  slug_DESC
+  staffPick_ASC
+  staffPick_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+"""
+Coupon website hero headline entity [See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/couponHeadline)
+"""
+type CouponHeadline implements Entry {
+  contentfulMetadata: ContentfulMetadata!
+  description(locale: String): String
+  image(locale: String, preview: Boolean): Asset
+  linkedFrom(allowedLocales: [String]): CouponHeadlineLinkingCollections
+  sys: Sys!
+  title(locale: String): String
+  url(locale: String): String
+}
+
+type CouponHeadlineCollection {
+  items: [CouponHeadline]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input CouponHeadlineFilter {
+  AND: [CouponHeadlineFilter]
+  OR: [CouponHeadlineFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
+  image_exists: Boolean
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+  url: String
+  url_contains: String
+  url_exists: Boolean
+  url_in: [String]
+  url_not: String
+  url_not_contains: String
+  url_not_in: [String]
+}
+
+type CouponHeadlineLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum CouponHeadlineOrder {
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+  url_ASC
+  url_DESC
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z,
+    compliant with the 'date-time' format outlined in section 5.6 of
+    the RFC 3339 profile of the ISO 8601 standard for representation
+    of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+"""
+The 'Dimension' type represents dimensions as whole numeric values between `1` and `4000`.
+"""
+scalar Dimension
+
+interface Entry {
+  contentfulMetadata: ContentfulMetadata!
+  sys: Sys!
+}
+
+type EntryCollection {
+  items: [Entry]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input EntryFilter {
+  AND: [EntryFilter]
+  OR: [EntryFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  sys: SysFilter
+}
+
+enum EntryOrder {
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""The 'HexColor' type represents color in `rgb:ffffff` string format."""
+scalar HexColor
+
+enum ImageFormat {
+  AVIF
+
+  """JPG image format."""
+  JPG
+
+  """
+  Progressive JPG format stores multiple passes of an image in progressively higher detail.
+          When a progressive image is loading, the viewer will first see a lower quality pixelated version which
+          will gradually improve in detail, until the image is fully downloaded. This is to display an image as
+          early as possible to make the layout look as designed.
+  """
+  JPG_PROGRESSIVE
+
+  """PNG image format"""
+  PNG
+
+  """
+  8-bit PNG images support up to 256 colors and weigh less than the standard 24-bit PNG equivalent.
+          The 8-bit PNG format is mostly used for simple images, such as icons or logos.
+  """
+  PNG8
+
+  """WebP image format."""
+  WEBP
+}
+
+enum ImageResizeFocus {
+  """Focus the resizing on the bottom."""
+  BOTTOM
+
+  """Focus the resizing on the bottom left."""
+  BOTTOM_LEFT
+
+  """Focus the resizing on the bottom right."""
+  BOTTOM_RIGHT
+
+  """Focus the resizing on the center."""
+  CENTER
+
+  """Focus the resizing on the largest face."""
+  FACE
+
+  """Focus the resizing on the area containing all the faces."""
+  FACES
+
+  """Focus the resizing on the left."""
+  LEFT
+
+  """Focus the resizing on the right."""
+  RIGHT
+
+  """Focus the resizing on the top."""
+  TOP
+
+  """Focus the resizing on the top left."""
+  TOP_LEFT
+
+  """Focus the resizing on the top right."""
+  TOP_RIGHT
+}
+
+enum ImageResizeStrategy {
+  """
+  Crops a part of the original image to fit into the specified dimensions.
+  """
+  CROP
+
+  """
+  Resizes the image to the specified dimensions, cropping the image if needed.
+  """
+  FILL
+
+  """Resizes the image to fit into the specified dimensions."""
+  FIT
+
+  """
+  Resizes the image to the specified dimensions, padding the image if needed.
+          Uses desired background color as padding color.
+  """
+  PAD
+
+  """
+  Resizes the image to the specified dimensions, changing the original aspect ratio if needed.
+  """
+  SCALE
+
+  """Creates a thumbnail from the image."""
+  THUMB
+}
+
+input ImageTransformOptions {
+  """
+  Desired background color, used with corner radius or `PAD` resize strategy.
+          Defaults to transparent (for `PNG`, `PNG8` and `WEBP`) or white (for `JPG` and `JPG_PROGRESSIVE`).
+  """
+  backgroundColor: HexColor
+
+  """
+  Desired corner radius in pixels.
+          Results in an image with rounded corners (pass `-1` for a full circle/ellipse).
+          Defaults to `0`. Uses desired background color as padding color,
+          unless the format is `JPG` or `JPG_PROGRESSIVE` and resize strategy is `PAD`, then defaults to white.
+  """
+  cornerRadius: Int
+
+  """Desired image format. Defaults to the original image format."""
+  format: ImageFormat
+
+  """Desired height in pixels. Defaults to the original image height."""
+  height: Dimension
+
+  """
+  Desired quality of the image in percents.
+          Used for `PNG8`, `JPG`, `JPG_PROGRESSIVE` and `WEBP` formats.
+  """
+  quality: Quality
+
+  """Desired resize focus area. Defaults to `CENTER`."""
+  resizeFocus: ImageResizeFocus
+
+  """Desired resize strategy. Defaults to `FIT`."""
+  resizeStrategy: ImageResizeStrategy
+
+  """Desired width in pixels. Defaults to the original image width."""
+  width: Dimension
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""
+[See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/person)
+"""
+type Person implements Entry {
+  company(locale: String): String
+  contentfulMetadata: ContentfulMetadata!
+  email(locale: String): String
+  facebook(locale: String): String
+  github(locale: String): String
+  image(locale: String, preview: Boolean): Asset
+  linkedFrom(allowedLocales: [String]): PersonLinkingCollections
+  name(locale: String): String
+  phone(locale: String): String
+  shortBio(locale: String): String
+  sys: Sys!
+  title(locale: String): String
+  twitter(locale: String): String
+}
+
+type PersonCollection {
+  items: [Person]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input PersonFilter {
+  AND: [PersonFilter]
+  OR: [PersonFilter]
+  company: String
+  company_contains: String
+  company_exists: Boolean
+  company_in: [String]
+  company_not: String
+  company_not_contains: String
+  company_not_in: [String]
+  contentfulMetadata: ContentfulMetadataFilter
+  email: String
+  email_contains: String
+  email_exists: Boolean
+  email_in: [String]
+  email_not: String
+  email_not_contains: String
+  email_not_in: [String]
+  facebook: String
+  facebook_contains: String
+  facebook_exists: Boolean
+  facebook_in: [String]
+  facebook_not: String
+  facebook_not_contains: String
+  facebook_not_in: [String]
+  github: String
+  github_contains: String
+  github_exists: Boolean
+  github_in: [String]
+  github_not: String
+  github_not_contains: String
+  github_not_in: [String]
+  image_exists: Boolean
+  name: String
+  name_contains: String
+  name_exists: Boolean
+  name_in: [String]
+  name_not: String
+  name_not_contains: String
+  name_not_in: [String]
+  phone: String
+  phone_contains: String
+  phone_exists: Boolean
+  phone_in: [String]
+  phone_not: String
+  phone_not_contains: String
+  phone_not_in: [String]
+  shortBio: String
+  shortBio_contains: String
+  shortBio_exists: Boolean
+  shortBio_in: [String]
+  shortBio_not: String
+  shortBio_not_contains: String
+  shortBio_not_in: [String]
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+  twitter: String
+  twitter_contains: String
+  twitter_exists: Boolean
+  twitter_in: [String]
+  twitter_not: String
+  twitter_not_contains: String
+  twitter_not_in: [String]
+}
+
+type PersonLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum PersonOrder {
+  company_ASC
+  company_DESC
+  email_ASC
+  email_DESC
+  facebook_ASC
+  facebook_DESC
+  github_ASC
+  github_DESC
+  name_ASC
+  name_DESC
+  phone_ASC
+  phone_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+  twitter_ASC
+  twitter_DESC
+}
+
+"""
+Product item [See type definition](https://app.contentful.com/spaces/8vnddh4olhe6/content_types/product)
+"""
+type Product implements Entry {
+  available(locale: String): Boolean
+  categories(locale: String): [String]
+  colors(locale: String): [String]
+  contentfulMetadata: ContentfulMetadata!
+  description(locale: String): String
+  imagesCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): AssetCollection
+  linkedFrom(allowedLocales: [String]): ProductLinkingCollections
+  name(locale: String): String
+  price(locale: String): Float
+  releaseDate(locale: String): DateTime
+  sys: Sys!
+}
+
+type ProductCollection {
+  items: [Product]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input ProductFilter {
+  AND: [ProductFilter]
+  OR: [ProductFilter]
+  available: Boolean
+  available_exists: Boolean
+  available_not: Boolean
+  categories_contains_all: [String]
+  categories_contains_none: [String]
+  categories_contains_some: [String]
+  categories_exists: Boolean
+  colors_contains_all: [String]
+  colors_contains_none: [String]
+  colors_contains_some: [String]
+  colors_exists: Boolean
+  contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
+  imagesCollection_exists: Boolean
+  name: String
+  name_contains: String
+  name_exists: Boolean
+  name_in: [String]
+  name_not: String
+  name_not_contains: String
+  name_not_in: [String]
+  price: Float
+  price_exists: Boolean
+  price_gt: Float
+  price_gte: Float
+  price_in: [Float]
+  price_lt: Float
+  price_lte: Float
+  price_not: Float
+  price_not_in: [Float]
+  releaseDate: DateTime
+  releaseDate_exists: Boolean
+  releaseDate_gt: DateTime
+  releaseDate_gte: DateTime
+  releaseDate_in: [DateTime]
+  releaseDate_lt: DateTime
+  releaseDate_lte: DateTime
+  releaseDate_not: DateTime
+  releaseDate_not_in: [DateTime]
+  sys: SysFilter
+}
+
+type ProductLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum ProductOrder {
+  available_ASC
+  available_DESC
+  name_ASC
+  name_DESC
+  price_ASC
+  price_DESC
+  releaseDate_ASC
+  releaseDate_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
+The 'Quality' type represents quality as whole numeric values between `1` and `100`.
+"""
+scalar Quality
+
+type Query {
+  asset(id: String!, locale: String, preview: Boolean): Asset
+  assetCollection(limit: Int = 100, locale: String, order: [AssetOrder], preview: Boolean, skip: Int = 0, where: AssetFilter): AssetCollection
+  blogPost(id: String!, locale: String, preview: Boolean): BlogPost
+  blogPostCollection(limit: Int = 100, locale: String, order: [BlogPostOrder], preview: Boolean, skip: Int = 0, where: BlogPostFilter): BlogPostCollection
+  couponCategory(id: String!, locale: String, preview: Boolean): CouponCategory
+  couponCategoryCollection(limit: Int = 100, locale: String, order: [CouponCategoryOrder], preview: Boolean, skip: Int = 0, where: CouponCategoryFilter): CouponCategoryCollection
+  couponEntity(id: String!, locale: String, preview: Boolean): CouponEntity
+  couponEntityCollection(limit: Int = 100, locale: String, order: [CouponEntityOrder], preview: Boolean, skip: Int = 0, where: CouponEntityFilter): CouponEntityCollection
+  couponEntry(id: String!, locale: String, preview: Boolean): CouponEntry
+  couponEntryCollection(limit: Int = 100, locale: String, order: [CouponEntryOrder], preview: Boolean, skip: Int = 0, where: CouponEntryFilter): CouponEntryCollection
+  couponHeadline(id: String!, locale: String, preview: Boolean): CouponHeadline
+  couponHeadlineCollection(limit: Int = 100, locale: String, order: [CouponHeadlineOrder], preview: Boolean, skip: Int = 0, where: CouponHeadlineFilter): CouponHeadlineCollection
+  entryCollection(limit: Int = 100, locale: String, order: [EntryOrder], preview: Boolean, skip: Int = 0, where: EntryFilter): EntryCollection
+  person(id: String!, locale: String, preview: Boolean): Person
+  personCollection(limit: Int = 100, locale: String, order: [PersonOrder], preview: Boolean, skip: Int = 0, where: PersonFilter): PersonCollection
+  product(id: String!, locale: String, preview: Boolean): Product
+  productCollection(limit: Int = 100, locale: String, order: [ProductOrder], preview: Boolean, skip: Int = 0, where: ProductFilter): ProductCollection
+}
+
+type Sys {
+  environmentId: String!
+  firstPublishedAt: DateTime
+  id: String!
+  publishedAt: DateTime
+  publishedVersion: Int
+  spaceId: String!
+}
+
+input SysFilter {
+  firstPublishedAt: DateTime
+  firstPublishedAt_exists: Boolean
+  firstPublishedAt_gt: DateTime
+  firstPublishedAt_gte: DateTime
+  firstPublishedAt_in: [DateTime]
+  firstPublishedAt_lt: DateTime
+  firstPublishedAt_lte: DateTime
+  firstPublishedAt_not: DateTime
+  firstPublishedAt_not_in: [DateTime]
+  id: String
+  id_contains: String
+  id_exists: Boolean
+  id_in: [String]
+  id_not: String
+  id_not_contains: String
+  id_not_in: [String]
+  publishedAt: DateTime
+  publishedAt_exists: Boolean
+  publishedAt_gt: DateTime
+  publishedAt_gte: DateTime
+  publishedAt_in: [DateTime]
+  publishedAt_lt: DateTime
+  publishedAt_lte: DateTime
+  publishedAt_not: DateTime
+  publishedAt_not_in: [DateTime]
+  publishedVersion: Float
+  publishedVersion_exists: Boolean
+  publishedVersion_gt: Float
+  publishedVersion_gte: Float
+  publishedVersion_in: [Float]
+  publishedVersion_lt: Float
+  publishedVersion_lte: Float
+  publishedVersion_not: Float
+  publishedVersion_not_in: [Float]
+}
+
+input cfCouponCategoryNestedFilter {
+  AND: [cfCouponCategoryNestedFilter]
+  OR: [cfCouponCategoryNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
+  image_exists: Boolean
+  name: String
+  name_contains: String
+  name_exists: Boolean
+  name_in: [String]
+  name_not: String
+  name_not_contains: String
+  name_not_in: [String]
+  sys: SysFilter
+}
+
+input cfCouponEntityNestedFilter {
+  AND: [cfCouponEntityNestedFilter]
+  OR: [cfCouponEntityNestedFilter]
+  brandUrl: String
+  brandUrl_contains: String
+  brandUrl_exists: Boolean
+  brandUrl_in: [String]
+  brandUrl_not: String
+  brandUrl_not_contains: String
+  brandUrl_not_in: [String]
+  category_exists: Boolean
+  contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
+  headline: String
+  headline_contains: String
+  headline_exists: Boolean
+  headline_in: [String]
+  headline_not: String
+  headline_not_contains: String
+  headline_not_in: [String]
+  logoImage_exists: Boolean
+  name: String
+  name_contains: String
+  name_exists: Boolean
+  name_in: [String]
+  name_not: String
+  name_not_contains: String
+  name_not_in: [String]
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  sys: SysFilter
+}

@@ -9,7 +9,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/next:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "defaultConfiguration": "production",
           "options": {
             "root": "apps/coupon",
@@ -40,7 +42,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/coupon"],
+          "outputs": [
+            "coverage/apps/coupon"
+          ],
           "options": {
             "jestConfig": "apps/coupon/jest.config.js",
             "passWithNoTests": true
@@ -48,9 +52,13 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/coupon/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/coupon/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         }
       },
@@ -75,14 +83,20 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/coupon-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/coupon-e2e/**/*.{js,ts}"
+            ]
           }
         }
       },
       "tags": [],
-      "implicitDependencies": ["coupon"]
+      "implicitDependencies": [
+        "coupon"
+      ]
     },
     "eslint-rules": {
       "root": "tools/eslint-rules",
@@ -90,7 +104,9 @@
       "targets": {
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/tools/eslint-rules"],
+          "outputs": [
+            "coverage/tools/eslint-rules"
+          ],
           "options": {
             "jestConfig": "tools/eslint-rules/jest.config.js",
             "passWithNoTests": true
@@ -105,7 +121,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/next:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "root": "apps/portfolio",
             "outputPath": "dist/apps/portfolio"
@@ -136,7 +154,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/portfolio"],
+          "outputs": [
+            "coverage/apps/portfolio"
+          ],
           "options": {
             "jestConfig": "apps/portfolio/jest.config.js",
             "passWithNoTests": true
@@ -145,9 +165,13 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/portfolio/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/portfolio/**/*.{ts,tsx,js,jsx}"
+            ]
           },
-          "outputs": ["{options.outputFile}"]
+          "outputs": [
+            "{options.outputFile}"
+          ]
         }
       }
     },
@@ -172,9 +196,13 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/portfolio-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/portfolio-e2e/**/*.{js,ts}"
+            ]
           },
-          "outputs": ["{options.outputFile}"]
+          "outputs": [
+            "{options.outputFile}"
+          ]
         }
       }
     },
@@ -187,13 +215,19 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/ui/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "libs/ui/**/*.{ts,tsx,js,jsx}"
+            ]
           },
-          "outputs": ["{options.outputFile}"]
+          "outputs": [
+            "{options.outputFile}"
+          ]
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ui"],
+          "outputs": [
+            "coverage/libs/ui"
+          ],
           "options": {
             "jestConfig": "libs/ui/jest.config.js",
             "passWithNoTests": true

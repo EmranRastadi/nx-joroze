@@ -1,0 +1,7 @@
+# GraphQL intellisense via VS Code extension:
+# https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql
+projects:
+  contentful:
+    schema: './libs/cms/src/lib/schema.graphql'
+    documents:
+      - './libs/cms/src/lib/**/*.{graphql,js,ts,jsx,tsx}'
