@@ -19,7 +19,7 @@ import { BiPurchaseTag, BiBadgeCheck, BiHappy } from 'react-icons/bi';
 import ROUTES from '../lib/routes';
 import BrandCarousel from '../components/BrandCarousel';
 import CouponCarousel from '../components/CouponCarousel';
-import { CouponStats, getCouponStatsDictionary } from './api/coupons/stats';
+import { getCouponStatsDictionary } from './api/coupons/stats';
 
 const MAX_COUPON_STATS_ITEMS = 10;
 

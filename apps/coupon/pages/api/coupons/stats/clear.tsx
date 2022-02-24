@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import {
   CouponPostVariables,
   getClientIpAddress,
-  getClientVoteDictionaryByIpAddress,
   getCouponStatsWithClientChoice,
   pushCouponStatsEvent,
   resetClientVotesByCouponId,

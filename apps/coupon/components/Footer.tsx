@@ -1,4 +1,4 @@
-import { Box, Flex, Stack, StackDivider, Container } from '@chakra-ui/react';
+import { Box, Flex, Stack, StackDivider } from '@chakra-ui/react';
 import Copyright from './Copyright';
 import LinkGrid from './LinkGrid';
 import SocialMediaLinks from './SocialMediaLinks';

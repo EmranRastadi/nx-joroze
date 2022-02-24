@@ -39,7 +39,7 @@ const Nav = ({ children, ...rest }: HTMLChakraProps<'div'>) => {
             alignItems={'center'}
             direction={{ base: 'column', md: 'row' }}
           >
-            <NextLink href={'/'}>
+            <NextLink passHref href={'/'}>
               <Flex cursor="pointer">
                 <Image
                   priority

@@ -9,7 +9,7 @@ import {
   HTMLChakraProps,
   ThemingProps,
 } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
 export interface NavProps extends HTMLChakraProps<'div'>, ThemingProps<'nav'> {
   title: string;

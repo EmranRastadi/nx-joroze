@@ -25,14 +25,11 @@ import {
   FaThumbsUp,
   FaHandsWash,
   FaTrashAlt,
-  FaCheckCircle,
-  FaRegCheckCircle,
 } from 'react-icons/fa';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import ROUTES from '../lib/routes';
 import {
   CouponPostVariables,
-  CouponPusherChannelName,
   CouponPusherEventType,
   CouponPusherEventPayload,
   CouponStats,

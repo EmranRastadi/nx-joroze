@@ -41,6 +41,7 @@ export default function Question(props) {
 
   useWatch({
     control,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     name: fieldsToWatch,
     defaultValue: '',

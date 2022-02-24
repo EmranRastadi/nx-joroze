@@ -58,7 +58,7 @@ const CategoryCarousel = () => {
                       draggable={false}
                       src={category?.image?.url}
                       alt={category.name || ''}
-                      layout='fill'
+                      layout="fill"
                     />
                   </Box>
                 )}

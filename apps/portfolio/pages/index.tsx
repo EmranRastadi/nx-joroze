@@ -80,7 +80,7 @@ function ShoeBox({ id, imgSrc, href }) {
   );
 }
 export default function Index({ shoes, meta }) {
-  const { title, description, imgSrc } = meta;
+  const { title, description } = meta;
   const router = useRouter();
   const metaUrl = `https://joroze.com${router.asPath}`;
 

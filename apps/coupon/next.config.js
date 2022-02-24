@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const withNx = require('@nrwl/next/plugins/with-nx');
 
 /**
@@ -17,11 +16,6 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     domains: ['images.ctfassets.net', 's.gravatar.com'],
   },
-  // eslint: {
-  //   // Warning: Dangerously allow production builds to successfully complete even if
-  //   // your project has ESLint errors.
-  //   ignoreDuringBuilds: true,
-  // },
   async redirects() {
     return [
       {
