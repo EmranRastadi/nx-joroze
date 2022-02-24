@@ -1,10 +1,11 @@
-import { Button, HStack, Box, Text, Image } from '@chakra-ui/react';
+import { Button, HStack, Box, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Flickity from 'react-flickity-component';
 import { CouponCategory } from '@joroze/cms';
 import { useQuery } from 'react-query';
 import ROUTES from '../lib/routes';
+import Image from 'next/image';
 
 const CategoryCarousel = () => {
   const router = useRouter();
@@ -57,7 +58,7 @@ const CategoryCarousel = () => {
                       draggable={false}
                       src={category?.image?.url}
                       alt={category.name || ''}
-                      layout="fill"
+                      layout='fill'
                     />
                   </Box>
                 )}

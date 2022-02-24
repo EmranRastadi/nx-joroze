@@ -10,6 +10,25 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
+  swcMinify: true,
+  poweredByHeader: false,
+  reactStrictMode: true,
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    domains: ['images.ctfassets.net', 's.gravatar.com'],
+  },
+  // eslint: {
+  //   // Warning: Dangerously allow production builds to successfully complete even if
+  //   // your project has ESLint errors.
+  //   ignoreDuringBuilds: true,
+  // },
+  experimental: {
+    // concurrentFeatures: true,
+    // serverComponents: true,
+  },
+  future: {
+    strictPostcssConfiguration: true,
+  },
 };
 
 module.exports = withNx(nextConfig);
