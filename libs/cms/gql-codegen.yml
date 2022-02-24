@@ -24,15 +24,9 @@ generates:
     plugins:
       # https://www.graphql-code-generator.com/plugins/typescript
       - 'typescript'
-  # Each .graphql document file will have a matching .generated.ts file
-  # containing TS types, hooks, helper methods.
-  libs/cms/src/lib/:
-    preset: near-operation-file
-    presetConfig:
-      extension: .generated.ts
-      baseTypesPath: types.generated.ts
+  libs/cms/src/lib/generated.ts:
     plugins:
-      # https://www.graphql-code-generator.com/plugins/typescript-operations
+      - 'typescript'
       - 'typescript-operations'
       - 'typescript-graphql-request'
     config:
