@@ -42,7 +42,7 @@ export default function BrandPage({ brand, coupons }: Props) {
 
       {coupons.map((coupon) => {
         return (
-          <Box w="full" key={coupon.sys.id} align="center">
+          <Box w="full" key={coupon.sys.id}>
             <motion.div
               whileHover={{
                 scale: 1.02,
