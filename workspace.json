@@ -9,9 +9,7 @@
       "targets": {
         "build": {
           "executor": "@nrwl/next:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "defaultConfiguration": "production",
           "options": {
             "root": "apps/coupon",
@@ -42,9 +40,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/coupon"
-          ],
+          "outputs": ["coverage/apps/coupon"],
           "options": {
             "jestConfig": "apps/coupon/jest.config.js",
             "passWithNoTests": true
@@ -52,13 +48,9 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": [
-            "{options.outputFile}"
-          ],
+          "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": [
-              "apps/coupon/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["apps/coupon/**/*.{ts,tsx,js,jsx}"]
           }
         }
       },
@@ -83,20 +75,14 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": [
-            "{options.outputFile}"
-          ],
+          "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": [
-              "apps/coupon-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/coupon-e2e/**/*.{js,ts}"]
           }
         }
       },
       "tags": [],
-      "implicitDependencies": [
-        "coupon"
-      ]
+      "implicitDependencies": ["coupon"]
     },
     "eslint-rules": {
       "root": "tools/eslint-rules",
@@ -104,9 +90,7 @@
       "targets": {
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/tools/eslint-rules"
-          ],
+          "outputs": ["coverage/tools/eslint-rules"],
           "options": {
             "jestConfig": "tools/eslint-rules/jest.config.js",
             "passWithNoTests": true
@@ -121,9 +105,7 @@
       "targets": {
         "build": {
           "executor": "@nrwl/next:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "root": "apps/portfolio",
             "outputPath": "dist/apps/portfolio"
@@ -154,9 +136,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/portfolio"
-          ],
+          "outputs": ["coverage/apps/portfolio"],
           "options": {
             "jestConfig": "apps/portfolio/jest.config.js",
             "passWithNoTests": true
@@ -165,13 +145,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/portfolio/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["apps/portfolio/**/*.{ts,tsx,js,jsx}"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         }
       }
     },
@@ -196,15 +172,93 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/portfolio-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/portfolio-e2e/**/*.{js,ts}"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         }
       }
+    },
+    "questionnaire": {
+      "root": "apps/questionnaire",
+      "sourceRoot": "apps/questionnaire",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "defaultConfiguration": "production",
+          "options": {
+            "root": "apps/questionnaire",
+            "outputPath": "dist/apps/questionnaire"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "questionnaire:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "questionnaire:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "questionnaire:build:production"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/questionnaire"],
+          "options": {
+            "jestConfig": "apps/questionnaire/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/questionnaire/**/*.{ts,tsx,js,jsx}"]
+          }
+        }
+      },
+      "tags": []
+    },
+    "questionnaire-e2e": {
+      "root": "apps/questionnaire-e2e",
+      "sourceRoot": "apps/questionnaire-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/questionnaire-e2e/cypress.json",
+            "devServerTarget": "questionnaire:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "questionnaire:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/questionnaire-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["questionnaire"]
     },
     "react-utils": "libs/react-utils",
     "ui": {
@@ -215,19 +269,13 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/ui/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/ui/**/*.{ts,tsx,js,jsx}"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/ui"
-          ],
+          "outputs": ["coverage/libs/ui"],
           "options": {
             "jestConfig": "libs/ui/jest.config.js",
             "passWithNoTests": true

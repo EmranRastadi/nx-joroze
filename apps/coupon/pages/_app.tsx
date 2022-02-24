@@ -13,7 +13,7 @@ import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { PusherProvider } from '@harelpls/use-pusher';
-import { useUser, UserProvider } from '@auth0/nextjs-auth0';
+import { UserProvider } from '@auth0/nextjs-auth0';
 
 const pusherConfig = {
   // required config props
