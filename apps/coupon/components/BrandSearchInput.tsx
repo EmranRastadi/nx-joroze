@@ -23,6 +23,7 @@ import {
   ChangeEvent,
   KeyboardEvent,
   useCallback,
+  useDeferredValue,
   useEffect,
   useMemo,
   useState,
@@ -45,13 +46,23 @@ const BrandSearchInput = () => {
     enabled: false,
   });
   const [searchValue, setSearchValue] = useState('');
+  const deferredSearchValue = useDeferredValue(searchValue);
   const filteredBrandOptions = useMemo(
     () =>
-      brands.filter((brand) =>
-        brand?.name?.toLowerCase().includes(searchValue.toLowerCase())
-      ),
-    [brands, searchValue]
+      brands.filter((brand) => {
+        if (!brand.name) {
+          return false;
+        }
+
+        return (
+          brand.name
+            .toLocaleLowerCase()
+            .indexOf(deferredSearchValue.toLocaleLowerCase()) > -1
+        );
+      }),
+    [brands, deferredSearchValue]
   );
+
   const [cursor, setCursor] = useState<number>(0);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -185,11 +196,11 @@ const BrandSearchInput = () => {
                   <Flex flexDir="column">
                     <Flex pl="4" pr="4" pt="2" pb="2" mt="2">
                       <SkeletonCircle size="10" mr="10px" />
-                      <Skeleton borderRadius="lg" flexGrow="1" />
+                      <Skeleton borderRadius="lg" flexGrow={1} />
                     </Flex>
                     <Flex pl="4" pr="4" pt="2" pb="2" mt="2">
                       <SkeletonCircle size="10" mr="10px" />
-                      <Skeleton borderRadius="lg" flexGrow="1" />
+                      <Skeleton borderRadius="lg" flexGrow={1} />
                     </Flex>
                   </Flex>
                 )}

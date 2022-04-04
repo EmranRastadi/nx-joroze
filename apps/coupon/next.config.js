@@ -11,7 +11,6 @@ const nextConfig = {
   },
   swcMinify: true,
   poweredByHeader: false,
-  reactStrictMode: true,
   images: {
     formats: ['image/avif', 'image/webp'],
     domains: ['images.ctfassets.net', 's.gravatar.com'],

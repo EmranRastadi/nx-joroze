@@ -93,7 +93,7 @@ const AlertBanner = () => {
                     <Flex key={alert.id} w="full">
                       <Text
                         wordBreak="break-word"
-                        flexGrow="1"
+                        flexGrow={1}
                         textAlign="center"
                       >
                         <Text fontWeight="bold" as="span">

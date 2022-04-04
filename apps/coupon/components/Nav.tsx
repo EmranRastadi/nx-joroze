@@ -61,7 +61,7 @@ const Nav = ({ children, ...rest }: HTMLChakraProps<'div'>) => {
                 display={{ md: 'none' }}
                 onClick={isOpen ? onClose : onOpen}
               />
-              <Flex direction="column" grow="1">
+              <Flex direction="column" grow={1}>
                 <BrandSearchInput />
               </Flex>
             </HStack>

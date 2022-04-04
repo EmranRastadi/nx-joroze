@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { GetStaticPropsContext } from 'next';
 import { fetchFromContentful } from '../..';
-import { useEffect, useMemo, useState } from 'react';
+import { useDeferredValue, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
@@ -85,12 +85,14 @@ type Props = {
 export default function BrandsPage({ preview, brands }: Props) {
   const router = useRouter();
   const { category: activeCategoryName } = router.query;
-  const [selectedAlphabetLetter, setSelectedAlphabetLetter] = useState<
-    AlphabetLetter | ''
-  >('');
+  const [selectedAlphabetLetter, setSelectedAlphabetLetter] =
+    useState<AlphabetLetter>();
+  const deferredSelectedAlphabetLetter = useDeferredValue(
+    selectedAlphabetLetter
+  );
 
   const handleOnShowAllBrandsButtonClick = () => {
-    setSelectedAlphabetLetter('');
+    setSelectedAlphabetLetter(undefined);
     router.replace(ROUTES.BRANDS);
   };
   const handleOnAlphabetLetterButtonClick =
@@ -110,13 +112,13 @@ export default function BrandsPage({ preview, brands }: Props) {
 
   const filteredBrands = useMemo(
     () =>
-      selectedAlphabetLetter
+      deferredSelectedAlphabetLetter
         ? filteredBrandsByCategory.filter(
             (brand) =>
-              brand?.name?.[0]?.toLowerCase() === selectedAlphabetLetter
+              brand?.name?.[0]?.toLowerCase() === deferredSelectedAlphabetLetter
           )
         : filteredBrandsByCategory,
-    [filteredBrandsByCategory, selectedAlphabetLetter]
+    [filteredBrandsByCategory, deferredSelectedAlphabetLetter]
   );
 
   const filteredAlphabetLetters = useMemo(
@@ -148,7 +150,7 @@ export default function BrandsPage({ preview, brands }: Props) {
   );
 
   useEffect(() => {
-    setSelectedAlphabetLetter('');
+    setSelectedAlphabetLetter(undefined);
   }, [activeCategoryName]);
 
   return (
