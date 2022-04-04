@@ -7,7 +7,7 @@ import {
   Flex,
   Text,
   Divider,
-  useMediaQuery,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import styles from './TopNavigator.module.scss';
 import React from 'react';
@@ -23,7 +23,7 @@ type Props = {
 export default function TopNavigator({ user }: Props) {
   const { firstName, lastName } = user;
 
-  const [isLargerThan550] = useMediaQuery('(min-width: 550px)');
+  const isLarge = useBreakpointValue({ md: true });
 
   const { colorMode, toggleColorMode } = useColorMode();
   const logoutColor = useColorModeValue('teal', 'tomato');
@@ -56,7 +56,7 @@ export default function TopNavigator({ user }: Props) {
                 <Button onClick={toggleColorMode}>
                   Toggle {colorMode === 'light' ? 'Dark 🌚' : 'Light 🌞'}
                 </Button>
-                {isLargerThan550 && (
+                {isLarge && (
                   <>
                     <Divider orientation="vertical" ml="4" mr="4" />
                     <Circle

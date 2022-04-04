@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const withNx = require('@nrwl/next/plugins/with-nx');
 
 /**
@@ -9,6 +8,15 @@ const nextConfig = {
     // Set this to true if you would like to to use SVGR
     // See: https://github.com/gregberge/svgr
     svgr: false,
+  },
+  swcMinify: true,
+  poweredByHeader: false,
+  experimental: {
+    // concurrentFeatures: true,
+    // serverComponents: true,
+  },
+  future: {
+    strictPostcssConfiguration: true,
   },
 };
 

@@ -18,7 +18,7 @@ export default function Home() {
 
       <TopNavigator />
 
-      <Center padding="50" flexGrow="1" backgroundColor={backgroundColor}>
+      <Center padding="50" flexGrow={1} backgroundColor={backgroundColor}>
         <PrescriptionView />
       </Center>
 
