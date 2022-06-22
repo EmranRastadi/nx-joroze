@@ -39,6 +39,7 @@ export function Index() {
           loop
           poster="polina.jpg"
           id="bgvid"
+          preload="none"
         >
           <source src="assets/videos/city_cover.webm" type="video/webm" />
           <source src="assets/videos/city_cover.mp4" type="video/mp4" />
