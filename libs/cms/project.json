@@ -1,5 +1,5 @@
 {
-  "root": "libs/cms",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/cms/src",
   "projectType": "library",
   "targets": {
@@ -14,7 +14,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/cms"],
       "options": {
-        "jestConfig": "libs/cms/jest.config.js",
+        "jestConfig": "libs/cms/jest.config.ts",
         "passWithNoTests": true
       }
     }

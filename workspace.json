@@ -3,6 +3,7 @@
   "projects": {
     "cms": "libs/cms",
     "coupon": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/coupon",
       "sourceRoot": "apps/coupon",
       "projectType": "application",
@@ -16,7 +17,8 @@
             "outputPath": "dist/apps/coupon"
           },
           "configurations": {
-            "production": {}
+            "production": {},
+            "development": {}
           }
         },
         "serve": {
@@ -29,8 +31,13 @@
             "production": {
               "buildTarget": "coupon:build:production",
               "dev": false
+            },
+            "development": {
+              "buildTarget": "coupon:build:development",
+              "dev": true
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "export": {
           "executor": "@nrwl/next:export",
@@ -42,7 +49,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/apps/coupon"],
           "options": {
-            "jestConfig": "apps/coupon/jest.config.js",
+            "jestConfig": "apps/coupon/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -57,6 +64,7 @@
       "tags": []
     },
     "coupon-e2e": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/coupon-e2e",
       "sourceRoot": "apps/coupon-e2e/src",
       "projectType": "application",
@@ -85,6 +93,7 @@
       "implicitDependencies": ["coupon"]
     },
     "eslint-rules": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "root": "tools/eslint-rules",
       "sourceRoot": "tools/eslint-rules",
       "targets": {
@@ -92,13 +101,14 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/tools/eslint-rules"],
           "options": {
-            "jestConfig": "tools/eslint-rules/jest.config.js",
+            "jestConfig": "tools/eslint-rules/jest.config.ts",
             "passWithNoTests": true
           }
         }
       }
     },
     "portfolio": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/portfolio",
       "sourceRoot": "apps/portfolio",
       "projectType": "application",
@@ -111,8 +121,10 @@
             "outputPath": "dist/apps/portfolio"
           },
           "configurations": {
-            "production": {}
-          }
+            "production": {},
+            "development": {}
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "executor": "@nrwl/next:server",
@@ -125,8 +137,13 @@
             "production": {
               "buildTarget": "portfolio:build:production",
               "dev": false
+            },
+            "development": {
+              "buildTarget": "portfolio:build:development",
+              "dev": true
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "export": {
           "executor": "@nrwl/next:export",
@@ -138,7 +155,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/apps/portfolio"],
           "options": {
-            "jestConfig": "apps/portfolio/jest.config.js",
+            "jestConfig": "apps/portfolio/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -152,6 +169,7 @@
       }
     },
     "portfolio-e2e": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/portfolio-e2e",
       "sourceRoot": "apps/portfolio-e2e/src",
       "projectType": "application",
@@ -179,6 +197,7 @@
       }
     },
     "questionnaire": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/questionnaire",
       "sourceRoot": "apps/questionnaire",
       "projectType": "application",
@@ -192,7 +211,8 @@
             "outputPath": "dist/apps/questionnaire"
           },
           "configurations": {
-            "production": {}
+            "production": {},
+            "development": {}
           }
         },
         "serve": {
@@ -205,8 +225,13 @@
             "production": {
               "buildTarget": "questionnaire:build:production",
               "dev": false
+            },
+            "development": {
+              "buildTarget": "questionnaire:build:development",
+              "dev": true
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "export": {
           "executor": "@nrwl/next:export",
@@ -218,7 +243,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/apps/questionnaire"],
           "options": {
-            "jestConfig": "apps/questionnaire/jest.config.js",
+            "jestConfig": "apps/questionnaire/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -233,6 +258,7 @@
       "tags": []
     },
     "questionnaire-e2e": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/questionnaire-e2e",
       "sourceRoot": "apps/questionnaire-e2e/src",
       "projectType": "application",
@@ -262,6 +288,7 @@
     },
     "react-utils": "libs/react-utils",
     "ui": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/ui",
       "sourceRoot": "libs/ui/src",
       "projectType": "library",
@@ -277,11 +304,12 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/ui"],
           "options": {
-            "jestConfig": "libs/ui/jest.config.js",
+            "jestConfig": "libs/ui/jest.config.ts",
             "passWithNoTests": true
           }
         }
       }
     }
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }

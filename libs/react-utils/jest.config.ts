@@ -1,5 +1,6 @@
-module.exports = {
-  displayName: 'cms',
+/* eslint-disable */
+export default {
+  displayName: 'react-utils',
   preset: '../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -10,5 +11,5 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/libs/cms',
+  coverageDirectory: '../../coverage/libs/react-utils',
 };
