@@ -11,6 +11,8 @@ type Props = {
 const CouponCarousel = ({ coupons }: Props) => {
   return coupons ? (
     <Box width="full">
+      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+      {/* @ts-ignore */}
       <Flickity
         options={{
           groupCells: 1,

@@ -9,9 +9,6 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "parserOptions": {
-        "project": ["apps/coupon/tsconfig(.*)?.json"]
-      },
       "rules": {
         "@typescript-eslint/no-unused-vars": "error",
         "@next/next/no-html-link-for-pages": ["error", "apps/coupon/pages"]
