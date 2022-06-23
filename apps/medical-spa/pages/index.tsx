@@ -1,9 +1,31 @@
-import { Box, Heading, Stack, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  Drawer,
+  Flex,
+  Heading,
+  IconButton,
+  Stack,
+  Text,
+  useBreakpointValue,
+  useDisclosure,
+  VStack,
+} from '@chakra-ui/react';
+import { FiMenu } from 'react-icons/fi';
 import Link from 'next/link';
+import { useRef } from 'react';
 
 export function Index() {
   return (
     <section>
+      <TopNavigator />
       <Box height="100vh" width="100%" position="relative">
         <Box padding="8" display="flex" width="100%" height="100%">
           <Stack spacing="5" alignSelf="flex-end" color="white">
@@ -55,8 +77,94 @@ export function Index() {
           position="absolute"
         />
       </Box>
-      <Text>Hello world</Text>
+      {/* <Text>Hello world</Text> */}
     </section>
+  );
+}
+
+export function TopNavigator() {
+  // const isLarge = useBreakpointValue({ md: true });
+
+  // const { colorMode, toggleColorMode } = useColorMode();
+  // const logoutColor = useColorModeValue('teal', 'tomato');
+  // const svgFilter = useColorModeValue(null, 'saturate(100)');
+
+  const isDesktop = useBreakpointValue({ base: false, lg: true });
+  return (
+    <>
+      <Flex
+        justifyContent="space-between"
+        zIndex={1}
+        px="8"
+        py="6"
+        as="nav"
+        position="fixed"
+        width="100%"
+        bg="white"
+        boxShadow="sm"
+        alignItems="center"
+      >
+        <Heading size="md">Adam Rosenberg</Heading>
+        {isDesktop ? (
+          <ButtonGroup variant="link" size="lg" colorScheme="black" spacing="8">
+            {['About', 'Treatments', 'Injectables', 'Location', 'Blog'].map(
+              (item) => (
+                <Button key={item}>{item}</Button>
+              )
+            )}
+          </ButtonGroup>
+        ) : (
+          <NavDrawerButton />
+        )}
+      </Flex>
+    </>
+  );
+}
+
+function NavDrawerButton() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = useRef();
+
+  return (
+    <>
+      <IconButton
+        variant="ghost"
+        icon={<FiMenu fontSize="1.25rem" />}
+        aria-label="Open Menu"
+        ref={btnRef}
+        onClick={onOpen}
+      />
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader></DrawerHeader>
+
+          <DrawerBody>
+            <VStack alignItems="flex-start">
+              {['About', 'Treatments', 'Injectables', 'Location', 'Blog'].map(
+                (item) => (
+                  <Button
+                    minWidth="unset"
+                    variant="link"
+                    size="lg"
+                    colorScheme="black"
+                    key={item}
+                  >
+                    {item}
+                  </Button>
+                )
+              )}
+            </VStack>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 }
 
