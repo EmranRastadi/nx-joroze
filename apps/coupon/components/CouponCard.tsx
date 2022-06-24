@@ -99,6 +99,8 @@ const CouponCard = ({
 
   const couponsPusherChannel = useChannel('coupons');
   const couponStatsEventHandler = useCallback(
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     (couponStats) =>
       couponStats?.id === coupon?.sys?.id && setCouponStats(couponStats),
     [coupon]
