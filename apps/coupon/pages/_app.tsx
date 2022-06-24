@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import './styles.scss';
 import './nprogress.scss';
-
 import { AppProps } from 'next/app';
 import type { NextPage } from 'next';
 import { ReactElement, ReactNode, useEffect } from 'react';
@@ -105,6 +105,7 @@ function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
+      {/* @ts-ignore */}
       <QueryClientProvider client={queryClient}>
         <PusherProvider {...pusherConfig}>
           <UserProvider>
