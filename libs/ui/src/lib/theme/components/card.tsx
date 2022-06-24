@@ -24,8 +24,6 @@ const Card: ComponentStyleConfig = {
   },
   // The default variant value
   defaultProps: {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
     variant: 'smooth',
   },
 };

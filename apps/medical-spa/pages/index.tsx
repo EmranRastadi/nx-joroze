@@ -21,6 +21,7 @@ import {
 import { FiMenu } from 'react-icons/fi';
 import Link from 'next/link';
 import { useRef } from 'react';
+import Image from 'next/image';
 
 export function Index() {
   return (
@@ -59,13 +60,12 @@ export function Index() {
           autoPlay
           muted
           loop
-          poster="polina.jpg"
           id="bgvid"
-          preload="none"
+          preload="auto"
+          poster="assets/images/skyline.jpg"
         >
           <source src="assets/videos/city_cover.webm" type="video/webm" />
           <source src="assets/videos/city_cover.mp4" type="video/mp4" />
-          Sorry, your browser does not support HTML5 video.
         </video>
         <Box
           bg="blue.100"
@@ -77,7 +77,15 @@ export function Index() {
           position="absolute"
         />
       </Box>
-      {/* <Text>Hello world</Text> */}
+
+      <Box borderTop="1px solid gray" height="100px" position="relative">
+        <Image
+          layout="fill"
+          alt="spa"
+          objectFit="cover"
+          src="/assets/images/spa.jpg"
+        />
+      </Box>
     </section>
   );
 }
