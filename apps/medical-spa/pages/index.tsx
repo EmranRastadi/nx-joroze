@@ -5,7 +5,6 @@ import {
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   Drawer,
@@ -19,6 +18,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { FiMenu } from 'react-icons/fi';
+import { FaLinkedin } from 'react-icons/fa';
 import Link from 'next/link';
 import { useRef } from 'react';
 import Image from 'next/image';
@@ -38,15 +38,17 @@ export function Index() {
               Take care of your mind,
               <br /> body and soul.
             </Heading>
-            <Text fontSize="medium">
+            <Text fontWeight="bold" fontSize="medium">
               Familiarize yourself with our world-class BoTox Spa and Studio,
               only available in NYC
             </Text>
-            <Link href="#">
-              <Text fontWeight="semibold" color="orange.100">
-                Book an appointment
-              </Text>
-            </Link>
+            <Box>
+              <Link href="#">
+                <Button variant="link" fontWeight="semibold" color="orange.100">
+                  Book an appointment
+                </Button>
+              </Link>
+            </Box>
           </Stack>
         </Box>
 
@@ -114,13 +116,27 @@ export function TopNavigator() {
         as="nav"
         position="fixed"
         width="100%"
-        bg="white"
+        bgGradient="linear(to-r, #20293e, #4a637feb, #20293e)"
+        color="white"
         boxShadow="sm"
         alignItems="center"
       >
-        <Heading size="md">Adam Rosenberg</Heading>
+        <Link passHref href=".">
+          <a>
+            <Text fontWeight="bold" fontSize="large">
+              Adam Rosenberg PA-C
+            </Text>
+          </a>
+        </Link>
         {isDesktop ? (
           <ButtonGroup variant="link" size="lg" colorScheme="black" spacing="8">
+            <Link passHref href="https://www.linkedin.com/in/adamrosepa/">
+              <Box as="a" display="flex">
+                <Button aria-label="linked-in">
+                  <FaLinkedin />
+                </Button>
+              </Box>
+            </Link>
             {['About', 'Treatments', 'Injectables', 'Location', 'Blog'].map(
               (item) => (
                 <Button key={item}>{item}</Button>
