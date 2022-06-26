@@ -59,6 +59,7 @@ export function Index() {
             filter: 'blur(.5px)',
             objectFit: 'cover',
             height: '100%',
+            minHeight: '100%',
           }}
           autoPlay
           muted
