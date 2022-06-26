@@ -27,7 +27,11 @@ export function Index() {
   return (
     <section>
       <TopNavigator />
-      <Box height="100vh" width="100%" position="relative">
+      <Box
+        css={{ height: ['100dvh', '100vh'] }}
+        width="100%"
+        position="relative"
+      >
         <Box padding="8" display="flex" width="100%" height="100%">
           <Stack spacing="5" alignSelf="flex-end" color="white">
             <Heading as="h1">
