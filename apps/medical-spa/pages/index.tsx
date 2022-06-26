@@ -60,6 +60,8 @@ export function Index() {
             objectFit: 'cover',
             height: '100%',
             minHeight: '100%',
+            width: '100%',
+            minWidth: '100%',
           }}
           autoPlay
           muted
