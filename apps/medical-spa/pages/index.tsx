@@ -58,8 +58,7 @@ export function Index() {
             position: 'absolute',
             filter: 'blur(.5px)',
             objectFit: 'cover',
-            width: 'inherit',
-            height: 'inherit',
+            height: '100%',
           }}
           autoPlay
           muted
