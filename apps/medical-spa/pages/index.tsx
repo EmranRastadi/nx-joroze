@@ -28,7 +28,7 @@ export function Index() {
     <section>
       <TopNavigator />
       <Box
-        css={{ height: ['100dvh', '100vh'] }}
+        css={{ height: ['100vh', '100dvh'] }}
         width="100%"
         position="relative"
       >
