@@ -121,7 +121,7 @@ export function TopNavigator() {
         boxShadow="sm"
         alignItems="center"
       >
-        <Link passHref href=".">
+        <Link passHref href="/">
           <a>
             <Text fontWeight="bold" fontSize="large">
               Adam Rosenberg PA-C

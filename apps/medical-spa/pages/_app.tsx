@@ -13,7 +13,15 @@ const themeWithFont = extendTheme(
       heading: `'Raleway', sans-serif`,
       body: `'Inter', sans-serif`,
     },
+    styles: {
+      global: (props) => ({
+        body: {
+          bg: '#394e68',
+        },
+      }),
+    },
   },
+
   Theme
 );
 
