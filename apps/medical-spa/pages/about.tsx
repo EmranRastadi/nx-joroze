@@ -1,4 +1,5 @@
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Center, Flex, Heading } from '@chakra-ui/react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { getLastSegmentInPath } from '../lib/routes';
 
@@ -13,11 +14,25 @@ export function About() {
         }}
         width="100%"
       >
-        <Box padding="8" display="flex" width="100%" minHeight="inherit">
+        <Flex padding="8" flexDir="column" width="100%" minHeight="inherit">
           <Heading textTransform="capitalize">
             {getLastSegmentInPath(router.pathname)}
           </Heading>
-        </Box>
+          <Flex flexDir="column" flexGrow={1}>
+            <Center flexGrow={1}>
+              <Box width="25%">
+                <Image
+                  objectFit="contain"
+                  alt="headshot"
+                  width="100px"
+                  height="100px"
+                  layout="responsive"
+                  src="/assets/images/headshot.jpg"
+                />
+              </Box>
+            </Center>
+          </Flex>
+        </Flex>
       </Box>
     </Box>
   );
