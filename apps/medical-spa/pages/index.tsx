@@ -53,6 +53,7 @@ export function Index() {
               spacing={8}
             >
               <Box
+                isolation="isolate"
                 borderRadius={['20px', '15px', '10px']}
                 width={['100%', '75%', '100%', '100%']}
                 height={['70%', '70%', '50%', '50%']}
