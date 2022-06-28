@@ -20,10 +20,9 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 import { FiMenu } from 'react-icons/fi';
-import { FaLinkedin } from 'react-icons/fa';
+import { FaLinkedin, FaInstagram } from 'react-icons/fa';
 import Link from 'next/link';
 import React, { useRef } from 'react';
-import Image from 'next/image';
 import useSize from '@react-hook/size';
 
 export function Index() {
@@ -31,97 +30,119 @@ export function Index() {
   const [, topNavigatorContainerHeight] = useSize(topNavigatorContainerRef);
 
   return (
-    <section>
-      <Box boxShadow="sm">
+    <>
+      <Box boxShadow="xl">
         <TopNavigator ref={topNavigatorContainerRef} />
       </Box>
-      <Box
-        css={{
-          height: [
-            `calc(100vh - ${topNavigatorContainerHeight}px)`,
-            `calc(100dvh - ${topNavigatorContainerHeight}px)`,
-          ],
-        }}
-        width="100%"
-        position="relative"
-      >
-        <Box padding="8" display="flex" width="100%" height="100%">
-          <SimpleGrid
-            justifyItems={['center']}
-            columns={[1, 1, 2, 2]}
-            spacing={8}
-          >
-            <Box
-              borderRadius={['20px', '15px', '10px']}
-              width={['100%', '75%', '100%', '100%']}
-              height={['70%', '100%', '50%', '50%']}
-              overflow="hidden"
-              boxShadow="2xl"
+      <Box as="section" backgroundColor="#394e68">
+        <Box
+          css={{
+            minHeight: [
+              `calc(100vh - ${topNavigatorContainerHeight}px)`,
+              `calc(100dvh - ${topNavigatorContainerHeight}px)`,
+            ],
+          }}
+          width="100%"
+        >
+          <Box padding="8" display="flex" width="100%" minHeight="inherit">
+            <SimpleGrid
+              justifyItems="center"
+              flexGrow={1}
+              columns={[1, 1, 2, 2]}
+              spacing={8}
             >
-              <video
-                playsInline
-                style={{
-                  objectFit: 'cover',
-                  height: '100%',
-                  minHeight: '100%',
-                  width: '100%',
-                  minWidth: '100%',
-                }}
-                autoPlay
-                muted
-                loop
-                id="bgvid"
-                preload="auto"
-                poster="assets/images/skyline.jpg"
+              <Box
+                borderRadius={['20px', '15px', '10px']}
+                width={['100%', '75%', '100%', '100%']}
+                height={['70%', '70%', '50%', '50%']}
+                overflow="hidden"
+                boxShadow="2xl"
               >
-                <source
-                  src="assets/videos/faces-preview.webm"
-                  type="video/webm"
-                />
-                <source
-                  src="assets/videos/faces-preview.mp4"
-                  type="video/mp4"
-                />
-              </video>
-            </Box>
-            <Stack
-              spacing="5"
-              alignSelf={[null, null, 'flex-end']}
-              color="white"
-            >
-              <Heading as="h1">
-                Take care of your mind,
-                <br /> body and soul.
-              </Heading>
-              <Text fontWeight="bold" fontSize="medium">
-                Familiarize yourself with our world-class BoTox Spa and Studio,
-                only available in NYC
-              </Text>
-              <Box>
-                <Link href="#">
-                  <Button
-                    variant="link"
-                    fontWeight="semibold"
-                    color="orange.100"
-                  >
-                    Book your appointment
-                  </Button>
-                </Link>
+                <video
+                  playsInline
+                  style={{
+                    objectFit: 'cover',
+                    height: '100%',
+                    minHeight: '100%',
+                    width: '100%',
+                    minWidth: '100%',
+                  }}
+                  autoPlay
+                  muted
+                  loop
+                  id="bgvid"
+                  preload="auto"
+                  poster="assets/images/skyline.jpg"
+                >
+                  <source
+                    src="assets/videos/faces-preview.webm"
+                    type="video/webm"
+                  />
+                  <source
+                    src="assets/videos/faces-preview.mp4"
+                    type="video/mp4"
+                  />
+                </video>
               </Box>
-            </Stack>
-          </SimpleGrid>
+              <Box height="50%" alignSelf={[null, null, 'flex-end']}>
+                <Stack spacing="5" color="white">
+                  <Heading as="h1">
+                    Take care of your mind,
+                    <br /> body and soul.
+                  </Heading>
+                  <Text fontWeight="bold" fontSize="medium">
+                    Familiarize yourself with our world-class BoTox Spa and
+                    Studio, only available in NYC
+                  </Text>
+                  <Box>
+                    <Link href="#">
+                      <Button
+                        variant="link"
+                        fontWeight="semibold"
+                        color="orange.100"
+                      >
+                        Book your appointment
+                      </Button>
+                    </Link>
+                  </Box>
+                </Stack>
+              </Box>
+            </SimpleGrid>
+          </Box>
         </Box>
       </Box>
-
-      <Box borderTop="1px solid gray" height="100px" position="relative">
-        <Image
-          layout="fill"
-          alt="spa"
-          objectFit="cover"
-          src="/assets/images/spa.jpg"
-        />
-      </Box>
-    </section>
+      <Flex
+        justifyContent="flex-end"
+        as="footer"
+        height={topNavigatorContainerHeight}
+        bgGradient="linear(to-r, #20293e, #4a637feb, #20293e)"
+      >
+        <Flex padding={6}>
+          <ButtonGroup variant="link" size="lg" colorScheme="white">
+            <Flex
+              as="a"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.linkedin.com/in/adamrosepa/"
+            >
+              <Button color="orange.100" aria-label="linked-in">
+                <FaLinkedin />
+              </Button>
+            </Flex>
+            <Flex
+              as="a"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.instagram.com/sculptedbyadam/"
+            >
+              <Button variant="link" color="orange.100" aria-label="linked-in">
+                <FaInstagram />
+              </Button>
+            </Flex>
+          </ButtonGroup>
+        </Flex>
+      </Flex>
+    </>
   );
 }
 
@@ -144,7 +165,6 @@ export const TopNavigator = forwardRef((props, ref) => {
       width="100%"
       bgGradient="linear(to-r, #20293e, #4a637feb, #20293e)"
       color="white"
-      boxShadow="sm"
       alignItems="center"
     >
       <Link passHref href="/">
