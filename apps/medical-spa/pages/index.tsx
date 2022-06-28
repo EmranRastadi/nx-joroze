@@ -52,9 +52,9 @@ export function Index() {
             spacing={8}
           >
             <Box
-              borderRadius="3%"
-              width={['75%', '50%', '100%', '100%']}
-              height={['100%', '100%', '50%', '50%']}
+              borderRadius={['20px', '15px', '10px']}
+              width={['100%', '75%', '100%', '100%']}
+              height={['70%', '100%', '50%', '50%']}
               overflow="hidden"
               boxShadow="2xl"
             >
@@ -84,7 +84,11 @@ export function Index() {
                 />
               </video>
             </Box>
-            <Stack spacing="5" alignSelf="flex-end" color="white">
+            <Stack
+              spacing="5"
+              alignSelf={[null, null, 'flex-end']}
+              color="white"
+            >
               <Heading as="h1">
                 Take care of your mind,
                 <br /> body and soul.
