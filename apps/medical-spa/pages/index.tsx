@@ -74,7 +74,6 @@ export function Index() {
                   loop
                   id="bgvid"
                   preload="auto"
-                  poster="assets/images/skyline.jpg"
                 >
                   <source
                     src="assets/videos/faces-preview.webm"
