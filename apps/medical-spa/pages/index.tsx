@@ -1,47 +1,21 @@
 import {
   Box,
   Button,
-  ButtonGroup,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
-  Drawer,
-  Flex,
   Heading,
-  IconButton,
   Stack,
   Text,
-  useBreakpointValue,
-  useDisclosure,
-  VStack,
-  forwardRef,
   SimpleGrid,
-  HStack,
 } from '@chakra-ui/react';
-import { FiMenu } from 'react-icons/fi';
-import { FaLinkedin, FaInstagram } from 'react-icons/fa';
 import Link from 'next/link';
-import React, { useRef } from 'react';
-import useSize from '@react-hook/size';
+import React from 'react';
 
 export function Index() {
-  const topNavigatorContainerRef = useRef();
-  const [, topNavigatorContainerHeight] = useSize(topNavigatorContainerRef);
-
   return (
     <>
-      <Box boxShadow="xl">
-        <TopNavigator ref={topNavigatorContainerRef} />
-      </Box>
       <Box as="section" backgroundColor="#394e68">
         <Box
           css={{
-            minHeight: [
-              `calc(100vh - ${topNavigatorContainerHeight}px)`,
-              `calc(100dvh - ${topNavigatorContainerHeight}px)`,
-            ],
+            minHeight: ['calc(100vh - 75px)', 'calc(100dvh - 75px)'],
           }}
           width="100%"
         >
@@ -112,179 +86,6 @@ export function Index() {
           </Box>
         </Box>
       </Box>
-      <Flex
-        justifyContent="flex-end"
-        as="footer"
-        height={topNavigatorContainerHeight}
-        bgGradient="linear(to-r, #20293e, #4a637feb, #20293e)"
-      >
-        <Flex padding={6}>
-          <ButtonGroup variant="link" size="lg" colorScheme="white">
-            <Flex
-              as="a"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.linkedin.com/in/adamrosepa/"
-            >
-              <Button color="orange.100" aria-label="linked-in">
-                <FaLinkedin />
-              </Button>
-            </Flex>
-            <Flex
-              as="a"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.instagram.com/sculptedbyadam/"
-            >
-              <Button variant="link" color="orange.100" aria-label="instagram">
-                <FaInstagram />
-              </Button>
-            </Flex>
-          </ButtonGroup>
-        </Flex>
-      </Flex>
-    </>
-  );
-}
-
-export const TopNavigator = forwardRef((props, ref) => {
-  // const isLarge = useBreakpointValue({ md: true });
-
-  // const { colorMode, toggleColorMode } = useColorMode();
-  // const logoutColor = useColorModeValue('teal', 'tomato');
-  // const svgFilter = useColorModeValue(null, 'saturate(100)');
-
-  const isDesktop = useBreakpointValue({ base: false, lg: true });
-
-  return (
-    <Flex
-      ref={ref}
-      justifyContent="space-between"
-      px="8"
-      py="6"
-      as="nav"
-      width="100%"
-      bgGradient="linear(to-r, #20293e, #4a637feb, #20293e)"
-      color="white"
-      alignItems="center"
-    >
-      <Link passHref href="/">
-        <a>
-          <Text fontWeight="bold" fontSize="large">
-            Adam Rosenberg PA-C
-          </Text>
-        </a>
-      </Link>
-      {isDesktop ? (
-        <ButtonGroup variant="link" size="lg" colorScheme="black" spacing="8">
-          <Flex
-            as="a"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.linkedin.com/in/adamrosepa/"
-          >
-            <Button variant="link" color="orange.100" aria-label="linked-in">
-              <FaLinkedin />
-            </Button>
-          </Flex>
-          <Flex
-            as="a"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.instagram.com/sculptedbyadam/"
-          >
-            <Button variant="link" color="orange.100" aria-label="instagram">
-              <FaInstagram />
-            </Button>
-          </Flex>
-          {['About', 'Treatments', 'Injectables', 'Location', 'Blog'].map(
-            (item) => (
-              <Button key={item}>{item}</Button>
-            )
-          )}
-        </ButtonGroup>
-      ) : (
-        <NavDrawerButton />
-      )}
-    </Flex>
-  );
-});
-
-function NavDrawerButton() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef();
-
-  return (
-    <>
-      <IconButton
-        variant="ghost"
-        icon={<FiMenu fontSize="1.25rem" />}
-        aria-label="Open Menu"
-        ref={btnRef}
-        onClick={onOpen}
-      />
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader></DrawerHeader>
-
-          <DrawerBody>
-            <VStack alignItems="flex-start">
-              <HStack>
-                <Flex
-                  as="a"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://www.linkedin.com/in/adamrosepa/"
-                >
-                  <Button
-                    variant="link"
-                    aria-label="linked-in"
-                    size="lg"
-                    minWidth="unset"
-                  >
-                    <FaLinkedin />
-                  </Button>
-                </Flex>
-                <Flex
-                  as="a"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://www.instagram.com/sculptedbyadam/"
-                >
-                  <Button
-                    variant="link"
-                    aria-label="instagram"
-                    size="lg"
-                    minWidth="unset"
-                  >
-                    <FaInstagram />
-                  </Button>
-                </Flex>
-              </HStack>
-              {['About', 'Treatments', 'Injectables', 'Location', 'Blog'].map(
-                (item) => (
-                  <Button
-                    minWidth="unset"
-                    variant="link"
-                    size="lg"
-                    colorScheme="black"
-                    key={item}
-                  >
-                    {item}
-                  </Button>
-                )
-              )}
-            </VStack>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
     </>
   );
 }
