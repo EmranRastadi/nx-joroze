@@ -250,7 +250,3 @@ export default async function couponStatsHandler(
       res.status(405).end(`Method ${method} Not Allowed`);
   }
 }
-
-export const config = {
-  runtime: 'experimental-edge',
-};

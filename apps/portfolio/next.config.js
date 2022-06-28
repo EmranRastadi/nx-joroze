@@ -12,7 +12,11 @@ const nextConfig = {
   swcMinify: true,
   poweredByHeader: false,
   experimental: {
-    runtime: 'experimental-edge',
+    // concurrentFeatures: true,
+    // serverComponents: true,
+  },
+  future: {
+    strictPostcssConfiguration: true,
   },
 };
 

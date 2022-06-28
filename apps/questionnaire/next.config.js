@@ -17,7 +17,11 @@ const nextConfig = {
     domains: ['images.ctfassets.net', 's.gravatar.com'],
   },
   experimental: {
-    runtime: 'experimental-edge',
+    // concurrentFeatures: true,
+    // serverComponents: true,
+  },
+  future: {
+    strictPostcssConfiguration: true,
   },
 };
 

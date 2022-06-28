@@ -10,7 +10,3 @@ export default async function previewDisableHandler(
   res.writeHead(307, { Location: '/' });
   res.end();
 }
-
-export const config = {
-  runtime: 'experimental-edge',
-};
