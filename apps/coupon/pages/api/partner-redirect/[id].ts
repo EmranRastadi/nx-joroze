@@ -15,6 +15,11 @@ export default async function partnerRedirectHandler(
     case 'GET':
       try {
         const couponId = Array.isArray(id) ? id[0] : id;
+
+        if (!couponId) {
+          throw new Error('No ID provided');
+        }
+
         const updatedCouponStats = await updateCouponStatsById(
           couponId,
           (couponStats) => {
