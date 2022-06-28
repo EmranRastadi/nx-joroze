@@ -17,10 +17,7 @@ import {
   useDisclosure,
   VStack,
   forwardRef,
-  HStack,
-  Grid,
   SimpleGrid,
-  AspectRatio,
 } from '@chakra-ui/react';
 import { FiMenu } from 'react-icons/fi';
 import { FaLinkedin } from 'react-icons/fa';
@@ -35,7 +32,9 @@ export function Index() {
 
   return (
     <section>
-      <TopNavigator ref={topNavigatorContainerRef} />
+      <Box boxShadow="sm">
+        <TopNavigator ref={topNavigatorContainerRef} />
+      </Box>
       <Box
         css={{
           height: [
@@ -62,7 +61,6 @@ export function Index() {
               <video
                 playsInline
                 style={{
-                  // filter: 'blur(.5px)',
                   objectFit: 'cover',
                   height: '100%',
                   minHeight: '100%',
