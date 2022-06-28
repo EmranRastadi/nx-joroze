@@ -7,16 +7,8 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FaInstagram, FaLinkedin } from 'react-icons/fa';
-import ROUTES from '../lib/routes';
+import { NAV_ROUTES } from '../lib/routes';
 import DrawerButton from './DrawerButton';
-
-const NAV_ROUTES = (({ about, treatments, injectables, location, blog }) => ({
-  about,
-  treatments,
-  injectables,
-  location,
-  blog,
-}))(ROUTES);
 
 const TopNavigator = (props) => {
   // const isLarge = useBreakpointValue({ md: true });

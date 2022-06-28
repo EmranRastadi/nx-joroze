@@ -12,9 +12,11 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import { useRef } from 'react';
 import { FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { FiMenu } from 'react-icons/fi';
+import { NAV_ROUTES } from '../lib/routes';
 
 const DrawerButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -74,19 +76,20 @@ const DrawerButton = () => {
                   </Button>
                 </Flex>
               </HStack>
-              {['About', 'Treatments', 'Injectables', 'Location', 'Blog'].map(
-                (item) => (
+              {Object.entries(NAV_ROUTES).map(([label, url]) => (
+                <Link key={label} href={url}>
                   <Button
+                    textTransform="capitalize"
+                    onClick={onClose}
                     minWidth="unset"
                     variant="link"
                     size="lg"
                     colorScheme="black"
-                    key={item}
                   >
-                    {item}
+                    {label}
                   </Button>
-                )
-              )}
+                </Link>
+              ))}
             </VStack>
           </DrawerBody>
         </DrawerContent>
