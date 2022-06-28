@@ -18,6 +18,7 @@ import {
   VStack,
   forwardRef,
   SimpleGrid,
+  HStack,
 } from '@chakra-ui/react';
 import { FiMenu } from 'react-icons/fi';
 import { FaLinkedin, FaInstagram } from 'react-icons/fa';
@@ -135,7 +136,7 @@ export function Index() {
               rel="noopener noreferrer"
               href="https://www.instagram.com/sculptedbyadam/"
             >
-              <Button variant="link" color="orange.100" aria-label="linked-in">
+              <Button variant="link" color="orange.100" aria-label="instagram">
                 <FaInstagram />
               </Button>
             </Flex>
@@ -176,13 +177,26 @@ export const TopNavigator = forwardRef((props, ref) => {
       </Link>
       {isDesktop ? (
         <ButtonGroup variant="link" size="lg" colorScheme="black" spacing="8">
-          <Link passHref href="https://www.linkedin.com/in/adamrosepa/">
-            <Box as="a" display="flex">
-              <Button color="orange.100" aria-label="linked-in">
-                <FaLinkedin />
-              </Button>
-            </Box>
-          </Link>
+          <Flex
+            as="a"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.linkedin.com/in/adamrosepa/"
+          >
+            <Button variant="link" color="orange.100" aria-label="linked-in">
+              <FaLinkedin />
+            </Button>
+          </Flex>
+          <Flex
+            as="a"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.instagram.com/sculptedbyadam/"
+          >
+            <Button variant="link" color="orange.100" aria-label="instagram">
+              <FaInstagram />
+            </Button>
+          </Flex>
           {['About', 'Treatments', 'Injectables', 'Location', 'Blog'].map(
             (item) => (
               <Button key={item}>{item}</Button>
@@ -222,18 +236,38 @@ function NavDrawerButton() {
 
           <DrawerBody>
             <VStack alignItems="flex-start">
-              <Link passHref href="https://www.linkedin.com/in/adamrosepa/">
-                <Box as="a" display="flex">
+              <HStack>
+                <Flex
+                  as="a"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.linkedin.com/in/adamrosepa/"
+                >
                   <Button
                     variant="link"
+                    aria-label="linked-in"
                     size="lg"
                     minWidth="unset"
-                    aria-label="linked-in"
                   >
                     <FaLinkedin />
                   </Button>
-                </Box>
-              </Link>
+                </Flex>
+                <Flex
+                  as="a"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.instagram.com/sculptedbyadam/"
+                >
+                  <Button
+                    variant="link"
+                    aria-label="instagram"
+                    size="lg"
+                    minWidth="unset"
+                  >
+                    <FaInstagram />
+                  </Button>
+                </Flex>
+              </HStack>
               {['About', 'Treatments', 'Injectables', 'Location', 'Blog'].map(
                 (item) => (
                   <Button
