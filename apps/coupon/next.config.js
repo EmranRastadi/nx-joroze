@@ -30,11 +30,7 @@ const nextConfig = {
     ];
   },
   experimental: {
-    // concurrentFeatures: true,
-    // serverComponents: true,
-  },
-  future: {
-    strictPostcssConfiguration: true,
+    runtime: 'experimental-edge',
   },
 };
 

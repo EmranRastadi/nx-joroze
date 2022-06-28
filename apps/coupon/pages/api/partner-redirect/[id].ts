@@ -51,3 +51,7 @@ export default async function partnerRedirectHandler(
       res.status(405).end(`Method ${method} Not Allowed`);
   }
 }
+
+export const config = {
+  runtime: 'experimental-edge',
+};
