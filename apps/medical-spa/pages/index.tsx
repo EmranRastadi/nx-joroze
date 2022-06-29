@@ -27,10 +27,11 @@ export function Index() {
               spacing={8}
             >
               <Box
+                alignSelf={['center', 'center', 'flex-start', 'flex-start']}
                 isolation="isolate"
                 borderRadius={['20px', '15px', '10px']}
                 width={['100%', '75%', '100%', '100%']}
-                height={['70%', '70%', '50%', '50%']}
+                height={['90%', '80%', '50%', '50%']}
                 overflow="hidden"
                 boxShadow="2xl"
               >
@@ -59,7 +60,11 @@ export function Index() {
                   />
                 </video>
               </Box>
-              <Box height="50%" alignSelf={[null, null, 'flex-end']}>
+              <Box
+                position="relative"
+                height="50%"
+                alignSelf={[null, null, 'flex-end']}
+              >
                 <Stack spacing="5" color="white">
                   <Heading as="h1">
                     Take care of your mind,
