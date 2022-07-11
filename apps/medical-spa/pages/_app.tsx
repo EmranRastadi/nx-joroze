@@ -93,7 +93,7 @@ function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
         <meta property="og:type" content="website" />
         {/* <meta property="og:url" content={'https://ssharely.joroze.com'} /> */}
         <meta property="og:title" content={WEBSITE_TITLE} />
-        <meta property="og:image" content={'/assets/images/headshot.jpg'} />
+        <meta property="og:image" content={'/assets/images/actionshot.jpg'} />
         {/* <!-- Twitter --> */}
         <meta property="twitter:card" content="summary_large_image" />
         {/* <meta property="twitter:url" content={metaUrl} /> */}
@@ -101,7 +101,7 @@ function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
         <meta property="twitter:description" content={WEBSITE_DESCRIPTION} />
         <meta
           property="twitter:image"
-          content={'/assets/images/headshot.jpg'}
+          content={'/assets/images/actionshot.jpg'}
         />
       </Head>
       <QueryClientProvider client={queryClient}>

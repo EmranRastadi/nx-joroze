@@ -1,26 +1,18 @@
 enum ROUTES {
   about = '/about',
   treatments = '/treatments',
-  injectables = '/injectables',
   location = '/location',
-  blog = '/blog',
+  results = '/results',
   // General Routes
   home = '/',
   not_found = '/404',
 }
 
-export const NAV_ROUTES = (({
+export const NAV_ROUTES = (({ about, treatments, location, results }) => ({
   about,
   treatments,
-  injectables,
+  results,
   location,
-  blog,
-}) => ({
-  about,
-  treatments,
-  injectables,
-  location,
-  blog,
 }))(ROUTES);
 
 export const getLastSegmentInPath = (thePath) =>

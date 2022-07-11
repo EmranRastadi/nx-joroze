@@ -1,4 +1,4 @@
-import { Box, Center, Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { getLastSegmentInPath } from '../lib/routes';
@@ -8,32 +8,42 @@ export function About() {
 
   return (
     <Box color="white" as="section" backgroundColor="#394e68">
-      <Box
-        css={{
-          minHeight: ['calc(100vh - 75px)', 'calc(100dvh - 75px)'],
-        }}
-        width="100%"
-      >
-        <Flex padding="8" flexDir="column" width="100%" minHeight="inherit">
+      <Flex gap={6} padding="8" flexDir="column">
+        <Flex gap={1} flexDir="column">
           <Heading textTransform="capitalize">
             {getLastSegmentInPath(router.pathname)}
           </Heading>
-          <Flex flexDir="column" flexGrow={1}>
-            <Center flexGrow={1}>
-              <Box width="25%">
-                <Image
-                  objectFit="contain"
-                  alt="headshot"
-                  width="100px"
-                  height="100px"
-                  layout="responsive"
-                  src="/assets/images/headshot.jpg"
-                />
-              </Box>
-            </Center>
-          </Flex>
+          <Text>
+            Adam Rosenberg is a Board Certified Physician Assistant based in
+            NYC.
+          </Text>
+          <Text>
+            Originally surgically and procedurally trained, he aims for precise
+            and detailed results cosmetically.
+          </Text>
+          <Text>
+            Adam is experienced with Botox injections for aesthetic
+            results/facial balancing as well as medical indications including
+            chronic migraines, jaw pain and excessive sweating.
+          </Text>
         </Flex>
-      </Box>
+        <Flex justifyContent="flex-end">
+          <Box
+            isolation="isolate"
+            display="flex"
+            overflow="hidden"
+            borderRadius="4px"
+            boxShadow="2xl"
+          >
+            <Image
+              width="450px"
+              height="450px"
+              alt="action shot"
+              src="/assets/images/actionshot.jpg"
+            />
+          </Box>
+        </Flex>
+      </Flex>
     </Box>
   );
 }

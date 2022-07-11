@@ -35,7 +35,7 @@ export function Location() {
               boxShadow="2xl"
               overflow="hidden"
               borderRadius="4px"
-              height="250px"
+              height="300px"
               width="100%"
             >
               <iframe

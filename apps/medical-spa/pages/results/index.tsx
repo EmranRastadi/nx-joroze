@@ -1,8 +1,8 @@
 import { Box, Heading } from '@chakra-ui/react';
-import { getLastSegmentInPath } from 'apps/medical-spa/lib/routes';
+import { getLastSegmentInPath } from '../../lib/routes';
 import { useRouter } from 'next/router';
 
-export function Blog() {
+export function Results() {
   const router = useRouter();
 
   return (
@@ -23,4 +23,4 @@ export function Blog() {
   );
 }
 
-export default Blog;
+export default Results;
