@@ -1,12 +1,12 @@
 import { Box, Heading } from '@chakra-ui/react';
-import { getLastSegmentInPath } from 'apps/medical-spa/lib/routes';
+import { getLastSegmentInPath } from '../../lib/routes';
 import { useRouter } from 'next/router';
 
 export const Treatments = () => {
   const router = useRouter();
 
   return (
-    <Box color="white" as="section" backgroundColor="#394e68">
+    <Box color="white" as="section">
       <Box
         css={{
           minHeight: ['calc(100vh - 75px)', 'calc(100dvh - 75px)'],

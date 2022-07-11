@@ -1,6 +1,8 @@
 import Footer from '../components/Footer';
 import Head from 'next/head';
 import TopNavigator from '../components/TopNavigator';
+import { Box, SlideFade } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
 type Props = {
   children: React.ReactNode;
@@ -8,6 +10,7 @@ type Props = {
 };
 
 const Layout = ({ metaTags, children }: Props) => {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -25,7 +28,11 @@ const Layout = ({ metaTags, children }: Props) => {
           })}
       </Head>
       <TopNavigator />
-      <main>{children}</main>
+      <Box as="main" backgroundColor="#394e68">
+        <SlideFade key={router.route} in>
+          {children}
+        </SlideFade>
+      </Box>
       <Footer />
     </>
   );

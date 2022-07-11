@@ -7,7 +7,7 @@ export function About() {
   const router = useRouter();
 
   return (
-    <Box color="white" as="section" backgroundColor="#394e68">
+    <Box color="white" as="section">
       <Flex gap={6} padding="8" flexDir="column">
         <Flex gap={1} flexDir="column">
           <Heading textTransform="capitalize">

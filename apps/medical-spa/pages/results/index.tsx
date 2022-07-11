@@ -6,7 +6,7 @@ export function Results() {
   const router = useRouter();
 
   return (
-    <Box color="white" as="section" backgroundColor="#394e68">
+    <Box color="white" as="section">
       <Box
         css={{
           minHeight: ['calc(100vh - 75px)', 'calc(100dvh - 75px)'],
