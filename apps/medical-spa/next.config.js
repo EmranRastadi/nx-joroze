@@ -8,8 +8,7 @@ const nextConfig = {
   swcMinify: true,
   poweredByHeader: false,
   images: {
-    // formats: ['image/avif', 'image/webp'],
-    formats: ['image/webp'],
+    formats: ['image/avif', 'image/webp'],
   },
   nx: {
     // Set this to true if you would like to to use SVGR
