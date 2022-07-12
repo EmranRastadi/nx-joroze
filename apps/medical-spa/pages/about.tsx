@@ -2,6 +2,7 @@ import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { getLastSegmentInPath } from '../lib/routes';
+import actionShot from '../public/assets/images/actionshot.jpg';
 
 export function About() {
   const router = useRouter();
@@ -40,7 +41,7 @@ export function About() {
               width="450px"
               height="450px"
               alt="action shot"
-              src="/assets/images/actionshot.jpg"
+              src={actionShot}
             />
           </Box>
         </Flex>
