@@ -13,6 +13,7 @@ const nextConfig = {
     domains: [
       'scontent-iad3-1.cdninstagram.com', 
       'scontent-atl3-2.cdninstagram.com',
+      'video-atl3-2.cdninstagram.com',
       'video-iad3-1.cdninstagram.com',
     ],
   },
