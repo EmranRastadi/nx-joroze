@@ -1,0 +1,6 @@
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[plugins]]
+  package = "./include_sharp"
