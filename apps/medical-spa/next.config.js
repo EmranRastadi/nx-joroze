@@ -9,6 +9,10 @@ const nextConfig = {
   poweredByHeader: false,
   images: {
     formats: ['image/avif', 'image/webp'],
+    domains: [
+      'scontent-iad3-1.cdninstagram.com',
+      'video-iad3-1.cdninstagram.com',
+    ],
   },
   nx: {
     // Set this to true if you would like to to use SVGR
