@@ -36,6 +36,7 @@ export function About() {
             boxShadow="2xl"
           >
             <Image
+              placeholder="blur"
               width="450px"
               height="450px"
               alt="action shot"
