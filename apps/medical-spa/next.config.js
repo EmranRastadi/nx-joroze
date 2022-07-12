@@ -11,7 +11,8 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     domains: [
-      'scontent-iad3-1.cdninstagram.com',
+      'scontent-iad3-1.cdninstagram.com', 
+      'scontent-atl3-2.cdninstagram.com',
       'video-iad3-1.cdninstagram.com',
     ],
   },
