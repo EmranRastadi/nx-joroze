@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { getPlaiceholder } from 'plaiceholder';
+// import { getPlaiceholder } from 'plaiceholder';
 
 const FlexMotion = motion(Flex);
 
@@ -43,8 +43,8 @@ export function Results({
                     rel="noopener noreferrer"
                   >
                     <Image
-                      placeholder="blur"
-                      blurDataURL={post.blurDataURL}
+                      // placeholder="blur"
+                      // blurDataURL={post.blurDataURL}
                       priority={index <= 2 ? true : false}
                       objectFit="contain"
                       width="300px"
@@ -104,20 +104,20 @@ export const getStaticProps = async ({ params, preview = false }) => {
     return acc;
   }, []);
 
-  const instagramPosts = await Promise.all(
-    instagramPostsFlattened.map(async (post) => {
-      const { base64 } = await getPlaiceholder(post.mediaUrl, { size: 10 });
+  // const instagramPosts = await Promise.all(
+  //   instagramPostsFlattened.map(async (post) => {
+  //     const { base64 } = await getPlaiceholder(post.mediaUrl, { size: 10 });
 
-      return {
-        ...post,
-        blurDataURL: base64,
-      };
-    })
-  );
+  //     return {
+  //       ...post,
+  //       blurDataURL: base64,
+  //     };
+  //   })
+  // );
 
   return {
     props: {
-      instagramPosts,
+      instagramPosts: instagramPostsFlattened,
     },
     revalidate: 86400, // 24 hours
   };
