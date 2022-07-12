@@ -3,6 +3,9 @@ import { getLastSegmentInPath } from '../../lib/routes';
 import { useRouter } from 'next/router';
 import { InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+
+const FlexMotion = motion(Flex);
 
 export function Results({
   instagramPosts,
@@ -26,8 +29,13 @@ export function Results({
             <Flex justifyContent="center" gap={2} flexWrap="wrap" flexGrow={1}>
               {instagramPosts.map((post) => {
                 return (
-                  <Flex
+                  <FlexMotion
                     as="a"
+                    whileHover={{
+                      scale: 1.02,
+                      transition: { duration: 0.3 },
+                    }}
+                    whileTap={{ scale: 0.95 }}
                     href={post.permalink}
                     key={post.id}
                     target="_blank"
@@ -40,7 +48,7 @@ export function Results({
                       alt="picture"
                       src={post.mediaUrl || post.thumbnailUrl}
                     />
-                  </Flex>
+                  </FlexMotion>
                 );
               })}
             </Flex>
