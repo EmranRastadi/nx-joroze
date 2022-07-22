@@ -1,5 +1,4 @@
 enum ROUTES {
-  about = '/about',
   treatments = '/treatments',
   location = '/location',
   results = '/results',
@@ -8,8 +7,7 @@ enum ROUTES {
   not_found = '/404',
 }
 
-export const NAV_ROUTES = (({ about, treatments, location, results }) => ({
-  about,
+export const NAV_ROUTES = (({ treatments, location, results }) => ({
   treatments,
   results,
   location,

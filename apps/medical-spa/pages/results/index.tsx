@@ -50,7 +50,7 @@ export function Results({
                       width="300px"
                       height="300px"
                       alt="picture"
-                      src={post.mediaUrl || post.thumbnailUrl}
+                      src={post.mediaType === "VIDEO" ? post.thumbnailUrl : post.mediaUrl}
                     />
                   </FlexMotion>
                 );

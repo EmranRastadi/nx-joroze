@@ -25,7 +25,7 @@ export function Location() {
               href="https://goo.gl/maps/ZeuzkJTvvb7UELzVA"
             >
               <Text fontWeight="semibold">
-                123 E 25th St, New York, NY 10010
+                25 5th Ave Suite 1F, New York, NY 10003
               </Text>
             </Link>
           </Flex>
@@ -41,7 +41,7 @@ export function Location() {
               <iframe
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9557824323397!2d-73.9862247855475!3d40.740998479328766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a7382ea583%3A0x43346a74620ba70f!2s123%20E%2025th%20St%2C%20New%20York%2C%20NY%2010010!5e0!3m2!1sen!2sus!4v1656653205196!5m2!1sen!2sus"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.327702052811!2d-73.995445!3d40.7328142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259975b41ef93%3A0xfa8234229ba42709!2s25%205th%20Ave%2C%20New%20York%2C%20NY%2010003!5e0!3m2!1sen!2sus!4v1657632297080!5m2!1sen!2sus"
                 width="100%"
                 height="100%"
                 loading="lazy"
