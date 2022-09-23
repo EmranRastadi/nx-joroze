@@ -11,12 +11,8 @@ const nextConfig = {
   },
   swcMinify: true,
   poweredByHeader: false,
-  experimental: {
-    // concurrentFeatures: true,
-    // serverComponents: true,
-  },
-  future: {
-    strictPostcssConfiguration: true,
+  images: {
+    formats: ['image/avif', 'image/webp'],
   },
 };
 

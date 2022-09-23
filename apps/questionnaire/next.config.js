@@ -16,13 +16,6 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     domains: ['images.ctfassets.net', 's.gravatar.com'],
   },
-  experimental: {
-    // concurrentFeatures: true,
-    // serverComponents: true,
-  },
-  future: {
-    strictPostcssConfiguration: true,
-  },
 };
 
 module.exports = withNx(nextConfig);
