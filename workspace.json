@@ -18,7 +18,9 @@
           },
           "configurations": {
             "production": {},
-            "development": {}
+            "development": {
+              "outputPath": "apps/coupon"
+            }
           }
         },
         "serve": {
@@ -121,7 +123,9 @@
             "outputPath": "dist/apps/medical-spa"
           },
           "configurations": {
-            "development": {},
+            "development": {
+              "outputPath": "apps/medical-spa"
+            },
             "production": {}
           }
         },
@@ -210,7 +214,9 @@
           },
           "configurations": {
             "production": {},
-            "development": {}
+            "development": {
+              "outputPath": "apps/portfolio"
+            }
           },
           "defaultConfiguration": "production"
         },
@@ -300,7 +306,9 @@
           },
           "configurations": {
             "production": {},
-            "development": {}
+            "development": {
+              "outputPath": "apps/questionnaire"
+            }
           }
         },
         "serve": {
