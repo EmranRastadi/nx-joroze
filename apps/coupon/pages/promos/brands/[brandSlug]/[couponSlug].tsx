@@ -10,6 +10,7 @@ import {
   Stack,
   StackDivider,
   HStack,
+  Flex,
 } from '@chakra-ui/react';
 import { CouponEntity, CouponEntry } from '@joroze/cms';
 import NextLink from 'next/link';
@@ -19,6 +20,7 @@ import {
   CouponStats,
   getCouponStatsById,
 } from '../../../../../../apps/coupon/pages/api/coupons/stats';
+import { AiFillStar } from 'react-icons/ai';
 
 type Props = {
   coupon: CouponEntry;
@@ -54,31 +56,45 @@ export default function CouponPage({ coupon, couponStats, brand }: Props) {
             <Text cursor="pointer" fontWeight="extrabold">
               Information
             </Text>
-            <HStack
+            <Stack
               width="full"
+              direction={{ base: 'column', sm: 'row' }}
+              alignItems="center"
               divider={<StackDivider borderColor="gray.200" />}
-              textAlign="left"
-              spacing={{ base: 0, xl: '6' }}
+              textAlign="center"
+              spacing={{ base: '6' }}
             >
-              <VStack width={{ base: '33%', xl: 'initial' }}>
+              <VStack width={{ base: 'initial', sm: '33%', xl: 'initial' }}>
                 <Text fontSize="sm" color="gray.600">
                   Coupons received
                 </Text>
                 <Text fontSize="xs">{couponStats?.linkOpened || '...'}</Text>
               </VStack>
-              <VStack width={{ base: '33%', xl: 'initial' }}>
+              <VStack width={{ base: 'initial', sm: '33%', xl: 'initial' }}>
                 <Text fontSize="sm" color="gray.600">
                   Coupon validity
                 </Text>
                 <Text fontSize="xs">{coupon.expiresAt || 'endless'}</Text>
               </VStack>
-              <VStack width={{ base: '33%', xl: 'initial' }}>
+              <VStack width={{ base: 'initial', sm: '33%', xl: 'initial' }}>
                 <Text fontSize="sm" color="gray.600">
                   Rating
                 </Text>
-                <Text fontSize="xs">...</Text>
+                <Flex
+                  justifyContent="center"
+                  flexWrap="wrap"
+                  gap={1}
+                  fontSize="small"
+                  color="orange"
+                >
+                  <AiFillStar />
+                  <AiFillStar />
+                  <AiFillStar />
+                  <AiFillStar />
+                  <AiFillStar />
+                </Flex>
               </VStack>
-            </HStack>
+            </Stack>
           </Stack>
           <NextLink href={`/api/partner-redirect/${coupon.sys.id}`} passHref>
             <chakra.a target="_blank" rel="noopener noreferrer">
