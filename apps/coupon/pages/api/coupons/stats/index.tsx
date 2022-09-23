@@ -87,6 +87,13 @@ export async function deleteCouponStatsById(couponId: string) {
   return selectedItem;
 }
 
+export async function getCouponStatsById(couponId: string) {
+  const couponDictionary = await getCouponStatsDictionary();
+  const selectedItem = couponDictionary[couponId];
+
+  return selectedItem;
+}
+
 export async function getCouponStatsWithClientChoice(clientIpAddress?: string) {
   const couponStatsDictionary = await getCouponStatsDictionary();
 

@@ -29,13 +29,6 @@ const nextConfig = {
       },
     ];
   },
-  experimental: {
-    // concurrentFeatures: true,
-    // serverComponents: true,
-  },
-  future: {
-    strictPostcssConfiguration: true,
-  },
 };
 
 module.exports = withNx(nextConfig);

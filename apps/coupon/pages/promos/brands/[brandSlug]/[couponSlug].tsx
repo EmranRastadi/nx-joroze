@@ -15,13 +15,18 @@ import { CouponEntity, CouponEntry } from '@joroze/cms';
 import NextLink from 'next/link';
 import { Card } from '@joroze/ui';
 import { getLayout } from '../../../../layouts/BrandLayout';
+import {
+  CouponStats,
+  getCouponStatsById,
+} from '../../../../../../apps/coupon/pages/api/coupons/stats';
 
 type Props = {
   coupon: CouponEntry;
+  couponStats: CouponStats;
   brand: CouponEntity;
 };
 
-export default function CouponPage({ coupon, brand }: Props) {
+export default function CouponPage({ coupon, couponStats, brand }: Props) {
   return (
     <VStack spacing="7" width="full">
       <Box width="full">
@@ -59,7 +64,7 @@ export default function CouponPage({ coupon, brand }: Props) {
                 <Text fontSize="sm" color="gray.600">
                   Coupons received
                 </Text>
-                <Text fontSize="xs">...</Text>
+                <Text fontSize="xs">{couponStats?.linkOpened || '...'}</Text>
               </VStack>
               <VStack width={{ base: '33%', xl: 'initial' }}>
                 <Text fontSize="sm" color="gray.600">
@@ -138,6 +143,8 @@ export const getStaticProps = async ({
     };
   }
 
+  const couponStats = await getCouponStatsById(coupon.sys.id);
+
   const websiteTitle = `Promotion ${brand.name} ${coupon.title}`;
 
   const metaTags = {
@@ -153,10 +160,12 @@ export const getStaticProps = async ({
     props: {
       preview,
       coupon,
+      couponStats,
       brand,
       brands: otherBrandsWithSales,
       metaTags,
     },
+    revalidate: 86400, // 24 hours
   };
 };
 
