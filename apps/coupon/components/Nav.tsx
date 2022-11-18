@@ -12,6 +12,7 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import Image from 'next/legacy/image';
 import NextLink from 'next/link';
 import BrandSearchInput from './BrandSearchInput';
+import logo from '../public/assets/logo.svg';
 
 const Nav = ({ children, ...rest }: HTMLChakraProps<'div'>) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -44,7 +45,7 @@ const Nav = ({ children, ...rest }: HTMLChakraProps<'div'>) => {
                 <Image
                   priority
                   draggable={false}
-                  src="/assets/logo.svg"
+                  src={logo}
                   alt="logo"
                   layout="fixed"
                   width={150}

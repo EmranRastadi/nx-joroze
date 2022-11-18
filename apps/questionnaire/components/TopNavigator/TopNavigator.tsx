@@ -11,7 +11,8 @@ import {
 } from '@chakra-ui/react';
 import styles from './TopNavigator.module.scss';
 import React from 'react';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
+import logo from '../public/assets/logo.svg';
 
 type Props = {
   user: {
@@ -37,12 +38,7 @@ export default function TopNavigator({ user }: Props) {
             <a href=".">
               <li className={styles.logo}>
                 <Box filter={svgFilter}>
-                  <Image
-                    src="/assets/logo.svg"
-                    alt="logo"
-                    width={50}
-                    height={50}
-                  />
+                  <Image src={logo} alt="logo" width={50} height={50} />
                 </Box>
                 <div>Tomorrow Health</div>
               </li>

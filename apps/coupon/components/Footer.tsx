@@ -3,7 +3,8 @@ import Copyright from './Copyright';
 import LinkGrid from './LinkGrid';
 import SocialMediaLinks from './SocialMediaLinks';
 import SubscribeForm from './SubscribeForm';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
+import logo from '../public/assets/logo.svg';
 
 const Footer = () => (
   <Box
@@ -22,7 +23,7 @@ const Footer = () => (
       >
         <Flex flex="1">
           <Image
-            src="/assets/logo.svg"
+            src={logo}
             alt="logo"
             draggable={false}
             layout="fixed"
