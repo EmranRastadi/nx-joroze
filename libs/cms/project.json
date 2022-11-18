@@ -1,4 +1,5 @@
 {
+  "name": "cms",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/cms/src",
   "projectType": "library",
@@ -12,7 +13,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/cms"],
+      "outputs": ["{workspaceRoot}/coverage/libs/cms"],
       "options": {
         "jestConfig": "libs/cms/jest.config.ts",
         "passWithNoTests": true

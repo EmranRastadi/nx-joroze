@@ -31,8 +31,8 @@ const BrandCard = ({
           src={brand.logoImage.url}
           alt={`${brand.name} logo`}
           objectFit="contain"
-          width={'80px'}
-          height={'20px'}
+          width={80}
+          height={20}
         />
       ) : (
         <Flex flexDir="column" height="full" justifyContent="center">

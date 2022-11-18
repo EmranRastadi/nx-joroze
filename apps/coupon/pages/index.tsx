@@ -216,8 +216,8 @@ export default function Index({
               src="/assets/gifts.svg"
               alt="people"
               objectFit="contain"
-              width="1000px"
-              height="700px"
+              width={1000}
+              height={700}
             />
           </Box>
         </Flex>

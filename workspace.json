@@ -49,7 +49,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/coupon"],
+          "outputs": ["{workspaceRoot}/coverage/apps/coupon"],
           "options": {
             "jestConfig": "apps/coupon/jest.config.ts",
             "passWithNoTests": true
@@ -101,7 +101,7 @@
       "targets": {
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/tools/eslint-rules"],
+          "outputs": ["{workspaceRoot}/coverage/tools/eslint-rules"],
           "options": {
             "jestConfig": "tools/eslint-rules/jest.config.ts",
             "passWithNoTests": true
@@ -157,7 +157,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/portfolio"],
+          "outputs": ["{workspaceRoot}/coverage/apps/portfolio"],
           "options": {
             "jestConfig": "apps/portfolio/jest.config.ts",
             "passWithNoTests": true
@@ -247,7 +247,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/questionnaire"],
+          "outputs": ["{workspaceRoot}/coverage/apps/questionnaire"],
           "options": {
             "jestConfig": "apps/questionnaire/jest.config.ts",
             "passWithNoTests": true
@@ -308,7 +308,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ui"],
+          "outputs": ["{workspaceRoot}/coverage/libs/ui"],
           "options": {
             "jestConfig": "libs/ui/jest.config.ts",
             "passWithNoTests": true
