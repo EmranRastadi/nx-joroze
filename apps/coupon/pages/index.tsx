@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import cms, { CouponEntity, CouponEntry, CouponHeadline } from '@joroze/cms';
 import { GetStaticPropsContext } from 'next';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import Flickity from 'react-flickity-component';
 import { BiPurchaseTag, BiBadgeCheck, BiHappy } from 'react-icons/bi';
@@ -70,7 +70,12 @@ export default function Index({
         >
           {headlines.map((headline) =>
             headline.url ? (
-              <Link key={headline.sys.id} passHref href={headline.url}>
+              <Link
+                legacyBehavior
+                key={headline.sys.id}
+                passHref
+                href={headline.url}
+              >
                 <Box
                   marginRight={2}
                   cursor="pointer"
@@ -143,7 +148,7 @@ export default function Index({
       <Box>
         <VStack width="full" gap={4} mt={10} mb="20">
           <BrandCarousel brands={brands} />
-          <Link href={ROUTES.BRANDS} passHref>
+          <Link legacyBehavior href={ROUTES.BRANDS} passHref>
             <Button
               colorScheme="purple"
               width="250px"

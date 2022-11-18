@@ -3,7 +3,7 @@ import Copyright from './Copyright';
 import LinkGrid from './LinkGrid';
 import SocialMediaLinks from './SocialMediaLinks';
 import SubscribeForm from './SubscribeForm';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 const Footer = () => (
   <Box

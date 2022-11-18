@@ -18,7 +18,7 @@ import { CouponEntity } from '@joroze/cms';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Card } from '@joroze/ui';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { CheckIcon } from '@chakra-ui/icons';
 import BrandCarousel from '../components/BrandCarousel';
 
@@ -41,7 +41,7 @@ const BrandLayout = ({ brand, brands, children }: Props) => {
       <VStack spacing="5" align="stretch" flexGrow={1}>
         <Breadcrumb mt="2" fontWeight="medium" fontSize="sm">
           <BreadcrumbItem>
-            <Link href={ROUTES.BRANDS} passHref>
+            <Link legacyBehavior href={ROUTES.BRANDS} passHref>
               <BreadcrumbLink>Brands</BreadcrumbLink>
             </Link>
           </BreadcrumbItem>
@@ -58,7 +58,11 @@ const BrandLayout = ({ brand, brands, children }: Props) => {
               {router.pathname === '/promos/brands/[brandSlug]' ? (
                 brand?.name
               ) : (
-                <Link href={`${ROUTES.BRANDS}/${brand?.slug}`} passHref>
+                <Link
+                  legacyBehavior
+                  href={`${ROUTES.BRANDS}/${brand?.slug}`}
+                  passHref
+                >
                   {brand?.name}
                 </Link>
               )}

@@ -29,7 +29,11 @@ const BrandCarousel = ({ brands }: Props) => {
       >
         {brands.map((brand) => (
           <Box key={brand.sys.id}>
-            <Link passHref href={`${ROUTES.BRANDS}/${brand.slug}`}>
+            <Link
+              legacyBehavior
+              passHref
+              href={`${ROUTES.BRANDS}/${brand.slug}`}
+            >
               <motion.div
                 whileHover={{
                   scale: 1.05,

@@ -10,7 +10,7 @@ import {
 import { getLayout } from '../components/Layout';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Hero from '../components/Hero';
 import { useRef } from 'react';
 

@@ -1,7 +1,7 @@
 import { Flex, HTMLChakraProps, Text } from '@chakra-ui/react';
 import { CouponEntity } from '@joroze/cms';
 import { Card } from '@joroze/ui';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 type Props = {
   brand: CouponEntity;

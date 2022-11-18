@@ -9,7 +9,6 @@ import {
   chakra,
   Stack,
   StackDivider,
-  HStack,
   Flex,
 } from '@chakra-ui/react';
 import { CouponEntity, CouponEntry } from '@joroze/cms';
@@ -96,7 +95,11 @@ export default function CouponPage({ coupon, couponStats, brand }: Props) {
               </VStack>
             </Stack>
           </Stack>
-          <NextLink href={`/api/partner-redirect/${coupon.sys.id}`} passHref>
+          <NextLink
+            legacyBehavior
+            href={`/api/partner-redirect/${coupon.sys.id}`}
+            passHref
+          >
             <chakra.a target="_blank" rel="noopener noreferrer">
               <Button rounded="full" colorScheme={'purple'}>
                 Open a share

@@ -5,7 +5,7 @@ import Flickity from 'react-flickity-component';
 import { CouponCategory } from '@joroze/cms';
 import { useQuery } from 'react-query';
 import ROUTES from '../lib/routes';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 const CategoryCarousel = () => {
   const router = useRouter();
@@ -46,6 +46,7 @@ const CategoryCarousel = () => {
             }
           >
             <Link
+              legacyBehavior
               shallow
               replace={router.pathname === ROUTES.BRANDS}
               href={`${

@@ -13,7 +13,7 @@ export interface CardProps
 export const Card = forwardRef((props: CardProps, ref) => {
   const { variant, ...rest } = props;
 
-  const styles = useStyleConfig('Card', { variant });
+  const styles = useStyleConfig('LegacyCard', { variant });
 
   // Pass the computed styles into the `__css` prop
   return <Box __css={styles} {...rest} ref={ref} />;

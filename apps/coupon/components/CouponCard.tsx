@@ -17,7 +17,7 @@ import { useChannel, useEvent } from '@harelpls/use-pusher';
 import { CouponEntry } from '@joroze/cms';
 import { useDebouncedCallback } from '@joroze/react-utils';
 import { Card } from '@joroze/ui';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import NextLink from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 import {
@@ -160,6 +160,7 @@ const CouponCard = ({
     >
       {imgSrc && (
         <NextLink
+          legacyBehavior
           passHref
           href={`${ROUTES.BRANDS}/${coupon?.brandEntity?.slug}/${coupon?.slug}`}
         >
@@ -244,6 +245,7 @@ const CouponCard = ({
             )}
           </HStack>
           <NextLink
+            legacyBehavior
             passHref
             href={`${ROUTES.BRANDS}/${coupon?.brandEntity?.slug}/${coupon?.slug}`}
           >
@@ -263,7 +265,11 @@ const CouponCard = ({
             </Text>
           )}
         </VStack>
-        <NextLink href={`/api/partner-redirect/${coupon.sys.id}`} passHref>
+        <NextLink
+          legacyBehavior
+          href={`/api/partner-redirect/${coupon.sys.id}`}
+          passHref
+        >
           <chakra.a flexGrow={0.25} target="_blank" rel="noopener noreferrer">
             <Button width="full" rounded="full" colorScheme={'purple'}>
               Open a share

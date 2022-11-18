@@ -17,7 +17,7 @@ import {
   Kbd,
   HStack,
 } from '@chakra-ui/react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { FaSearch } from 'react-icons/fa';
 import {
   ChangeEvent,
@@ -216,6 +216,7 @@ const BrandSearchInput = () => {
 
                       return (
                         <Link
+                          legacyBehavior
                           key={brand?.sys?.id}
                           passHref
                           href={`${ROUTES.BRANDS}/${brand.slug}`}

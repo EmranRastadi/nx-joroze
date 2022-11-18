@@ -15,7 +15,7 @@ const overrides = {
   // borders,
   // Other foundational style overrides go here
   components: {
-    Card,
+    LegacyCard: Card,
     // Other components go here
   },
 };

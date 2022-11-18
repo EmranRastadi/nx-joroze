@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import styles from './TopNavigator.module.scss';
 import React from 'react';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 type Props = {
   user: {

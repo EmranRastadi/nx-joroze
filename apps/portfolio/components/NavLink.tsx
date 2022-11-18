@@ -13,7 +13,7 @@ export interface NavLinkProps
 }
 
 const NavLink: React.FC<NavLinkProps> = ({ href, ...rest }) => (
-  <NextLink passHref href={href}>
+  <NextLink legacyBehavior passHref href={href}>
     <Link
       px={2}
       py={1}

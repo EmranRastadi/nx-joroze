@@ -9,7 +9,7 @@ import {
   Container,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import NextLink from 'next/link';
 import BrandSearchInput from './BrandSearchInput';
 
@@ -39,7 +39,7 @@ const Nav = ({ children, ...rest }: HTMLChakraProps<'div'>) => {
             alignItems={'center'}
             direction={{ base: 'column', md: 'row' }}
           >
-            <NextLink passHref href={'/'}>
+            <NextLink legacyBehavior passHref href={'/'}>
               <Flex cursor="pointer">
                 <Image
                   priority
